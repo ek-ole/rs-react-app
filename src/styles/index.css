@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Cookie&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+@import 'tailwindcss';
+
+:root {
+  --font-primary: 'Josefin Sans', sans-serif;
+  --font-cookie: 'Cookie', cursive;
+
+  --background: #ffff006b;
+  --foreground: #4b0082;
+}
+
+body {
+  font-family: var(--font-primary);
+  background-color: var(--background);
+  color: var(--foreground);
+}
