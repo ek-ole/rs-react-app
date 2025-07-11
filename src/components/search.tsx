@@ -1,12 +1,16 @@
 import React from 'react';
 
 class Search extends React.Component {
+  handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+  };
+
   render() {
     return (
-      <div className="flex w-full flex-col items-center sm:px-4">
+      <form onSubmit={this.handleSubmit} className="flex w-full flex-col items-center sm:px-4">
         <div className="border-p-4 flex w-full max-w-sm items-center gap-2 rounded-xl border-4 p-2 sm:my-6">
           <input
-            type="text"
+            type="search"
             placeholder="Search character..."
             className="bg-primary-light w-full flex-1 rounded-xl px-2 py-1 focus:outline-none sm:px-4"
           />
@@ -17,7 +21,7 @@ class Search extends React.Component {
             Search
           </button>
         </div>
-      </div>
+      </form>
     );
   }
 }
