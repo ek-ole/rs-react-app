@@ -16,10 +16,17 @@ class Results extends React.Component<ResultsProps> {
           {characters.map((character) => (
             <div
               key={character.id}
-              className="shadow-foreground/50 my-2 items-center gap-2 rounded-xl border-4 p-4 shadow-lg transition-shadow hover:shadow-md"
+              className="shadow-foreground/50 my-2 flex flex-col items-center gap-2 rounded-xl border-4 p-4 shadow-lg transition-shadow hover:shadow-md"
             >
+              {character.image && (
+                <img
+                  src={character.image}
+                  alt={character.name}
+                  className="mb-3 h-40 w-full rounded-lg object-cover"
+                />
+              )}
               <h3 className="mb-2 text-lg font-semibold">{character.name}</h3>
-              <p className="text-sm">{character.description}</p>
+              <p className="text-sm whitespace-pre-line">{character.description}</p>
             </div>
           ))}
         </div>

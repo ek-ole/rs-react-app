@@ -3,15 +3,17 @@ export type ApiCharacter = {
   name: string;
   status: string;
   species: string;
-  type: string;
-  gender: string;
-  created: string;
-  origin: string;
-  location: string;
+  image: string;
+  location: { name: string };
 };
 
 export type Character = {
   id: number;
   name: string;
   description: string;
+  image: string;
+};
+
+export type ApiResponse = {
+  results: ApiCharacter[];
 };

@@ -1,8 +1,9 @@
 import React from 'react';
 
-import type { ApiCharacter, Character } from '@/types';
+import type { Character } from '@/types';
 
-import { mapApiToCharacter } from './api/api-characters';
+import { mapApiToCharacter } from './api/map-characters';
+import { RickAndMortyApi } from './api/rick-and-morty-api';
 import Results from './components/results';
 import Search from './components/search';
 
@@ -14,11 +15,11 @@ class App extends React.Component {
   componentDidMount() {
     void this.loadCharacters();
   }
+
   async loadCharacters() {
     try {
-      const response = await fetch('https://rickandmortyapi-sigma.vercel.app/api/character');
-      const data = (await response.json()) as ApiCharacter[];
-      const characters = data.map(mapApiToCharacter);
+      const data = await RickAndMortyApi.fetchCharacters();
+      const characters = data.results.map(mapApiToCharacter);
       this.setState({ characters });
     } catch (error) {
       console.error('Loading error:', error);
