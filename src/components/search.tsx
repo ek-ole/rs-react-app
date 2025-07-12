@@ -1,6 +1,12 @@
 import React from 'react';
 
-class Search extends React.Component<{ onSearch: (term: string) => void }> {
+import { SearchInput } from './ui/search-input';
+
+type Props = {
+  onSearch: (term: string) => void;
+};
+
+class Search extends React.Component<Props> {
   state = { inputValue: '' };
 
   handleSubmit = (e: React.FormEvent) => {
@@ -12,12 +18,10 @@ class Search extends React.Component<{ onSearch: (term: string) => void }> {
     return (
       <form onSubmit={this.handleSubmit} className="flex w-full flex-col items-center sm:px-4">
         <div className="border-p-4 flex w-full max-w-sm items-center gap-2 rounded-xl border-4 p-2 sm:my-6">
-          <input
-            type="search"
+          <SearchInput
             value={this.state.inputValue}
-            onChange={(e) => this.setState({ inputValue: e.target.value })}
+            onChange={(value) => this.setState({ inputValue: value })}
             placeholder="Search character..."
-            className="bg-primary-light w-full flex-1 rounded-xl px-2 py-1 focus:outline-none sm:px-4"
           />
           <button
             type="submit"

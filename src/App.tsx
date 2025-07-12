@@ -1,45 +1,45 @@
 import React from 'react';
 
-import { mapApiToCharacter } from './api/map-characters';
-import { RickAndMortyApi } from './api/rick-and-morty-api';
 import Results from './components/results';
 import Search from './components/search';
-import type { AppState } from './types';
+import { CharacterService } from './services/character-service';
+import type { AppState } from './types/app';
 
 class App extends React.Component<object, AppState> {
   state: AppState = {
     characters: [],
-    searchTerm: '',
     isLoading: false,
     error: null,
   };
 
   componentDidMount() {
-    void this.loadCharacters();
+    void this.handleLoadCharacters();
   }
 
-  loadCharacters = async (searchTerm = '') => {
+  handleLoadCharacters = async (searchTerm = '') => {
     this.setState({ isLoading: true, error: null });
-
-    try {
-      const data = await RickAndMortyApi.fetchCharacters(searchTerm);
-      const characters = data.results.map(mapApiToCharacter);
-      this.setState({ characters, searchTerm });
-    } catch (error) {
-      this.setState({ error: error instanceof Error ? error.message : 'Search failed' });
-    }
+    const { characters, error } = await CharacterService.loadCharacters(searchTerm);
+    this.setState({
+      characters: characters || [],
+      error,
+      isLoading: false,
+    });
   };
 
   handleSearch = (term: string) => {
-    void this.loadCharacters(term);
+    void this.handleLoadCharacters(term.trim());
   };
 
   render() {
+    const { characters, isLoading, error } = this.state;
+
     return (
       <div className="mx-auto my-6 flex flex-col items-center p-4">
         <h1>Rick & Morty</h1>
         <Search onSearch={this.handleSearch} />
-        <Results characters={this.state.characters} />
+        {isLoading && <div>Loading...</div>}
+        {error && <div className="text-error-message">{error}</div>}
+        {!isLoading && !error && <Results characters={characters} />}
       </div>
     );
   }
