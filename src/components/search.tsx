@@ -1,8 +1,11 @@
 import React from 'react';
 
-class Search extends React.Component {
+class Search extends React.Component<{ onSearch: (term: string) => void }> {
+  state = { inputValue: '' };
+
   handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    this.props.onSearch(this.state.inputValue.trim());
   };
 
   render() {
@@ -11,6 +14,8 @@ class Search extends React.Component {
         <div className="border-p-4 flex w-full max-w-sm items-center gap-2 rounded-xl border-4 p-2 sm:my-6">
           <input
             type="search"
+            value={this.state.inputValue}
+            onChange={(e) => this.setState({ inputValue: e.target.value })}
             placeholder="Search character..."
             className="bg-primary-light w-full flex-1 rounded-xl px-2 py-1 focus:outline-none sm:px-4"
           />

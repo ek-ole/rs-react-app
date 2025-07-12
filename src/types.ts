@@ -17,3 +17,10 @@ export type Character = {
 export type ApiResponse = {
   results: ApiCharacter[];
 };
+
+export type AppState = {
+  characters: Character[];
+  searchTerm: string;
+  isLoading: boolean;
+  error: string | null;
+};
