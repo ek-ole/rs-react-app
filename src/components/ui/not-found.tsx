@@ -23,7 +23,12 @@ export class NotFound extends React.Component<Props> {
         >
           Reset search
         </button>
-        <img src="/not-found.webp" alt="Not found" className="mb-4 rounded-2xl object-contain" />
+        <img
+          src="/not-found.webp"
+          alt="Not found"
+          className="mb-4 rounded-2xl object-contain"
+          loading="lazy"
+        />
       </div>
     );
   }

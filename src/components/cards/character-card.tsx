@@ -13,6 +13,7 @@ export class CharacterCard extends React.Component<{ character: Character }> {
             src={image}
             alt={name}
             className="error-message mb-3 h-60 w-full rounded-lg object-cover lg:h-40"
+            loading="lazy"
           />
         )}
         <h3 className="text-lg font-semibold lg:text-base">{name}</h3>

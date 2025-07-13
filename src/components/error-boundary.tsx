@@ -35,6 +35,7 @@ export class ErrorBoundary extends React.Component<
               src={ErrorImage}
               alt="Error Illustration"
               className="mb-4 rounded-2xl object-contain"
+              loading="lazy"
             />
             <button
               onClick={() => this.setState({ hasError: false })}
