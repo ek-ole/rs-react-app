@@ -1,13 +1,8 @@
 import js from '@eslint/js';
 import globals from 'globals';
 import reactPlugin from 'eslint-plugin-react';
-import reactHooks from 'eslint-plugin-react-hooks';
-import reactRefresh from 'eslint-plugin-react-refresh';
 import tseslint from 'typescript-eslint';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
-import testingLibrary from 'eslint-plugin-testing-library';
-import jestDom from 'eslint-plugin-jest-dom';
-import vitest from '@vitest/eslint-plugin';
 import importPlugin from 'eslint-plugin-import';
 import eslintConfigPrettier from 'eslint-config-prettier/flat';
 
@@ -20,7 +15,6 @@ export default tseslint.config(
       ...tseslint.configs.recommendedTypeChecked,
       reactPlugin.configs.flat.recommended,
       reactPlugin.configs.flat['jsx-runtime'],
-      reactHooks.configs['recommended-latest'],
       jsxA11y.flatConfigs.recommended,
       eslintConfigPrettier,
     ],
@@ -33,14 +27,7 @@ export default tseslint.config(
         tsconfigRootDir: import.meta.dirname,
       },
     },
-    plugins: {
-      'react-refresh': reactRefresh,
-      'testing-library': testingLibrary,
-      'jest-dom': jestDom,
-      vitest: vitest,
-    },
     rules: {
-      'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
       '@typescript-eslint/consistent-type-exports': 'error',
       '@typescript-eslint/consistent-type-imports': 'error',
       '@typescript-eslint/no-inferrable-types': 'error',
@@ -63,12 +50,6 @@ export default tseslint.config(
         },
       ],
     },
-  },
-  {
-    files: ['**/*.test.{ts,tsx}'],
-    ...testingLibrary.configs['flat/react'],
-    ...jestDom.configs['flat/recommended'],
-    ...vitest.configs.recommended,
   },
   {
     files: ['src/vite-env.d.ts'],
