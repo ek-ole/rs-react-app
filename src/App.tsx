@@ -2,6 +2,7 @@ import React from 'react';
 
 import Results from './components/results';
 import Search from './components/search';
+import { Loader } from './components/ui/loader';
 import { CharacterService } from './services/character-service';
 import { LocalStorageService } from './services/storage';
 import type { AppState } from './types/app';
@@ -39,7 +40,7 @@ class App extends React.Component<object, AppState> {
       <div className="mx-auto my-6 flex flex-col items-center p-4">
         <h1>Rick & Morty</h1>
         <Search onSearch={this.handleSearch} />
-        {isLoading && <div>Loading...</div>}
+        {isLoading && <Loader />}
         {error && <div className="text-error-message">{error}</div>}
         {!isLoading && !error && <Results characters={characters} />}
       </div>
