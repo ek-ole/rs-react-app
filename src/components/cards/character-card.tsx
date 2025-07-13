@@ -12,10 +12,10 @@ export class CharacterCard extends React.Component<{ character: Character }> {
           <img
             src={image}
             alt={name}
-            className="error-message mb-3 h-60 w-full rounded-lg object-cover lg:h-30"
+            className="error-message mb-3 h-60 w-full rounded-lg object-cover lg:h-40"
           />
         )}
-        <h3 className="mb-2 text-lg font-semibold lg:text-base">{name}</h3>
+        <h3 className="text-lg font-semibold lg:text-base">{name}</h3>
         <p className="text-sm whitespace-pre-line">{description}</p>
       </div>
     );

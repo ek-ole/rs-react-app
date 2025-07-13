@@ -29,7 +29,7 @@ class App extends React.Component<object, AppState> {
       });
     } catch (error) {
       this.setState({
-        error: error instanceof Error ? error.message : 'Search failed',
+        error: error instanceof Error ? error.message : 'Character not found',
         characters: [],
       });
     } finally {
@@ -45,7 +45,7 @@ class App extends React.Component<object, AppState> {
     const { characters, isLoading, error } = this.state;
 
     return (
-      <div className="mx-auto my-6 flex w-full max-w-2xl flex-col items-center p-4">
+      <div className="mx-auto my-6 flex w-full flex-col items-center px-8 py-4">
         <h1>Rick & Morty</h1>
         <Search onSearch={this.handleSearch} />
         {isLoading && <Loader />}
