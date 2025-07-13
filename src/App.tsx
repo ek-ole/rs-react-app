@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { ApiErrorHandler } from './api/api-eror-handler';
 import Results from './components/results';
 import Search from './components/search';
 import { Loader } from './components/ui/loader';
@@ -31,7 +32,7 @@ class App extends React.Component<object, AppState> {
       });
     } catch (error) {
       this.setState({
-        error: error instanceof Error ? error.message : 'Character not found',
+        error: ApiErrorHandler.getErrorMessage(error),
         characters: [],
       });
     } finally {
