@@ -1,7 +1,6 @@
 import React from 'react';
 
 import type { ErrorBoundaryState } from '@/types/components';
-import ErrorImage from 'public/error-boundary.webp';
 
 export class ErrorBoundary extends React.Component<
   { children: React.ReactNode },
@@ -32,7 +31,7 @@ export class ErrorBoundary extends React.Component<
               Oh my gosh! Everything is broken!
             </h2>
             <img
-              src={ErrorImage}
+              src="/error-boundary.webp"
               alt="Error Illustration"
               className="mb-4 rounded-2xl object-contain"
               loading="lazy"
