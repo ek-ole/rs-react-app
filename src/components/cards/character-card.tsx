@@ -16,7 +16,7 @@ export class CharacterCard extends React.Component<{ character: Character }> {
           />
         )}
         <h3 className="text-lg font-semibold lg:text-base">{name}</h3>
-        <p className="text-sm whitespace-pre-line">{description}</p>
+        <p className="text-center text-sm whitespace-pre-line">{description}</p>
       </div>
     );
   }

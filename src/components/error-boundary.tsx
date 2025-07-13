@@ -26,10 +26,16 @@ export class ErrorBoundary extends React.Component<
   render() {
     if (this.state.hasError) {
       return (
-        <div className="mx-auto my-6 flex w-full flex-col items-center px-8 py-4">
-          <div className="mx-auto mt-6 flex w-full max-w-6xl flex-col items-center rounded-xl border-4 p-4">
-            <h2 className="mb-4 p-8 text-xl font-semibold">Oh my gosh! Everything is broken!</h2>
-            <img src={ErrorImage} alt="Error Illustration" className="mb-4 object-contain" />
+        <div className="mx-auto my-6 flex w-full flex-col items-center justify-center px-8 py-4">
+          <div className="mx-auto mt-6 flex w-full max-w-4xl flex-col items-center rounded-xl border-4 p-4">
+            <h2 className="mb-4 p-8 text-center text-xl font-semibold">
+              Oh my gosh! Everything is broken!
+            </h2>
+            <img
+              src={ErrorImage}
+              alt="Error Illustration"
+              className="mb-4 rounded-2xl object-contain"
+            />
             <button
               onClick={() => this.setState({ hasError: false })}
               className="hover:bg-foreground/80 hover:text-primary-light hover:border-foreground m-8 cursor-pointer rounded-xl border-3 px-2 font-medium transition-colors duration-400 sm:border-4 sm:px-4 sm:py-2"

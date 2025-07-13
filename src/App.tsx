@@ -3,6 +3,7 @@ import React from 'react';
 import Results from './components/results';
 import Search from './components/search';
 import { Loader } from './components/ui/loader';
+import { NotFound } from './components/ui/not-found';
 import { CharacterService } from './services/character-service';
 import { LocalStorageService } from './services/storage';
 import type { AppState } from './types/app';
@@ -12,6 +13,7 @@ class App extends React.Component<object, AppState> {
     characters: [],
     isLoading: false,
     error: null,
+    inputValue: LocalStorageService.getSearchTerm(),
   };
 
   componentDidMount() {
@@ -49,7 +51,15 @@ class App extends React.Component<object, AppState> {
         <h1>Rick & Morty</h1>
         <Search onSearch={this.handleSearch} />
         {isLoading && <Loader />}
-        {error && <div className="text-error-message">{error}</div>}
+        {error && (
+          <NotFound
+            error={error}
+            onReset={() => {
+              this.setState({ inputValue: '' });
+              void this.handleLoadCharacters('');
+            }}
+          />
+        )}
 
         {!isLoading && !error && <Results characters={characters} />}
       </div>
