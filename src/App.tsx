@@ -3,6 +3,7 @@ import React from 'react';
 import Results from './components/results';
 import Search from './components/search';
 import { CharacterService } from './services/character-service';
+import { LocalStorageService } from './services/storage';
 import type { AppState } from './types/app';
 
 class App extends React.Component<object, AppState> {
@@ -13,7 +14,8 @@ class App extends React.Component<object, AppState> {
   };
 
   componentDidMount() {
-    void this.handleLoadCharacters();
+    const initialSearchTerm = LocalStorageService.getSearchTerm();
+    void this.handleLoadCharacters(initialSearchTerm);
   }
 
   handleLoadCharacters = async (searchTerm = '') => {

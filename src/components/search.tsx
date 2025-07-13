@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { LocalStorageService } from '@/services/storage';
+
 import { SearchInput } from './ui/search-input';
 
 type Props = {
@@ -7,11 +9,15 @@ type Props = {
 };
 
 class Search extends React.Component<Props> {
-  state = { inputValue: '' };
+  state = {
+    inputValue: LocalStorageService.getSearchTerm(),
+  };
 
   handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    this.props.onSearch(this.state.inputValue.trim());
+    const trimmedValue = this.state.inputValue.trim();
+    LocalStorageService.setSearchTerm(trimmedValue);
+    this.props.onSearch(trimmedValue);
   };
 
   render() {
