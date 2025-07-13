@@ -12,7 +12,6 @@ class App extends React.Component<object, AppState> {
     characters: [],
     isLoading: false,
     error: null,
-    showContent: true,
   };
 
   componentDidMount() {
@@ -21,13 +20,12 @@ class App extends React.Component<object, AppState> {
   }
 
   handleLoadCharacters = async (searchTerm = '') => {
-    this.setState({ showContent: false, isLoading: true, error: null });
+    this.setState({ isLoading: true, error: null });
 
     try {
       const characters = await CharacterService.loadCharacters(searchTerm);
       this.setState({
         characters: characters,
-        showContent: true,
       });
     } catch (error) {
       this.setState({
@@ -44,21 +42,16 @@ class App extends React.Component<object, AppState> {
   };
 
   render() {
-    const { characters, isLoading, error, showContent } = this.state;
+    const { characters, isLoading, error } = this.state;
 
     return (
-      <div className="mx-auto my-6 flex flex-col items-center p-4">
+      <div className="mx-auto my-6 flex w-full max-w-2xl flex-col items-center p-4">
         <h1>Rick & Morty</h1>
         <Search onSearch={this.handleSearch} />
         {isLoading && <Loader />}
         {error && <div className="text-error-message">{error}</div>}
-        <div
-          className={`w-full transition-opacity duration-300 ${
-            showContent ? 'opacity-100' : 'opacity-0'
-          }`}
-        >
-          {!isLoading && !error && <Results characters={characters} />}
-        </div>
+
+        {!isLoading && !error && <Results characters={characters} />}
       </div>
     );
   }
