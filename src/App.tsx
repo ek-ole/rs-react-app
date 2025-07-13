@@ -5,7 +5,7 @@ import Results from './components/results';
 import Search from './components/search';
 import { Loader } from './components/ui/loader';
 import { NotFound } from './components/ui/not-found';
-import { CharacterService } from './services/character-service';
+import { AppService } from './services/app-service';
 import { LocalStorageService } from './services/storage';
 import type { AppState } from './types/app';
 
@@ -18,18 +18,15 @@ class App extends React.Component<object, AppState> {
   };
 
   componentDidMount() {
-    const initialSearchTerm = LocalStorageService.getSearchTerm();
-    void this.handleLoadCharacters(initialSearchTerm);
+    void this.loadData(this.state.inputValue);
   }
 
-  handleLoadCharacters = async (searchTerm = '') => {
+  loadData = async (searchTerm = '') => {
     this.setState({ isLoading: true, error: null });
 
     try {
-      const characters = await CharacterService.loadCharacters(searchTerm);
-      this.setState({
-        characters: characters,
-      });
+      const characters = await AppService.loadCharacters(searchTerm);
+      this.setState({ characters });
     } catch (error) {
       this.setState({
         error: ApiErrorHandler.getErrorMessage(error),
@@ -41,7 +38,8 @@ class App extends React.Component<object, AppState> {
   };
 
   handleSearch = (term: string) => {
-    void this.handleLoadCharacters(term.trim());
+    AppService.saveSearchTerm(term);
+    void this.loadData(term.trim());
   };
 
   render() {
@@ -52,15 +50,7 @@ class App extends React.Component<object, AppState> {
         <h1>Rick & Morty</h1>
         <Search onSearch={this.handleSearch} />
         {isLoading && <Loader />}
-        {error && (
-          <NotFound
-            error={error}
-            onReset={() => {
-              this.setState({ inputValue: '' });
-              void this.handleLoadCharacters('');
-            }}
-          />
-        )}
+        {error && <NotFound error={error} onReset={() => this.handleSearch('')} />}
 
         {!isLoading && !error && <Results characters={characters} />}
       </div>
