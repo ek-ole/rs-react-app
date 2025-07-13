@@ -9,3 +9,8 @@ export type SearchInputProps = {
   onChange: (value: string) => void;
   placeholder?: string;
 };
+
+export type ErrorBoundaryState = {
+  hasError: boolean;
+  error: Error | null;
+};
