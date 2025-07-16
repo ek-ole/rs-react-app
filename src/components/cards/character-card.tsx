@@ -1,13 +1,20 @@
 import React from 'react';
 
 import type { Character } from '@/types/character';
+import { cn } from '@/utils/cn';
 
 export class CharacterCard extends React.Component<{ character: Character }> {
   render() {
     const { image, name, description } = this.props.character;
 
     return (
-      <div className="shadow-foreground/50 my-2 flex flex-col items-center gap-2 rounded-xl border-4 p-4 shadow-lg transition-shadow hover:shadow-md lg:p-3">
+      <div
+        className={cn(
+          'shadow-foreground/50 my-2 flex flex-col',
+          'items-center gap-2 rounded-xl border-4 p-4',
+          'shadow-lg transition-shadow hover:shadow-md lg:p-3',
+        )}
+      >
         {image && (
           <img
             src={image}
