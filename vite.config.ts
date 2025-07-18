@@ -19,6 +19,7 @@ export default defineConfig({
       reporter: ['text', 'html'],
     },
     environment: 'jsdom',
+    globals: true,
     setupFiles: ['./vitest-setup.js'],
   },
 });
