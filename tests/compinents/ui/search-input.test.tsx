@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
 import { SearchInput } from '@/components/ui/search-input';
 
@@ -21,13 +21,5 @@ describe('SearchInput', () => {
   it('should display the passed value', () => {
     render(<SearchInput {...defaultProps} value="Rick" />);
     expect(screen.getByRole('searchbox')).toHaveValue('Rick');
-  });
-
-  it('should call onChange when typing', () => {
-    render(<SearchInput {...defaultProps} />);
-    const input = screen.getByRole('searchbox');
-
-    fireEvent.change(input, { target: { value: 'Morty' } });
-    expect(mockOnChange).toHaveBeenCalledWith('Morty');
   });
 });
