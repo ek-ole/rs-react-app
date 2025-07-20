@@ -8,7 +8,7 @@ describe('CharacterCard', () => {
     id: 1,
     name: 'Rick Sanchez',
     description: 'Species: Human, status: Alive \nLocation: Earth',
-    image: 'https://example.com/rick.png',
+    image: 'rick.png',
   };
 
   it('should render character card', () => {
@@ -16,7 +16,7 @@ describe('CharacterCard', () => {
 
     const img = screen.getByRole('img');
     expect(img).toBeInTheDocument();
-    expect(img).toHaveAttribute('src', 'https://example.com/rick.png');
+    expect(img).toHaveAttribute('src', 'rick.png');
 
     const name = screen.getByText(/Rick Sanchez/i);
     expect(name).toBeInTheDocument();
