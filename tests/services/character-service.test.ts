@@ -31,7 +31,7 @@ vi.mock('@/api/map-characters', () => ({
 }));
 
 describe('CharacterService', () => {
-  it('просто проверяем загрузку персонажей', async () => {
+  it('should load characters', async () => {
     const result = await CharacterService.loadCharacters('Rick');
 
     expect(result).toHaveLength(1);
