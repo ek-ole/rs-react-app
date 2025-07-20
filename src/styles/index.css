@@ -11,7 +11,7 @@
 :root {
   --font-primary: 'Josefin Sans', sans-serif;
   --font-cookie: 'Cookie', cursive;
-  --background: #ffffa3;
+  --background: oklch(97.989% 0.11354 108.347);
   --foreground: oklch(30% 0.15 300);
   --primary-light: oklch(94.278% 0.0523 92.944);
   --error-message: rgb(255, 51, 0);
