@@ -1,9 +1,14 @@
-import React from 'react';
+import { Component } from 'react';
 
-import type { SearchInputProps } from '@/types/components';
 import { cn } from '@/utils/cn';
 
-export class SearchInput extends React.Component<SearchInputProps> {
+type SearchInputProps = {
+  value: string;
+  onChange: (value: string) => void;
+  placeholder?: string;
+};
+
+export class SearchInput extends Component<SearchInputProps> {
   render() {
     return (
       <input

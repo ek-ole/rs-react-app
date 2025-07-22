@@ -1,12 +1,13 @@
-import React from 'react';
+import { Component } from 'react';
 
-import type { ErrorBoundaryState } from '@/types/components';
 import { cn } from '@/utils/cn';
 
-export class ErrorBoundary extends React.Component<
-  { children: React.ReactNode },
-  ErrorBoundaryState
-> {
+type ErrorBoundaryState = {
+  hasError: boolean;
+  error: Error | null;
+};
+
+export class ErrorBoundary extends Component<{ children: React.ReactNode }, ErrorBoundaryState> {
   state: ErrorBoundaryState = {
     hasError: false,
     error: null,

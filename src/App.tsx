@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 
 import { ApiErrorHandler } from './api/api-eror-handler';
 import Results from './components/results';
@@ -9,16 +9,16 @@ import { AppService } from './services/app-service';
 import { LocalStorageService } from './services/storage';
 import type { AppState } from './types/app';
 
-class App extends React.Component<object, AppState> {
+class App extends Component<object, AppState> {
   state: AppState = {
     characters: [],
     isLoading: false,
     error: null,
-    inputValue: LocalStorageService.getSearchTerm(),
+    searchValue: LocalStorageService.getSearchTerm(),
   };
 
   componentDidMount() {
-    void this.loadData(this.state.inputValue);
+    void this.loadData(this.state.searchValue);
   }
 
   loadData = async (searchTerm = '') => {
@@ -52,7 +52,7 @@ class App extends React.Component<object, AppState> {
         {isLoading && <Loader />}
         {error && <NotFound error={error} onReset={() => this.handleSearch('')} />}
 
-        {!isLoading && !error && <Results characters={characters} />}
+        {characters.length > 0 && <Results characters={characters} />}
       </div>
     );
   }

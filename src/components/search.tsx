@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 
 import { LocalStorageService } from '@/services/storage';
 import { cn } from '@/utils/cn';
@@ -9,7 +9,7 @@ type Props = {
   onSearch: (term: string) => void;
 };
 
-class Search extends React.Component<Props> {
+class Search extends Component<Props> {
   state = {
     inputValue: LocalStorageService.getSearchTerm(),
   };

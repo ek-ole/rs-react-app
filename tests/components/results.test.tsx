@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import React from 'react';
+import { Component } from 'react';
 
 import Results from '@/components/results';
 
@@ -10,10 +10,7 @@ describe('Results', () => {
     { id: 2, name: 'Morty Smith', description: 'Alive', image: 'morty.png' },
   ];
 
-  class TestErrorBoundary extends React.Component<
-    { children: React.ReactNode },
-    { hasError: boolean }
-  > {
+  class TestErrorBoundary extends Component<{ children: React.ReactNode }, { hasError: boolean }> {
     state = { hasError: false };
 
     static getDerivedStateFromError(): { hasError: boolean } {

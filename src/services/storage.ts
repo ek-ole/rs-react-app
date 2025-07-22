@@ -6,10 +6,12 @@ export class LocalStorageService {
   }
 
   static setSearchTerm(term: string): void {
-    return term.trim()
-      ? localStorage.setItem(SEARCH_TERM_KEY, term.trim())
+    const trimmedTerm = term.trim();
+    return trimmedTerm
+      ? localStorage.setItem(SEARCH_TERM_KEY, trimmedTerm)
       : localStorage.removeItem(SEARCH_TERM_KEY);
   }
+
   static clearSearchTerm(): void {
     localStorage.removeItem(SEARCH_TERM_KEY);
   }

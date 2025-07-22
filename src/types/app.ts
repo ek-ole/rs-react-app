@@ -4,5 +4,5 @@ export type AppState = {
   characters: Character[];
   isLoading: boolean;
   error: string | null;
-  inputValue: string;
+  searchValue: string;
 };

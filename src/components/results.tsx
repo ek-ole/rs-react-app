@@ -1,11 +1,15 @@
-import React from 'react';
+import { Component } from 'react';
 
-import type { ResultsProps } from '@/types/components';
+import type { Character } from '@/types/character';
 import { cn } from '@/utils/cn';
 
 import { CharacterCard } from './cards/character-card';
 
-class Results extends React.Component<ResultsProps> {
+type ResultsProps = {
+  characters: Character[];
+};
+
+class Results extends Component<ResultsProps> {
   state = {
     shouldThrow: false,
   };

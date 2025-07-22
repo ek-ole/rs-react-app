@@ -1,13 +1,13 @@
-import React from 'react';
+import { Component } from 'react';
 
 import { LocalStorageService } from '@/services/storage';
 
 type Props = {
   error: string;
-  onReset: () => void;
+  onReset: VoidFunction;
 };
 
-export class NotFound extends React.Component<Props> {
+export class NotFound extends Component<Props> {
   handleReset = () => {
     LocalStorageService.clearSearchTerm();
     this.props.onReset();

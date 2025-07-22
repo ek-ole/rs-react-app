@@ -1,9 +1,9 @@
-import React from 'react';
+import { Component } from 'react';
 
 import type { Character } from '@/types/character';
 import { cn } from '@/utils/cn';
 
-export class CharacterCard extends React.Component<{ character: Character }> {
+export class CharacterCard extends Component<{ character: Character }> {
   render() {
     const { image, name, description } = this.props.character;
 

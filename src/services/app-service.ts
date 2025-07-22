@@ -11,6 +11,7 @@ export class AppService {
       throw new Error(ApiErrorHandler.getErrorMessage(error));
     }
   }
+
   static getInitialSearchTerm() {
     return LocalStorageService.getSearchTerm();
   }
