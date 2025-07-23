@@ -10,14 +10,7 @@ type ResultsProps = {
 };
 
 class Results extends Component<ResultsProps> {
-  state = {
-    shouldThrow: false,
-  };
-
   render() {
-    if (this.state.shouldThrow) {
-      throw new Error('Test Error Boundary');
-    }
     return (
       <div
         className={cn(
@@ -31,12 +24,6 @@ class Results extends Component<ResultsProps> {
             <CharacterCard key={character.id} character={character} />
           ))}
         </div>
-        <button
-          onClick={() => this.setState({ shouldThrow: true })}
-          className="hover:bg-foreground/80 hover:text-primary-light hover:border-foreground mt-8 cursor-pointer rounded-xl border-3 px-2 font-medium transition-colors duration-400 sm:border-4 sm:px-4 sm:py-2"
-        >
-          Break everything!
-        </button>
       </div>
     );
   }
