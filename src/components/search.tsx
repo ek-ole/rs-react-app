@@ -1,4 +1,5 @@
 import useLocalStorage from '@/hooks/useLocalStorage';
+import { SEARCH_TERM_KEY } from '@/services/constants';
 import { cn } from '@/utils/cn';
 
 import { SearchInput } from './ui/search-input';
@@ -8,7 +9,7 @@ type Props = {
 };
 
 function Search({ onSearch }: Props) {
-  const [inputValue, setInputValue] = useLocalStorage('searchTerm', '');
+  const [inputValue, setInputValue] = useLocalStorage(SEARCH_TERM_KEY, '');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

@@ -6,7 +6,3 @@ export async function loadCharacters(searchTerm = '') {
   const characters = data.results.map(mapApiToCharacter);
   return characters;
 }
-
-export const CharacterService = {
-  loadCharacters,
-};

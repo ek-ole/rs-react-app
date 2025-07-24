@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 function useLocalStorage(key: string, initialValue: string): [string, (value: string) => void] {
-  const [storedValue, setStoredValue] = useState<string>(() => {
+  const [searchTerm, setSearchTerm] = useState<string>(() => {
     try {
       const item = localStorage.getItem(key);
       return item ? (JSON.parse(item) as string) : initialValue;
@@ -13,13 +13,13 @@ function useLocalStorage(key: string, initialValue: string): [string, (value: st
 
   useEffect(() => {
     try {
-      localStorage.setItem(key, JSON.stringify(storedValue));
+      localStorage.setItem(key, JSON.stringify(searchTerm));
     } catch (error) {
       console.error('Error writing ro localStorage:', error);
     }
-  }, [key, storedValue]);
+  }, [key, searchTerm]);
 
-  return [storedValue, setStoredValue];
+  return [searchTerm, setSearchTerm];
 }
 
 export default useLocalStorage;

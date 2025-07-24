@@ -1,26 +1,27 @@
 import { getErrorMessage } from '@/api/api-eror-handler';
+import useLocalStorage from '@/hooks/useLocalStorage';
 
-import { CharacterService } from './character-service';
-import { LocalStorageService } from './storage';
+import { loadCharacters } from './character-service';
+import { SEARCH_TERM_KEY } from './constants';
 
-export async function loadCharacters(searchTerm: string) {
+function useSearchStorage() {
+  return useLocalStorage(SEARCH_TERM_KEY, '');
+}
+
+export async function loadAndProcessCharacters(searchTerm: string) {
   try {
-    return await CharacterService.loadCharacters(searchTerm);
+    return await loadCharacters(searchTerm);
   } catch (error) {
     throw new Error(getErrorMessage(error));
   }
 }
 
-export function getInitialSearchTerm() {
-  return LocalStorageService.getSearchTerm();
+export function useSearchTerm() {
+  const [searchTerm] = useSearchStorage();
+  return searchTerm;
 }
 
-export function saveSearchTerm(term: string) {
-  LocalStorageService.setSearchTerm(term);
+export function useSaveSearchTerm() {
+  const [, setSearchTerm] = useSearchStorage();
+  return (term: string) => setSearchTerm(term.trim());
 }
-
-export const AppService = {
-  loadCharacters,
-  getInitialSearchTerm,
-  saveSearchTerm,
-};

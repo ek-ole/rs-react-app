@@ -1,4 +1,5 @@
-import { LocalStorageService } from '@/services/storage';
+import useLocalStorage from '@/hooks/useLocalStorage';
+import { SEARCH_TERM_KEY } from '@/services/constants';
 
 type Props = {
   error: string;
@@ -6,8 +7,9 @@ type Props = {
 };
 
 export function NotFound({ error, onReset }: Props) {
+  const [, setSearchTerm] = useLocalStorage(SEARCH_TERM_KEY, '');
   const handleReset = () => {
-    LocalStorageService.clearSearchTerm();
+    setSearchTerm('');
     onReset();
   };
 

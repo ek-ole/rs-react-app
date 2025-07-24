@@ -5,23 +5,24 @@ import Results from './components/results';
 import Search from './components/search';
 import { Loader } from './components/ui/loader';
 import { NotFound } from './components/ui/not-found';
-import { AppService } from './services/app-service';
-import { LocalStorageService } from './services/storage';
+import useLocalStorage from './hooks/useLocalStorage';
+import { loadAndProcessCharacters } from './services/app-service';
+import { SEARCH_TERM_KEY } from './services/constants';
 import type { AppState } from './types/app';
 
 function App() {
-  const [state, setState] = useState<AppState>({
+  const [searchTerm, setSearchTerm] = useLocalStorage(SEARCH_TERM_KEY, '');
+  const [state, setState] = useState<Omit<AppState, 'searchValue'>>({
     characters: [],
     isLoading: false,
     error: null,
-    searchValue: LocalStorageService.getSearchTerm(),
   });
 
   const loadData = async (searchTerm = '') => {
     setState((prev) => ({ ...prev, isLoading: true, error: null }));
 
     try {
-      const characters = await AppService.loadCharacters(searchTerm);
+      const characters = await loadAndProcessCharacters(searchTerm);
       setState((prev) => ({ ...prev, characters }));
     } catch (error) {
       setState((prev) => ({
@@ -35,13 +36,14 @@ function App() {
   };
 
   const handleSearch = (term: string) => {
-    AppService.saveSearchTerm(term);
-    void loadData(term.trim());
+    const trimmedValue = term.trim();
+    setSearchTerm(trimmedValue);
+    void loadData(trimmedValue);
   };
 
   useEffect(() => {
-    void loadData(state.searchValue);
-  }, [state.searchValue]);
+    void loadData(searchTerm);
+  }, [searchTerm]);
 
   return (
     <div className="mx-auto my-6 flex w-full flex-col items-center px-8 py-4">
