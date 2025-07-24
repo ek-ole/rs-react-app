@@ -4,18 +4,31 @@ import About from '@/components/about';
 import Page404 from '@/components/page-404';
 
 import App from './App';
+import { Layout } from './components/layout';
 
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: <App />,
+    element: (
+      <Layout>
+        <App />
+      </Layout>
+    ),
   },
   {
     path: '/about',
-    element: <About />,
+    element: (
+      <Layout>
+        <About />
+      </Layout>
+    ),
   },
   {
     path: '*',
-    element: <Page404 />,
+    element: (
+      <Layout>
+        <Page404 />
+      </Layout>
+    ),
   },
 ]);
