@@ -1,7 +1,11 @@
 import type { Character } from '@/types/character';
 import { cn } from '@/utils/cn';
 
-export function CharacterCard(character: Character) {
+type characterProps = {
+  character: Character;
+};
+
+export function CharacterCard({ character }: characterProps) {
   const { image, name, description } = character;
 
   return (

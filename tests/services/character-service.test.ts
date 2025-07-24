@@ -3,22 +3,20 @@ import { vi, describe, it, expect } from 'vitest';
 import { CharacterService } from '@/services/character-service';
 
 vi.mock('@/api/rick-and-morty-api', () => ({
-  RickAndMortyApi: {
-    fetchCharacters: vi.fn(() =>
-      Promise.resolve({
-        results: [
-          {
-            id: 1,
-            name: 'Rick',
-            species: 'Human',
-            status: 'Alive',
-            location: { name: 'Earth' },
-            image: 'rick.png',
-          },
-        ],
-      }),
-    ),
-  },
+  fetchCharacters: vi.fn(() =>
+    Promise.resolve({
+      results: [
+        {
+          id: 1,
+          name: 'Rick',
+          species: 'Human',
+          status: 'Alive',
+          location: { name: 'Earth' },
+          image: 'rick.png',
+        },
+      ],
+    }),
+  ),
 }));
 
 vi.mock('@/api/map-characters', () => ({
