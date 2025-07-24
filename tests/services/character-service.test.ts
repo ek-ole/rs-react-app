@@ -1,6 +1,6 @@
 import { vi, describe, it, expect } from 'vitest';
 
-import { CharacterService } from '@/services/character-service';
+import { loadCharacters } from '@/services/character-service';
 
 vi.mock('@/api/rick-and-morty-api', () => ({
   fetchCharacters: vi.fn(() =>
@@ -30,7 +30,7 @@ vi.mock('@/api/map-characters', () => ({
 
 describe('CharacterService', () => {
   it('should load characters', async () => {
-    const result = await CharacterService.loadCharacters('Rick');
+    const result = await loadCharacters('Rick');
 
     expect(result).toHaveLength(1);
     expect(result[0].name).toBe('Rick');
