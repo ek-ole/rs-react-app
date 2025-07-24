@@ -1,6 +1,4 @@
-import { useState } from 'react';
-
-import { LocalStorageService } from '@/services/storage';
+import useLocalStorage from '@/hooks/useLocalStorage';
 import { cn } from '@/utils/cn';
 
 import { SearchInput } from './ui/search-input';
@@ -10,12 +8,12 @@ type Props = {
 };
 
 function Search({ onSearch }: Props) {
-  const [inputValue, setInputValue] = useState(LocalStorageService.getSearchTerm());
+  const [inputValue, setInputValue] = useLocalStorage('searchTerm', '');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const trimmedValue = inputValue.trim();
-    LocalStorageService.setSearchTerm(trimmedValue);
+    setInputValue(trimmedValue);
     onSearch(trimmedValue);
   };
 
