@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { ApiErrorHandler } from './api/api-eror-handler';
+import { getErrorMessage } from './api/api-eror-handler';
 import Results from './components/results';
 import Search from './components/search';
 import { Loader } from './components/ui/loader';
@@ -26,7 +26,7 @@ function App() {
     } catch (error) {
       setState((prev) => ({
         ...prev,
-        error: ApiErrorHandler.getErrorMessage(error),
+        error: getErrorMessage(error),
         characters: [],
       }));
     } finally {

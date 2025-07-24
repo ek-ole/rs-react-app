@@ -1,4 +1,4 @@
-import { ApiErrorHandler } from '@/api/api-eror-handler';
+import { getErrorMessage } from '@/api/api-eror-handler';
 
 import { CharacterService } from './character-service';
 import { LocalStorageService } from './storage';
@@ -7,7 +7,7 @@ export async function loadCharacters(searchTerm: string) {
   try {
     return await CharacterService.loadCharacters(searchTerm);
   } catch (error) {
-    throw new Error(ApiErrorHandler.getErrorMessage(error));
+    throw new Error(getErrorMessage(error));
   }
 }
 

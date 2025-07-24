@@ -22,9 +22,3 @@ export function getErrorMessage(error: unknown): string {
   }
   return 'Something went wrong, please try again';
 }
-
-export const ApiErrorHandler = {
-  checkResponse,
-  logError,
-  getErrorMessage,
-};

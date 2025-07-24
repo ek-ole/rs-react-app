@@ -1,4 +1,4 @@
-import { RickAndMortyApi } from '@/api/rick-and-morty-api';
+import { fetchCharacters } from '@/api/rick-and-morty-api';
 
 global.fetch = vi.fn();
 
@@ -10,7 +10,7 @@ describe('RickAndMortyApi', () => {
       headers: { 'Content-Type': 'application/json' },
     });
     vi.mocked(fetch).mockResolvedValue(mockResponse);
-    await RickAndMortyApi.fetchCharacters('Rick');
+    await fetchCharacters('Rick');
     expect(fetch).toHaveBeenCalledWith('https://rickandmortyapi.com/api/character?name=Rick');
   });
 });
