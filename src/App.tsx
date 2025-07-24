@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { useEffect, useState } from 'react';
 
 import { ApiErrorHandler } from './api/api-eror-handler';
 import Results from './components/results';
@@ -9,53 +9,49 @@ import { AppService } from './services/app-service';
 import { LocalStorageService } from './services/storage';
 import type { AppState } from './types/app';
 
-class App extends Component<object, AppState> {
-  state: AppState = {
+function App() {
+  const [state, setState] = useState<AppState>({
     characters: [],
     isLoading: false,
     error: null,
     searchValue: LocalStorageService.getSearchTerm(),
-  };
+  });
 
-  componentDidMount() {
-    void this.loadData(this.state.searchValue);
-  }
-
-  loadData = async (searchTerm = '') => {
-    this.setState({ isLoading: true, error: null });
+  const loadData = async (searchTerm = '') => {
+    setState((prev) => ({ ...prev, isLoading: true, error: null }));
 
     try {
       const characters = await AppService.loadCharacters(searchTerm);
-      this.setState({ characters });
+      setState((prev) => ({ ...prev, characters }));
     } catch (error) {
-      this.setState({
+      setState((prev) => ({
+        ...prev,
         error: ApiErrorHandler.getErrorMessage(error),
         characters: [],
-      });
+      }));
     } finally {
-      this.setState({ isLoading: false });
+      setState((prev) => ({ ...prev, isLoading: false }));
     }
   };
 
-  handleSearch = (term: string) => {
+  const handleSearch = (term: string) => {
     AppService.saveSearchTerm(term);
-    void this.loadData(term.trim());
+    void loadData(term.trim());
   };
 
-  render() {
-    const { characters, isLoading, error } = this.state;
+  useEffect(() => {
+    void loadData(state.searchValue);
+  }, [state.searchValue]);
 
-    return (
-      <div className="mx-auto my-6 flex w-full flex-col items-center px-8 py-4">
-        <h1>Rick & Morty</h1>
-        <Search onSearch={this.handleSearch} />
-        {isLoading && <Loader />}
-        {error && <NotFound error={error} onReset={() => this.handleSearch('')} />}
-
-        {characters.length > 0 && <Results characters={characters} />}
-      </div>
-    );
-  }
+  return (
+    <div className="mx-auto my-6 flex w-full flex-col items-center px-8 py-4">
+      <h1>Rick & Morty</h1>
+      <Search onSearch={handleSearch} />
+      {state.isLoading && <Loader />}
+      {state.error && <NotFound error={state.error} onReset={() => handleSearch('')} />}
+      {!state.isLoading && !state.error && <Results characters={state.characters} />}
+    </div>
+  );
 }
 
 export default App;
