@@ -71,7 +71,7 @@ function App() {
         <>
           <Pagination
             currentPage={currentPage}
-            totalPage={state.totalPages || 1}
+            totalPages={state.totalPages}
             onPageChange={handlePageChange}
           />
           <Results characters={state.characters} />
