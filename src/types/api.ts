@@ -8,5 +8,11 @@ export type ApiCharacter = {
 };
 
 export type ApiResponse = {
+  info: {
+    count: number;
+    pages: number;
+    next: string | null;
+    prev: string | null;
+  };
   results: ApiCharacter[];
 };

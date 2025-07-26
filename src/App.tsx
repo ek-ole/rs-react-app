@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 import { getErrorMessage } from './api/api-eror-handler';
+import { Pagination } from './components/pagination';
 import Results from './components/results';
 import Search from './components/search';
 import { Loader } from './components/ui/loader';
@@ -16,19 +18,23 @@ function App() {
     characters: [],
     isLoading: false,
     error: null,
+    totalPages: 1,
   });
+  const [currentPage, setCurrentPage] = useState(1);
 
-  const loadData = async (searchTerm = '') => {
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const loadData = async (searchTerm = '', page = 1) => {
     setState((prev) => ({ ...prev, isLoading: true, error: null }));
-
     try {
-      const characters = await loadAndProcessCharacters(searchTerm);
-      setState((prev) => ({ ...prev, characters }));
+      const { characters, totalPages } = await loadAndProcessCharacters(searchTerm, page);
+      setState((prev) => ({ ...prev, characters, totalPages }));
     } catch (error) {
       setState((prev) => ({
         ...prev,
         error: getErrorMessage(error),
         characters: [],
+        totalPages: 1,
       }));
     } finally {
       setState((prev) => ({ ...prev, isLoading: false }));
@@ -38,11 +44,21 @@ function App() {
   const handleSearch = (term: string) => {
     const trimmedValue = term.trim();
     setSearchTerm(trimmedValue);
-    void loadData(trimmedValue);
+    setCurrentPage(1);
+    void loadData(trimmedValue, 1);
+  };
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    searchParams.set('page', String(page));
+    setSearchParams(searchParams);
+    void loadData(searchTerm, page);
   };
 
   useEffect(() => {
-    void loadData(searchTerm);
+    const page = Number(searchParams.get('page')) || 1;
+    setCurrentPage(page);
+    void loadData(searchTerm, page);
   }, [searchTerm]);
 
   return (
@@ -51,7 +67,16 @@ function App() {
       <Search onSearch={handleSearch} />
       {state.isLoading && <Loader />}
       {state.error && <NotFound error={state.error} onReset={() => handleSearch('')} />}
-      {!state.isLoading && !state.error && <Results characters={state.characters} />}
+      {!state.isLoading && !state.error && (
+        <>
+          <Pagination
+            currentPage={currentPage}
+            totalPage={state.totalPages || 1}
+            onPageChange={handlePageChange}
+          />
+          <Results characters={state.characters} />
+        </>
+      )}
     </div>
   );
 }

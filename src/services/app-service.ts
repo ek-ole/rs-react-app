@@ -1,4 +1,5 @@
 import { getErrorMessage } from '@/api/api-eror-handler';
+import { mapApiToCharacter } from '@/api/map-characters';
 import useLocalStorage from '@/hooks/useLocalStorage';
 
 import { loadCharacters } from './character-service';
@@ -8,9 +9,13 @@ function useSearchStorage() {
   return useLocalStorage(SEARCH_TERM_KEY, '');
 }
 
-export async function loadAndProcessCharacters(searchTerm: string) {
+export async function loadAndProcessCharacters(searchTerm: string, page = 1) {
   try {
-    return await loadCharacters(searchTerm);
+    const data = await loadCharacters(searchTerm, page);
+    return {
+      characters: data.results.map(mapApiToCharacter),
+      totalPages: data.info.pages,
+    };
   } catch (error) {
     throw new Error(getErrorMessage(error));
   }
