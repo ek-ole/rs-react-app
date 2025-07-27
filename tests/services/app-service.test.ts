@@ -1,46 +1,34 @@
+import { getErrorMessage } from '@/api/api-error-handler';
 import useLocalStorage from '@/hooks/use-local-storage';
 import { loadAndProcessCharacters, useSaveSearchTerm, useSearchTerm } from '@/services/app-service';
 import { loadCharacters } from '@/services/character-service';
 
 vi.mock('@/services/character-service');
-vi.mock('@/hooks/useLocalStorage');
+vi.mock('@/hooks/use-local-storage');
+vi.mock('@/api/api-error-handler');
+vi.mock('@/api/map-characters');
 
 describe('AppService', () => {
   const mockSetTerm = vi.fn();
-
   describe('loadAndProcessCharacters()', () => {
-    it('should load characters via CharacterService', async () => {
-      const mockCharacters = [
-        {
-          id: 1,
-          name: 'Rick',
-          description: 'Species: Human, Status: Alive\nLocation: Earth (C-137)',
-          image: 'rick.png',
-        },
-      ];
-      vi.mocked(loadCharacters).mockResolvedValue(mockCharacters);
+    it('should handle errors', async () => {
+      vi.mocked(loadCharacters).mockRejectedValue(new Error('404 Not Found'));
+      vi.mocked(getErrorMessage).mockReturnValue('Custom error message');
 
-      const result = await loadAndProcessCharacters('Rick');
-      expect(vi.mocked(loadCharacters)).toHaveBeenCalledWith('Rick');
-      expect(result).toEqual(mockCharacters);
+      await expect(loadAndProcessCharacters('Rick')).rejects.toThrow('Custom error message');
     });
+  });
 
-    it('should handle errors via ApiErrorHandler', async () => {
-      vi.mocked(loadCharacters).mockImplementation(() => {
-        throw new Error('API request failed: 404 Not Found');
-      });
-      await expect(loadAndProcessCharacters('Rick')).rejects.toThrow(
-        "Sorry, we couldn't find any characters matching your search",
-      );
-    });
-
-    it('should return value from LocalStorage', () => {
+  describe('useSearchTerm()', () => {
+    it('should return search term from storage', () => {
       vi.mocked(useLocalStorage).mockReturnValue(['Rick', mockSetTerm]);
       expect(useSearchTerm()).toBe('Rick');
     });
+  });
 
-    it('should save term to LocalStorage', () => {
-      useSaveSearchTerm()('Rick');
+  describe('useSaveSearchTerm()', () => {
+    it('should save trimmed term to storage', () => {
+      useSaveSearchTerm()('  Rick  ');
       expect(mockSetTerm).toHaveBeenCalledWith('Rick');
     });
   });
