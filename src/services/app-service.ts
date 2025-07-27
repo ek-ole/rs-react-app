@@ -1,6 +1,6 @@
-import { getErrorMessage } from '@/api/api-eror-handler';
+import { getErrorMessage } from '@/api/api-error-handler';
 import { mapApiToCharacter } from '@/api/map-characters';
-import useLocalStorage from '@/hooks/useLocalStorage';
+import useLocalStorage from '@/hooks/use-local-storage';
 
 import { loadCharacters } from './character-service';
 import { SEARCH_TERM_KEY } from './constants';

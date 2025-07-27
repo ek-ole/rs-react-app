@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-import { getErrorMessage } from './api/api-eror-handler';
+import { getErrorMessage } from './api/api-error-handler';
 import { Pagination } from './components/pagination';
 import Results from './components/results';
 import Search from './components/search';
 import { Loader } from './components/ui/loader';
 import { NotFound } from './components/ui/not-found';
-import useLocalStorage from './hooks/useLocalStorage';
+import useLocalStorage from './hooks/use-local-storage';
 import { loadAndProcessCharacters } from './services/app-service';
 import { SEARCH_TERM_KEY } from './services/constants';
 import type { AppState } from './types/app';

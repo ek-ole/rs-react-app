@@ -1,4 +1,4 @@
-import useLocalStorage from '@/hooks/useLocalStorage';
+import useLocalStorage from '@/hooks/use-local-storage';
 import { SEARCH_TERM_KEY } from '@/services/constants';
 
 type Props = {

@@ -1,4 +1,4 @@
-import { checkResponse, getErrorMessage } from '@/api/api-eror-handler';
+import { checkResponse, getErrorMessage } from '@/api/api-error-handler';
 
 describe('ApiErrorHandler', () => {
   describe('checkResponse', () => {

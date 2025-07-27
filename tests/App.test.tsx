@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 
 import App from '@/App';
-import useLocalStorage from '@/hooks/useLocalStorage';
+import useLocalStorage from '@/hooks/use-local-storage';
 import { loadAndProcessCharacters } from '@/services/app-service';
 
 vi.mock('@/services/app-service');

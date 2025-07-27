@@ -1,4 +1,4 @@
-import useLocalStorage from '@/hooks/useLocalStorage';
+import useLocalStorage from '@/hooks/use-local-storage';
 import { loadAndProcessCharacters, useSaveSearchTerm, useSearchTerm } from '@/services/app-service';
 import { loadCharacters } from '@/services/character-service';
 

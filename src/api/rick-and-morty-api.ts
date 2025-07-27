@@ -1,6 +1,6 @@
 import type { ApiResponse } from '@/types/api';
 
-import { checkResponse, logError } from './api-eror-handler';
+import { checkResponse, logError } from './api-error-handler';
 
 const BASE_URL = 'https://rickandmortyapi.com/api';
 
