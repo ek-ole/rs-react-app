@@ -24,7 +24,7 @@ describe('App component', () => {
     });
 
     render(
-      <MemoryRouter initialEntries={['/']}>
+      <MemoryRouter>
         <App />
       </MemoryRouter>,
     );
