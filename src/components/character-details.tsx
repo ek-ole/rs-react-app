@@ -29,7 +29,7 @@ export function CharacterDetails() {
   };
 
   return (
-    <div className="flex flex-col py-10">
+    <div className="sticky top-0 flex h-[100vh] flex-col py-10">
       <div className="flex justify-end">
         <button
           onClick={handleClose}
@@ -57,7 +57,7 @@ export function CharacterDetails() {
           <img
             src={character.image}
             alt={character.name}
-            className="error-message mb-3 h-full w-full rounded-lg object-cover lg:h-40"
+            className="error-message mb-3 h-full w-full rounded-lg object-cover"
           />
           <p>{character.description}</p>
         </div>
