@@ -1,61 +1,53 @@
-import React from 'react';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 
-import { ApiErrorHandler } from './api/api-eror-handler';
+import { Pagination } from './components/pagination';
 import Results from './components/results';
 import Search from './components/search';
 import { Loader } from './components/ui/loader';
 import { NotFound } from './components/ui/not-found';
-import { AppService } from './services/app-service';
-import { LocalStorageService } from './services/storage';
-import type { AppState } from './types/app';
+import { useCharacters } from './hooks/use-characters';
 
-class App extends React.Component<object, AppState> {
-  state: AppState = {
-    characters: [],
-    isLoading: false,
-    error: null,
-    inputValue: LocalStorageService.getSearchTerm(),
-  };
-
-  componentDidMount() {
-    void this.loadData(this.state.inputValue);
-  }
-
-  loadData = async (searchTerm = '') => {
-    this.setState({ isLoading: true, error: null });
-
-    try {
-      const characters = await AppService.loadCharacters(searchTerm);
-      this.setState({ characters });
-    } catch (error) {
-      this.setState({
-        error: ApiErrorHandler.getErrorMessage(error),
-        characters: [],
-      });
-    } finally {
-      this.setState({ isLoading: false });
+function App() {
+  const { state, currentPage, handleSearch, handlePageChange } = useCharacters();
+  const { pathname } = useLocation();
+  const hasDetails = pathname.includes('/characters/');
+  const navigate = useNavigate();
+  const resetDetails = () => {
+    if (hasDetails) {
+      void navigate('/');
     }
   };
 
-  handleSearch = (term: string) => {
-    AppService.saveSearchTerm(term);
-    void this.loadData(term.trim());
-  };
-
-  render() {
-    const { characters, isLoading, error } = this.state;
-
-    return (
-      <div className="mx-auto my-6 flex w-full flex-col items-center px-8 py-4">
-        <h1>Rick & Morty</h1>
-        <Search onSearch={this.handleSearch} />
-        {isLoading && <Loader />}
-        {error && <NotFound error={error} onReset={() => this.handleSearch('')} />}
-
-        {!isLoading && !error && <Results characters={characters} />}
+  return (
+    <div className="mx-auto my-6 flex w-full flex-col items-center px-8 py-4">
+      <h1>Rick & Morty</h1>
+      <Search onSearch={handleSearch} resetDetails={resetDetails} />
+      {state.isLoading && <Loader />}
+      {state.error && (
+        <NotFound
+          error={state.error}
+          onReset={() => {
+            handleSearch('');
+            resetDetails();
+          }}
+        />
+      )}
+      <div className={`flex w-full ${hasDetails ? 'gap-4' : ''}`}>
+        <div className={hasDetails ? 'w-[65%]' : 'w-full'}>
+          {!state.isLoading && !state.error && (
+            <>
+              <Pagination
+                currentPage={currentPage}
+                totalPages={state.totalPages}
+                onPageChange={handlePageChange}
+              />
+              <Results characters={state.characters} />
+            </>
+          )}
+        </div>
+        <Outlet />
       </div>
-    );
-  }
+    </div>
+  );
 }
-
 export default App;

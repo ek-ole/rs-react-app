@@ -8,6 +8,7 @@ import jestDom from 'eslint-plugin-jest-dom';
 import vitest from '@vitest/eslint-plugin';
 import importPlugin from 'eslint-plugin-import';
 import eslintConfigPrettier from 'eslint-config-prettier/flat';
+import reactHooks from 'eslint-plugin-react-hooks';
 
 export default tseslint.config(
   { ignores: ['dist', 'coverage'] },
@@ -33,6 +34,7 @@ export default tseslint.config(
     plugins: {
       'testing-library': testingLibrary,
       'jest-dom': jestDom,
+      'react-hooks': reactHooks,
       vitest: vitest,
     },
     rules: {
@@ -41,6 +43,8 @@ export default tseslint.config(
       '@typescript-eslint/no-inferrable-types': 'error',
       '@typescript-eslint/array-type': 'error',
       '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
+      'react-hooks/rules-of-hooks': 'error',
+      'react-hooks/exhaustive-deps': 'warn',
       'import/order': [
         'error',
         {

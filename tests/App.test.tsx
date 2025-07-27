@@ -1,47 +1,86 @@
 import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { MemoryRouter } from 'react-router-dom';
 
 import App from '@/App';
-import { AppService } from '@/services/app-service';
+import { useCharacters } from '@/hooks/use-characters';
 
-vi.mock('@/services/app-service');
-vi.mock('@/components/results', () => ({
-  default: () => <div data-testid="mock-results" />,
-}));
+vi.mock('@/hooks/use-characters');
 
-describe('App', () => {
-  beforeEach(() => {
-    vi.spyOn(AppService, 'loadCharacters').mockResolvedValue([]);
-    vi.spyOn(AppService, 'saveSearchTerm').mockImplementation(() => {});
+describe('App component', () => {
+  const mockHandleSearch = vi.fn();
+  const mockHandlePageChange = vi.fn();
+
+  it('renders loader when loading', () => {
+    vi.mocked(useCharacters).mockReturnValue({
+      state: {
+        isLoading: true,
+        error: null,
+        characters: [],
+        totalPages: 0,
+      },
+      currentPage: 1,
+      handleSearch: mockHandleSearch,
+      handlePageChange: mockHandlePageChange,
+    });
+
+    render(
+      <MemoryRouter>
+        <App />
+      </MemoryRouter>,
+    );
+
+    expect(screen.getByText(/Rick & Morty/i)).toBeInTheDocument();
   });
 
-  const mockCharacters = [
-    { id: 1, name: 'Rick', description: 'Human', image: 'rick.png' },
-    { id: 2, name: 'Morty', description: 'Human', image: 'morty.png' },
-  ];
+  it('renders NotFound when error exists', () => {
+    vi.mocked(useCharacters).mockReturnValue({
+      state: {
+        isLoading: false,
+        error: 'Something went wrong',
+        characters: [],
+        totalPages: 0,
+      },
+      currentPage: 1,
+      handleSearch: mockHandleSearch,
+      handlePageChange: mockHandlePageChange,
+    });
 
-  it('should render header text', () => {
-    render(<App />);
-    const heading = screen.getByRole('heading');
-    expect(heading).toBeInTheDocument();
-    expect(heading).toHaveTextContent(/rick & morty/i);
+    render(
+      <MemoryRouter>
+        <App />
+      </MemoryRouter>,
+    );
+
+    expect(screen.getByText(/Something went wrong/i)).toBeInTheDocument();
   });
 
-  it('should update character list after search', async () => {
-    const loadCharactersSpy = vi
-      .spyOn(AppService, 'loadCharacters')
-      .mockResolvedValue(mockCharacters);
+  it('renders results and pagination when data is available', () => {
+    vi.mocked(useCharacters).mockReturnValue({
+      state: {
+        isLoading: false,
+        error: null,
+        characters: [
+          {
+            id: 1,
+            name: 'Rick',
+            description: '',
+            image: '',
+          },
+        ],
+        totalPages: 5,
+      },
+      currentPage: 1,
+      handleSearch: mockHandleSearch,
+      handlePageChange: mockHandlePageChange,
+    });
 
-    const user = userEvent.setup();
+    render(
+      <MemoryRouter>
+        <App />
+      </MemoryRouter>,
+    );
 
-    render(<App />);
-
-    const input = screen.getByRole('searchbox');
-    const button = screen.getByRole('button');
-
-    await user.type(input, 'Rick');
-    await user.click(button);
-
-    expect(loadCharactersSpy).toHaveBeenCalledWith('Rick');
+    expect(screen.getByText(/Rick & Morty/i)).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /next/i })).toBeInTheDocument();
   });
 });

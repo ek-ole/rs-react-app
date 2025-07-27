@@ -1,41 +1,44 @@
-import React from 'react';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 
-import type { ResultsProps } from '@/types/components';
+import type { Character } from '@/types/character';
 import { cn } from '@/utils/cn';
 
 import { CharacterCard } from './cards/character-card';
 
-class Results extends React.Component<ResultsProps> {
-  state = {
-    shouldThrow: false,
+type ResultsProps = {
+  characters: Character[];
+};
+
+function Results({ characters }: ResultsProps) {
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const [searchParams] = useSearchParams();
+
+  const handleCharacterClick = (characterId: number) => {
+    const params = new URLSearchParams(searchParams);
+    void navigate(`/characters/${characterId}?${params.toString()}`);
   };
 
-  render() {
-    if (this.state.shouldThrow) {
-      throw new Error('Test Error Boundary');
-    }
-    return (
-      <div
-        className={cn(
-          'mx-auto mt-6 flex w-full max-w-6xl',
-          'flex-col items-center rounded-xl border-4 p-4',
-        )}
-      >
-        <h2>Characters</h2>
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
-          {this.props.characters.map((character) => (
-            <CharacterCard key={character.id} character={character} />
-          ))}
-        </div>
-        <button
-          onClick={() => this.setState({ shouldThrow: true })}
-          className="hover:bg-foreground/80 hover:text-primary-light hover:border-foreground mt-8 cursor-pointer rounded-xl border-3 px-2 font-medium transition-colors duration-400 sm:border-4 sm:px-4 sm:py-2"
-        >
-          Break everything!
-        </button>
+  return (
+    <div
+      className={cn(
+        'mx-auto mt-6 flex w-full max-w-6xl',
+        'flex-col items-center rounded-xl border-4 p-4',
+      )}
+    >
+      <h2>Characters</h2>
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+        {characters.map((character) => (
+          <CharacterCard
+            key={character.id}
+            character={character}
+            isActive={id === String(character.id)}
+            onClick={() => handleCharacterClick(character.id)}
+          />
+        ))}
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 export default Results;

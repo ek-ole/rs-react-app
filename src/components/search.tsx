@@ -1,55 +1,58 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
 
-import { LocalStorageService } from '@/services/storage';
+import useLocalStorage from '@/hooks/use-local-storage';
+import { SEARCH_TERM_KEY } from '@/services/constants';
 import { cn } from '@/utils/cn';
 
 import { SearchInput } from './ui/search-input';
 
 type Props = {
   onSearch: (term: string) => void;
+  resetDetails?: () => void;
 };
 
-class Search extends React.Component<Props> {
-  state = {
-    inputValue: LocalStorageService.getSearchTerm(),
-  };
+function Search({ onSearch, resetDetails }: Props) {
+  const [searchTerm] = useLocalStorage(SEARCH_TERM_KEY, '');
+  const [inputValue, setInputValue] = useState(searchTerm);
 
-  handleSubmit = (e: React.FormEvent) => {
+  useEffect(() => {
+    setInputValue(searchTerm);
+  }, [searchTerm]);
+
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const trimmedValue = this.state.inputValue.trim();
-    LocalStorageService.setSearchTerm(trimmedValue);
-    this.props.onSearch(trimmedValue);
+    const trimmedValue = inputValue.trim();
+    onSearch(trimmedValue);
+    resetDetails?.();
   };
 
-  render() {
-    return (
-      <form onSubmit={this.handleSubmit} className="flex w-full flex-col items-center sm:px-4">
-        <div
+  return (
+    <form onSubmit={handleSubmit} className="flex w-full flex-col items-center sm:px-4">
+      <div
+        className={cn(
+          'border-p-4 flex w-full max-w-sm items-center gap-2',
+          'rounded-xl border-4 p-2 sm:my-6',
+        )}
+      >
+        <SearchInput
+          value={inputValue}
+          onChange={(value) => setInputValue(value)}
+          placeholder="Search character..."
+        />
+        <button
+          type="submit"
           className={cn(
-            'border-p-4 flex w-full max-w-sm items-center gap-2',
-            'rounded-xl border-4 p-2 sm:my-6',
+            'hover:bg-foreground/80 hover:text-primary-light',
+            'hover:border-foreground cursor-pointer',
+            'rounded-xl border-3 px-2 font-medium',
+            'transition-colors duration-400 sm:border-4 sm:px-4 sm:py-2',
           )}
         >
-          <SearchInput
-            value={this.state.inputValue}
-            onChange={(value) => this.setState({ inputValue: value })}
-            placeholder="Search character..."
-          />
-          <button
-            type="submit"
-            className={cn(
-              'hover:bg-foreground/80 hover:text-primary-light',
-              'hover:border-foreground cursor-pointer',
-              'rounded-xl border-3 px-2 font-medium',
-              'transition-colors duration-400 sm:border-4 sm:px-4 sm:py-2',
-            )}
-          >
-            Search
-          </button>
-        </div>
-      </form>
-    );
-  }
+          Search
+        </button>
+      </div>
+    </form>
+  );
 }
 
 export default Search;

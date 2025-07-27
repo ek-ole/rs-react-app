@@ -1,21 +1,32 @@
-import { ApiErrorHandler } from '@/api/api-eror-handler';
+import { getErrorMessage } from '@/api/api-error-handler';
+import { mapApiToCharacter } from '@/api/map-characters';
+import useLocalStorage from '@/hooks/use-local-storage';
 
-import { CharacterService } from './character-service';
-import { LocalStorageService } from './storage';
+import { loadCharacters } from './character-service';
+import { SEARCH_TERM_KEY } from './constants';
 
-export class AppService {
-  static async loadCharacters(searchTerm: string) {
-    try {
-      return await CharacterService.loadCharacters(searchTerm);
-    } catch (error) {
-      throw new Error(ApiErrorHandler.getErrorMessage(error));
-    }
-  }
-  static getInitialSearchTerm() {
-    return LocalStorageService.getSearchTerm();
-  }
+function useSearchStorage() {
+  return useLocalStorage(SEARCH_TERM_KEY, '');
+}
 
-  static saveSearchTerm(term: string) {
-    LocalStorageService.setSearchTerm(term);
+export async function loadAndProcessCharacters(searchTerm: string, page = 1) {
+  try {
+    const data = await loadCharacters(searchTerm, page);
+    return {
+      characters: data.results.map(mapApiToCharacter),
+      totalPages: data.info.pages,
+    };
+  } catch (error) {
+    throw new Error(getErrorMessage(error));
   }
+}
+
+export function useSearchTerm() {
+  const [searchTerm] = useSearchStorage();
+  return searchTerm;
+}
+
+export function useSaveSearchTerm() {
+  const [, setSearchTerm] = useSearchStorage();
+  return (term: string) => setSearchTerm(term.trim());
 }

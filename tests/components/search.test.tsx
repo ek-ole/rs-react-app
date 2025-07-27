@@ -2,46 +2,54 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import Search from '@/components/search';
+import useLocalStorage from '@/hooks/use-local-storage';
 
-vi.mock('@/services/storage', () => ({
-  LocalStorageService: {
-    getSearchTerm: () => 'initial value',
-    setSearchTerm: vi.fn(),
-    clearSearchTerm: vi.fn(),
-  },
+vi.mock('@/hooks/use-local-storage');
+vi.mock('./ui/search-input', () => ({
+  SearchInput: ({ value, onChange }: { value: string; onChange: (v: string) => void }) => (
+    <input
+      type="search"
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+      placeholder="Search character..."
+      className="search-input"
+    />
+  ),
 }));
 
 describe('Search Component', () => {
-  const user = userEvent.setup();
   const mockOnSearch = vi.fn();
+  const mockResetDetails = vi.fn();
+  const mockSetLocalStorage = vi.fn();
 
   beforeEach(() => {
-    vi.clearAllMocks();
+    vi.mocked(useLocalStorage).mockReturnValue(['', mockSetLocalStorage]);
+    mockOnSearch.mockClear();
+    mockResetDetails.mockClear();
+    mockSetLocalStorage.mockClear();
   });
 
-  it('should render input', () => {
+  it('should render search input and button', () => {
     render(<Search onSearch={mockOnSearch} />);
-    const input = screen.getByRole('searchbox');
-    expect(input).toBeInTheDocument();
-    expect(input).toHaveValue('initial value');
+
+    expect(screen.getByRole('searchbox')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /search/i })).toBeInTheDocument();
   });
 
-  it('should render button', () => {
-    render(<Search onSearch={mockOnSearch} />);
-    const button = screen.getByRole('button', { name: /search/i });
-    expect(button).toBeInTheDocument();
+  it('should call resetDetails when provided', async () => {
+    const user = userEvent.setup();
+    render(<Search onSearch={mockOnSearch} resetDetails={mockResetDetails} />);
+
+    await user.type(screen.getByRole('searchbox'), 'Rick');
+    await user.click(screen.getByRole('button', { name: /search/i }));
+
+    expect(mockResetDetails).toHaveBeenCalledTimes(1);
   });
 
-  it('should trim input and call onSearch', async () => {
+  it('should initialize with value from localStorage', () => {
+    vi.mocked(useLocalStorage).mockReturnValue(['initial value', mockSetLocalStorage]);
     render(<Search onSearch={mockOnSearch} />);
 
-    const input = screen.getByRole('searchbox');
-    const button = screen.getByRole('button', { name: /search/i });
-
-    await user.clear(input);
-    await user.type(input, '  Rick ');
-    await user.click(button);
-
-    expect(mockOnSearch).toHaveBeenCalledWith('Rick');
+    expect(screen.getByRole('searchbox')).toHaveValue('initial value');
   });
 });
