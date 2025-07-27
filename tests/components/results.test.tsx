@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 
 import Results from '@/components/results';
 
@@ -8,11 +9,14 @@ describe('Results', () => {
     { id: 2, name: 'Morty Smith', description: 'Alive', image: 'morty.png' },
   ];
 
-  it('should render cards gris', () => {
-    render(<Results characters={mockCharacters} />);
+  it('should render characters grid with all items', () => {
+    render(
+      <MemoryRouter>
+        <Results characters={mockCharacters} />
+      </MemoryRouter>,
+    );
 
-    const header = screen.getByRole('heading', { name: /characters/i });
-    expect(header).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /characters/i })).toBeInTheDocument();
 
     mockCharacters.forEach((character) => {
       expect(screen.getByText(character.name)).toBeInTheDocument();
