@@ -6,9 +6,10 @@ import { SearchInput } from './ui/search-input';
 
 type Props = {
   onSearch: (term: string) => void;
+  resetDetails?: () => void;
 };
 
-function Search({ onSearch }: Props) {
+function Search({ onSearch, resetDetails }: Props) {
   const [inputValue, setInputValue] = useLocalStorage(SEARCH_TERM_KEY, '');
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -16,6 +17,7 @@ function Search({ onSearch }: Props) {
     const trimmedValue = inputValue.trim();
     setInputValue(trimmedValue);
     onSearch(trimmedValue);
+    resetDetails?.();
   };
 
   return (

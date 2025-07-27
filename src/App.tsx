@@ -1,4 +1,4 @@
-import { Outlet, useLocation } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 
 import { Pagination } from './components/pagination';
 import Results from './components/results';
@@ -11,11 +11,17 @@ function App() {
   const { state, currentPage, handleSearch, handlePageChange } = useCharacters();
   const { pathname } = useLocation();
   const hasDetails = pathname.includes('/characters/');
+  const navigate = useNavigate();
+  const resetDetails = () => {
+    if (hasDetails) {
+      void navigate('/');
+    }
+  };
 
   return (
     <div className="mx-auto my-6 flex w-full flex-col items-center px-8 py-4">
       <h1>Rick & Morty</h1>
-      <Search onSearch={handleSearch} />
+      <Search onSearch={handleSearch} resetDetails={resetDetails} />
       {state.isLoading && <Loader />}
       {state.error && <NotFound error={state.error} onReset={() => handleSearch('')} />}
       <div className={`flex w-full ${hasDetails ? 'gap-4' : ''}`}>
