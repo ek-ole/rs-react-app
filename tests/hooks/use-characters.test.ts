@@ -5,6 +5,7 @@ import { getErrorMessage } from '@/api/api-error-handler';
 import { useCharacters } from '@/hooks/use-characters';
 import useLocalStorage from '@/hooks/use-local-storage';
 import { loadAndProcessCharacters } from '@/services/app-service';
+import type { Character } from '@/types/character';
 
 vi.mock('@/hooks/use-local-storage');
 vi.mock('react-router-dom', async () => {
@@ -21,6 +22,13 @@ describe('useCharacters', () => {
   const mockSetSearchTerm = vi.fn();
   const mockSetSearchParams = vi.fn();
 
+  const mockCharacter: Character = {
+    id: 1,
+    name: 'Morty',
+    description: 'A nervous teenager',
+    image: 'morty.png',
+  };
+
   beforeEach(() => {
     vi.clearAllMocks();
     vi.mocked(useLocalStorage).mockReturnValue(['Morty', mockSetSearchTerm]);
@@ -31,9 +39,8 @@ describe('useCharacters', () => {
   });
 
   it('should load characters on init with params from URL', async () => {
-    const charactersMock = [{ id: 1, name: 'Morty' }];
     vi.mocked(loadAndProcessCharacters).mockResolvedValue({
-      characters: charactersMock,
+      characters: [mockCharacter],
       totalPages: 5,
     });
 
@@ -43,7 +50,7 @@ describe('useCharacters', () => {
     });
 
     expect(loadAndProcessCharacters).toHaveBeenCalledWith('Morty', 2);
-    expect(result.current.state.characters).toEqual(charactersMock);
+    expect(result.current.state.characters).toEqual([mockCharacter]);
     expect(result.current.state.totalPages).toBe(5);
     expect(result.current.currentPage).toBe(2);
   });
@@ -52,7 +59,7 @@ describe('useCharacters', () => {
     const { result } = renderHook(() => useCharacters());
 
     vi.mocked(loadAndProcessCharacters).mockResolvedValue({
-      characters: [],
+      characters: [mockCharacter],
       totalPages: 1,
     });
 
