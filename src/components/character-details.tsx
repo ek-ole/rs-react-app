@@ -24,7 +24,8 @@ export function CharacterDetails() {
   if (!id) return null;
 
   const handleClose = () => {
-    void navigate('/');
+    const params = new URLSearchParams(window.location.search);
+    void navigate(`/?${params.toString()}`);
   };
 
   return (

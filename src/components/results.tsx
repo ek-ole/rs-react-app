@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 
 import type { Character } from '@/types/character';
 import { cn } from '@/utils/cn';
@@ -12,9 +12,11 @@ type ResultsProps = {
 function Results({ characters }: ResultsProps) {
   const navigate = useNavigate();
   const { id } = useParams();
+  const [searchParams] = useSearchParams();
 
   const handleCharacterClick = (characterId: number) => {
-    void navigate(`/characters/${characterId}`);
+    const params = new URLSearchParams(searchParams);
+    void navigate(`/characters/${characterId}?${params.toString()}`);
   };
 
   return (
