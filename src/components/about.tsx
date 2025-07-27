@@ -15,13 +15,13 @@ function About() {
 
         <div className="mb-8 space-y-4 text-center">
           <p>This is a React application for exploring Rick and Morty characters.</p>
-          <p className="flex items-center whitespace-nowrap">
+          <p className="flex flex-wrap items-center justify-center">
             Created by Ekaterina Dmitrenko as part of&nbsp;
             <Link
               to="https://rs.school/courses/reactjs"
               target="_blank"
               rel="noopener noreferrer"
-              className="semi-bold flex items-center whitespace-nowrap hover:underline"
+              className="flex items-center font-bold hover:underline"
             >
               RS School React Course
               <img
