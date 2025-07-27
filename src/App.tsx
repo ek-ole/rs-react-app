@@ -44,7 +44,11 @@ function App() {
   const handleSearch = (term: string) => {
     const trimmedValue = term.trim();
     setSearchTerm(trimmedValue);
-    setCurrentPage(1);
+
+    const params = new URLSearchParams(searchParams);
+    params.set('search', trimmedValue);
+    params.set('page', '1');
+    setSearchParams(params);
     void loadData(trimmedValue, 1);
   };
 
@@ -56,10 +60,13 @@ function App() {
   };
 
   useEffect(() => {
+    const searchTerm = searchParams.get('search') || '';
     const page = Number(searchParams.get('page')) || 1;
+
+    setSearchTerm(searchTerm);
     setCurrentPage(page);
     void loadData(searchTerm, page);
-  }, [searchTerm]);
+  }, [searchParams, searchTerm, setSearchTerm]);
 
   return (
     <div className="mx-auto my-6 flex w-full flex-col items-center px-8 py-4">
