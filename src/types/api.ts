@@ -1,3 +1,5 @@
+import type { Character } from './character';
+
 export type ApiCharacter = {
   id: number;
   name: string;
@@ -16,3 +18,10 @@ export type ApiResponse = {
   };
   results: ApiCharacter[];
 };
+
+export const mapApiToCharacter = (apiData: ApiCharacter): Character => ({
+  id: apiData.id,
+  name: apiData.name,
+  image: apiData.image,
+  description: `${apiData.status} - ${apiData.species} from ${apiData.location.name}`,
+});

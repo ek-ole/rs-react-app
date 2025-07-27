@@ -7,7 +7,7 @@ export function Header() {
     <header className="flex items-center justify-between px-4 shadow-lg">
       <NavLink to="/">
         <img
-          src="favicon.svg"
+          src="/favicon.svg"
           alt="Logo"
           className={cn(
             'shadow-foreground/50 duration-300',
