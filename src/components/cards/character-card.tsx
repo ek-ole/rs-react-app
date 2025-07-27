@@ -3,17 +3,30 @@ import { cn } from '@/utils/cn';
 
 type characterProps = {
   character: Character;
+  isActive?: boolean;
+  onClick?: () => void;
 };
 
-export function CharacterCard({ character }: characterProps) {
+export function CharacterCard({ character, isActive, onClick }: characterProps) {
   const { image, name, description } = character;
 
   return (
     <div
+      tabIndex={0}
+      role="button"
+      aria-label={`View details for ${character.name}`}
+      onClick={onClick}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          onClick?.();
+        }
+      }}
       className={cn(
         'shadow-foreground/50 my-2 flex flex-col',
         'items-center gap-2 rounded-xl border-4 p-4',
         'shadow-lg transition-shadow hover:shadow-md lg:p-3',
+        isActive ? 'border-primary-light' : '',
       )}
     >
       {image && (

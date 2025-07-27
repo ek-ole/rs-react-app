@@ -1,3 +1,5 @@
+import { useNavigate, useParams } from 'react-router-dom';
+
 import type { Character } from '@/types/character';
 import { cn } from '@/utils/cn';
 
@@ -8,6 +10,13 @@ type ResultsProps = {
 };
 
 function Results({ characters }: ResultsProps) {
+  const navigate = useNavigate();
+  const { id } = useParams();
+
+  const handleCharacterClick = (characterId: number) => {
+    void navigate(`/characters/${characterId}`);
+  };
+
   return (
     <div
       className={cn(
@@ -18,7 +27,12 @@ function Results({ characters }: ResultsProps) {
       <h2>Characters</h2>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
         {characters.map((character) => (
-          <CharacterCard key={character.id} character={character} />
+          <CharacterCard
+            key={character.id}
+            character={character}
+            isActive={id === String(character.id)}
+            onClick={() => handleCharacterClick(character.id)}
+          />
         ))}
       </div>
     </div>
