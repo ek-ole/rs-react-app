@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+
 import useLocalStorage from '@/hooks/use-local-storage';
 import { SEARCH_TERM_KEY } from '@/services/constants';
 import { cn } from '@/utils/cn';
@@ -10,12 +12,16 @@ type Props = {
 };
 
 function Search({ onSearch, resetDetails }: Props) {
-  const [inputValue, setInputValue] = useLocalStorage(SEARCH_TERM_KEY, '');
+  const [searchTerm] = useLocalStorage(SEARCH_TERM_KEY, '');
+  const [inputValue, setInputValue] = useState(searchTerm);
+
+  useEffect(() => {
+    setInputValue(searchTerm);
+  }, [searchTerm]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const trimmedValue = inputValue.trim();
-    setInputValue(trimmedValue);
     onSearch(trimmedValue);
     resetDetails?.();
   };

@@ -1,4 +1,4 @@
-import { renderHook, act, waitFor } from '@testing-library/react';
+import { renderHook, waitFor } from '@testing-library/react';
 import { useSearchParams } from 'react-router-dom';
 
 import { getErrorMessage } from '@/api/api-error-handler';
@@ -53,21 +53,6 @@ describe('useCharacters', () => {
     expect(result.current.state.characters).toEqual([mockCharacter]);
     expect(result.current.state.totalPages).toBe(5);
     expect(result.current.currentPage).toBe(2);
-  });
-
-  it('should handle search', () => {
-    const { result } = renderHook(() => useCharacters());
-
-    vi.mocked(loadAndProcessCharacters).mockResolvedValue({
-      characters: [mockCharacter],
-      totalPages: 1,
-    });
-
-    act(() => result.current.handleSearch('Rick'));
-
-    expect(mockSetSearchTerm).toHaveBeenCalledWith('Rick');
-    expect(mockSetSearchParams).toHaveBeenCalledWith(expect.any(URLSearchParams));
-    expect(loadAndProcessCharacters).toHaveBeenCalledWith('Rick', 1);
   });
 
   it('should handle error from loadAndProcessCharacters', async () => {

@@ -38,13 +38,11 @@ export function useCharacters() {
 
   const handleSearch = (term: string) => {
     const trimmedValue = term.trim();
-    setSearchTerm(trimmedValue);
 
     const params = new URLSearchParams(searchParams);
     params.set('search', trimmedValue);
     params.set('page', '1');
     setSearchParams(params);
-    void loadData(trimmedValue, 1);
   };
 
   const handlePageChange = (page: number) => {
@@ -61,7 +59,7 @@ export function useCharacters() {
     setSearchTerm(searchTerm);
     setCurrentPage(page);
     void loadData(searchTerm, page);
-  }, [searchParams, searchTerm, setSearchTerm]);
+  }, [searchParams]);
 
   return { state, currentPage, handleSearch, handlePageChange };
 }

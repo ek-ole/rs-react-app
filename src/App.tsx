@@ -23,7 +23,15 @@ function App() {
       <h1>Rick & Morty</h1>
       <Search onSearch={handleSearch} resetDetails={resetDetails} />
       {state.isLoading && <Loader />}
-      {state.error && <NotFound error={state.error} onReset={() => handleSearch('')} />}
+      {state.error && (
+        <NotFound
+          error={state.error}
+          onReset={() => {
+            handleSearch('');
+            resetDetails();
+          }}
+        />
+      )}
       <div className={`flex w-full ${hasDetails ? 'gap-4' : ''}`}>
         <div className={hasDetails ? 'w-[65%]' : 'w-full'}>
           {!state.isLoading && !state.error && (
