@@ -1,3 +1,5 @@
+import { Outlet, useLocation } from 'react-router-dom';
+
 import { Pagination } from './components/pagination';
 import Results from './components/results';
 import Search from './components/search';
@@ -7,6 +9,8 @@ import { useCharacters } from './hooks/use-characters';
 
 function App() {
   const { state, currentPage, handleSearch, handlePageChange } = useCharacters();
+  const { pathname } = useLocation();
+  const hasDetails = pathname.includes('/characters/');
 
   return (
     <div className="mx-auto my-6 flex w-full flex-col items-center px-8 py-4">
@@ -14,18 +18,22 @@ function App() {
       <Search onSearch={handleSearch} />
       {state.isLoading && <Loader />}
       {state.error && <NotFound error={state.error} onReset={() => handleSearch('')} />}
-      {!state.isLoading && !state.error && (
-        <>
-          <Pagination
-            currentPage={currentPage}
-            totalPages={state.totalPages}
-            onPageChange={handlePageChange}
-          />
-          <Results characters={state.characters} />
-        </>
-      )}
+      <div className={`flex w-full ${hasDetails ? 'gap-4' : ''}`}>
+        <div className={hasDetails ? 'w-[65%]' : 'w-full'}>
+          {!state.isLoading && !state.error && (
+            <>
+              <Pagination
+                currentPage={currentPage}
+                totalPages={state.totalPages}
+                onPageChange={handlePageChange}
+              />
+              <Results characters={state.characters} />
+            </>
+          )}
+        </div>
+        <Outlet />
+      </div>
     </div>
   );
 }
-
 export default App;
