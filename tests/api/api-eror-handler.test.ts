@@ -1,3 +1,5 @@
+import { describe, it, expect } from 'vitest';
+
 import { checkResponse, getErrorMessage } from '@/api/api-error-handler';
 
 describe('ApiErrorHandler', () => {

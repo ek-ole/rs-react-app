@@ -1,3 +1,5 @@
+import { vi, describe, it, expect } from 'vitest';
+
 import { getErrorMessage } from '@/api/api-error-handler';
 import useLocalStorage from '@/hooks/use-local-storage';
 import { loadAndProcessCharacters, useSaveSearchTerm, useSearchTerm } from '@/services/app-service';

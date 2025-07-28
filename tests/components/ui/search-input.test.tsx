@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+import { vi, describe, it, expect } from 'vitest';
 
 import { SearchInput } from '@/components/ui/search-input';
 

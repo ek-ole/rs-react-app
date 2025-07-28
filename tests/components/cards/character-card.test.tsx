@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { vi, describe, it, expect } from 'vitest';
 
 import { CharacterCard } from '@/components/cards/character-card';
 import type { Character } from '@/types/character';

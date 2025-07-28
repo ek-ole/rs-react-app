@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { vi, describe, it, expect } from 'vitest';
 
 import { NotFound } from '@/components/ui/not-found';
 

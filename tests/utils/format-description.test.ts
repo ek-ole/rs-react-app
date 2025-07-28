@@ -1,3 +1,5 @@
+import { describe, it, expect } from 'vitest';
+
 import type { ApiCharacter } from '@/types/api';
 import { formatDescription } from '@/utils/format-description';
 
