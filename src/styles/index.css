@@ -6,15 +6,19 @@
   --color-foreground: var(--foreground);
   --color-primary-light: var(--primary-light);
   --color-error-message: var(--error-message);
+  --color-shadow: var(--gradient-middle);
 }
 
 :root {
   --font-primary: 'Josefin Sans', sans-serif;
   --font-cookie: 'Cookie', cursive;
   --background: oklch(97.989% 0.11354 108.347);
-  --foreground: oklch(30% 0.15 300);
+  --foreground: oklch(29.978% 0.14974 300.291);
   --primary-light: oklch(94.278% 0.0523 92.944);
   --error-message: rgb(255, 51, 0);
+  --gradient-cold: oklch(73.9% 0.15155 166.971);
+  --gradient-hot: oklch(72.445% 0.18897 50.929 / 0.904);
+  --gradient-middle: oklch(71.159% 0.18121 22.817 / 0.644);
 }
 
 @layer base {
@@ -34,6 +38,16 @@
     }
     to {
       opacity: 1;
+    }
+  }
+
+  @layer utilities {
+    .shadow-glow {
+      box-shadow:
+        30px 30px 20px -20px var(--gradient-hot),
+        -30px -30px 20px -20px var(--gradient-cold),
+        30px -30px 20px -20px var(--gradient-middle),
+        -30px 50px 50px -10px var(--gradient-middle);
     }
   }
 }

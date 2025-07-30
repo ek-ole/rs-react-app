@@ -48,9 +48,9 @@ export function CharacterDetails() {
       ) : character ? (
         <div
           className={cn(
-            'shadow-foreground/50 my-2 flex flex-col',
+            'my-2 flex flex-col',
             'items-center gap-2 rounded-xl border-4 p-4',
-            'shadow-lg transition-shadow hover:shadow-md lg:p-3',
+            'shadow-[0px_0px_24px_13px] lg:p-3',
           )}
         >
           <h2 className="text-lg font-semibold lg:text-base">{character.name}</h2>

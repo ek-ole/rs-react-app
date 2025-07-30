@@ -24,6 +24,7 @@ function Results({ characters }: ResultsProps) {
       className={cn(
         'mx-auto mt-6 flex w-full max-w-6xl',
         'flex-col items-center rounded-xl border-4 p-4',
+        'shadow-glow rounded-xl',
       )}
     >
       <h2>Characters</h2>

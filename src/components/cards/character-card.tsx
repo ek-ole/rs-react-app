@@ -25,7 +25,7 @@ export function CharacterCard({ character, isActive, onClick }: characterProps) 
       className={cn(
         'shadow-foreground/50 my-2 flex flex-col',
         'items-center gap-2 rounded-xl border-4 p-4',
-        'shadow-lg transition-shadow hover:shadow-md lg:p-3',
+        'cursor-pointer shadow-lg transition-shadow hover:shadow-md lg:p-3',
         isActive ? 'border-primary-light' : '',
       )}
     >
