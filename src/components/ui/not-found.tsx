@@ -1,5 +1,6 @@
 import useLocalStorage from '@/hooks/use-local-storage';
 import { SEARCH_TERM_KEY } from '@/services/constants';
+import { cn } from '@/utils/cn';
 
 type Props = {
   error: string;
@@ -14,7 +15,14 @@ export function NotFound({ error, onReset }: Props) {
   };
 
   return (
-    <div className="mx-auto mt-6 flex w-full max-w-4xl flex-col items-center rounded-xl border-4 p-4">
+    <div
+      className={cn(
+        'mx-auto mt-6 flex w-full',
+        'max-w-4xl flex-col items-center',
+        'rounded-xl border-4 p-4',
+        'shadow-glow',
+      )}
+    >
       <p className="text-center whitespace-pre-line">{error}</p>
       <button
         onClick={handleReset}

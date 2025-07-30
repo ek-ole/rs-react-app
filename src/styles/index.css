@@ -49,5 +49,21 @@
         30px -30px 20px -20px var(--gradient-middle),
         -30px 50px 50px -10px var(--gradient-middle);
     }
+
+    .shadow-reverse {
+      box-shadow:
+        30px 30px 20px -20px var(--gradient-cold),
+        -20px -25px 20px -20px var(--gradient-hot),
+        30px -30px 20px -20px var(--gradient-middle),
+        -20px 30px 20px -20px var(--gradient-middle);
+    }
+
+    .shadow-inset {
+      box-shadow:
+        inset 30px 30px 20px -30px var(--gradient-hot),
+        inset -30px -30px 15px -30px var(--gradient-cold),
+        inset 30px -30px 10px -50px var(--gradient-middle),
+        inset -30px 50px 10px -50px var(--gradient-middle);
+    }
   }
 }

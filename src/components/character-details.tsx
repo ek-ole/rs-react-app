@@ -50,7 +50,7 @@ export function CharacterDetails() {
           className={cn(
             'my-2 flex flex-col',
             'items-center gap-2 rounded-xl border-4 p-4',
-            'shadow-[0px_0px_24px_13px] lg:p-3',
+            'shadow-reverse rounded-xl lg:p-3',
           )}
         >
           <h2 className="text-lg font-semibold lg:text-base">{character.name}</h2>

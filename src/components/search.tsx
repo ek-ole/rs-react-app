@@ -32,6 +32,7 @@ function Search({ onSearch, resetDetails }: Props) {
         className={cn(
           'border-p-4 flex w-full max-w-sm items-center gap-2',
           'rounded-xl border-4 p-2 sm:my-6',
+          'shadow-inset',
         )}
       >
         <SearchInput
