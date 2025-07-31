@@ -26,7 +26,7 @@ export function NotFound({ error, onReset }: Props) {
       <p className="text-center whitespace-pre-line">{error}</p>
       <button
         onClick={handleReset}
-        className="hover:bg-foreground/80 hover:text-primary-light hover:border-foreground my-4 cursor-pointer rounded-xl border-3 px-4 font-medium transition-colors duration-400 sm:border-4 sm:px-4 sm:py-2"
+        className="hover:bg-shadow hover:text-primary-light hover:border-shadow my-4 cursor-pointer rounded-xl border-3 px-4 font-medium transition-colors duration-400 sm:border-4 sm:px-4 sm:py-2"
       >
         Reset search
       </button>
