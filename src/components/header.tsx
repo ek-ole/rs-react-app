@@ -4,7 +4,7 @@ import { cn } from '@/utils/cn';
 
 export function Header() {
   return (
-    <header className="flex items-center justify-between px-4 shadow-lg">
+    <header className="shadow-foreground/20 flex items-center justify-between px-4 shadow-lg">
       <NavLink to="/">
         <img
           src="/favicon.svg"
