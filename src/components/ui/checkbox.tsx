@@ -24,7 +24,7 @@ export function Checkbox({ checked, onChange }: CheckboxProps) {
         }
       }}
       className={cn(
-        'flex h-6 w-6',
+        'flex h-10 w-10 transform hover:scale-105',
         'items-center justify-center rounded-full',
         'bg-primary-light/20 backdrop-blur-sm',
         'cursor-pointer transition-all duration-300',

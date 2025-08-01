@@ -40,8 +40,10 @@ export function CharacterCard({ character, isActive, onClick }: characterProps) 
     >
       <div
         className={cn(
-          'absolute top-2 right-2 transition-all duration-100',
-          isHovered || isChecked ? 'scale-100 opacity-100' : 'scale-90 opacity-0',
+          'absolute -top-3 -right-3 transition-all duration-200',
+          isHovered || isChecked
+            ? 'border-input shadow-inset scale-100 rounded-full border-2 opacity-100'
+            : 'scale-90 opacity-0',
         )}
       >
         <Checkbox checked={isChecked} onChange={setIsChecked} />
