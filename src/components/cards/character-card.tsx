@@ -1,8 +1,9 @@
-import { Check } from 'lucide-react';
 import { useState } from 'react';
 
 import type { Character } from '@/types/character';
 import { cn } from '@/utils/cn';
+
+import { Checkbox } from '../ui/checkbox';
 
 type characterProps = {
   character: Character;
@@ -37,31 +38,14 @@ export function CharacterCard({ character, isActive, onClick }: characterProps) 
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <button
-        type="button"
-        role="checkbox"
-        aria-checked={isChecked}
-        onClick={(e) => {
-          e.stopPropagation();
-          setIsChecked(!isChecked);
-        }}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            onClick?.();
-          }
-        }}
+      <div
         className={cn(
-          'absolute top-2 right-2 flex h-6 w-6',
-          'items-center justify-center rounded-full',
-          'bg-primary-light/20 backdrop-blur-sm',
-          'cursor-pointer transition-all duration-200',
-          'focus:ring-primary-light outline-none focus:ring-2',
+          'absolute top-2 right-2 transition-all duration-100',
           isHovered || isChecked ? 'scale-100 opacity-100' : 'scale-90 opacity-0',
         )}
       >
-        {isChecked && <Check className="text-foreground h-4 w-4 stroke-[3px]" />}
-      </button>
+        <Checkbox checked={isChecked} onChange={setIsChecked} />
+      </div>
       {image && (
         <img
           src={image}
