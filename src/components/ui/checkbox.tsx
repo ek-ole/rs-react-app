@@ -12,7 +12,7 @@ export function Checkbox({ checked, onChange }: CheckboxProps) {
     <button
       type="button"
       role="checkbox"
-      aria-checked={checked}
+      aria-checked={checked ? 'true' : 'false'}
       onClick={(e) => {
         e.stopPropagation();
         onChange(!checked);

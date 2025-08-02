@@ -1,5 +1,9 @@
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 
+import type { RootState } from '@/app/store';
+import { useAppDispatch } from '@/app/store';
+import { toggle } from '@/services/selected-characters';
 import type { Character } from '@/types/character';
 import { cn } from '@/utils/cn';
 
@@ -15,7 +19,10 @@ export function CharacterCard({ character, isActive, onClick }: characterProps) 
   const { image, name, description } = character;
 
   const [isHovered, setIsHovered] = useState(false);
-  const [isChecked, setIsChecked] = useState(false);
+
+  const dispatch = useAppDispatch();
+  const selectedIds = useSelector((state: RootState) => state.selectedCharacters.ids);
+  const isChecked = selectedIds.includes(character.id);
 
   return (
     <div
@@ -46,7 +53,7 @@ export function CharacterCard({ character, isActive, onClick }: characterProps) 
             : 'scale-90 opacity-0',
         )}
       >
-        <Checkbox checked={isChecked} onChange={setIsChecked} />
+        <Checkbox checked={isChecked} onChange={() => dispatch(toggle(character.id))} />
       </div>
       {image && (
         <img
