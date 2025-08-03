@@ -59,7 +59,7 @@ export function useCharacters() {
     setSearchTerm(searchTerm);
     setCurrentPage(page);
     void loadData(searchTerm, page);
-  }, [searchParams]);
+  }, [searchParams, setSearchTerm]);
 
   return { state, currentPage, handleSearch, handlePageChange };
 }

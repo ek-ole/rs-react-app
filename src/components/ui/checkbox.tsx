@@ -11,8 +11,6 @@ export function Checkbox({ checked, onChange }: CheckboxProps) {
   return (
     <button
       type="button"
-      // role="checkbox"
-      // aria-checked={checked ? 'true' : 'false'}
       onClick={(e) => {
         e.stopPropagation();
         onChange(!checked);

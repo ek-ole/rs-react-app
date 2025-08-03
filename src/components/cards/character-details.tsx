@@ -2,10 +2,9 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { fetchCharacter } from '@/api/rick-and-morty-api';
+import { Loader } from '@/components/ui/loader';
 import type { Character } from '@/types/character';
 import { cn } from '@/utils/cn';
-
-import { Loader } from './ui/loader';
 
 export function CharacterDetails() {
   const { id } = useParams();
