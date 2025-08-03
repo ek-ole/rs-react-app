@@ -49,8 +49,4 @@ export const downloadCSV = (content: string, filename: string): void => {
   link.setAttribute('download', filename);
   document.body.appendChild(link);
   link.click();
-  setTimeout(() => {
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
-  }, 100);
 };
