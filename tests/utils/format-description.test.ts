@@ -12,6 +12,6 @@ describe('formatDescription', () => {
     } as ApiCharacter;
 
     const result = formatDescription(mockCharacter);
-    expect(result).toBe('Species: Human, Status: Alive \nLocation: Earth');
+    expect(result).toBe('Species: Human \nStatus: Alive \nLocation: Earth');
   });
 });

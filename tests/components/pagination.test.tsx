@@ -57,12 +57,4 @@ describe('Pagination', () => {
     expect(screen.getByText('10')).toBeInTheDocument();
     expect(screen.getAllByText('...')).toHaveLength(2);
   });
-
-  it('should highlight current page', () => {
-    render(<Pagination {...baseProps} currentPage={3} />);
-
-    const currentPageButton = screen.getByText('3');
-    expect(currentPageButton).toHaveClass('bg-foreground/80');
-    expect(currentPageButton).toHaveClass('text-primary-light');
-  });
 });

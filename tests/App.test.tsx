@@ -1,15 +1,24 @@
+import { configureStore } from '@reduxjs/toolkit';
 import { render, screen } from '@testing-library/react';
+import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 import { vi, describe, it, expect } from 'vitest';
 
 import App from '@/App';
 import { useCharacters } from '@/hooks/use-characters';
+import selectedCharactersReducer from '@/services/selected-characters';
 
 vi.mock('@/hooks/use-characters');
 
 describe('App component', () => {
   const mockHandleSearch = vi.fn();
   const mockHandlePageChange = vi.fn();
+
+  const store = configureStore({
+    reducer: {
+      selectedCharacters: selectedCharactersReducer,
+    },
+  });
 
   it('renders loader when loading', () => {
     vi.mocked(useCharacters).mockReturnValue({
@@ -48,7 +57,9 @@ describe('App component', () => {
 
     render(
       <MemoryRouter>
-        <App />
+        <Provider store={store}>
+          <App />
+        </Provider>
       </MemoryRouter>,
     );
 
@@ -77,7 +88,9 @@ describe('App component', () => {
 
     render(
       <MemoryRouter>
-        <App />
+        <Provider store={store}>
+          <App />
+        </Provider>
       </MemoryRouter>,
     );
 
