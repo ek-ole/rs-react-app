@@ -1,9 +1,10 @@
-import { X } from 'lucide-react';
 import { useSelector } from 'react-redux';
 
 import { useAppDispatch, type RootState } from '@/app/store';
 import { clearAll, toggle } from '@/services/selected-characters';
 import { cn } from '@/utils/cn';
+
+import { CharacterThumbnail } from './ui/character-thumbnail';
 
 export function SelectedPanel() {
   const dispatch = useAppDispatch();
@@ -14,58 +15,54 @@ export function SelectedPanel() {
   return (
     <div
       className={cn(
-        'fixed bottom-2 left-1/2',
-        '-translate-x-1/2 transform',
-        'bg-background xl shadow-inset shadow-shadow',
-        'rounded p-4 shadow-[0px_0px_5px_2px]',
+        'fixed bottom-2 left-1/2 w-[75vw] max-w-6xl min-w-[300px]',
+        'flex -translate-x-1/2 transform justify-between',
+        'bg-input shadow-shadow backdrop-blur-xl',
+        'rounded-xl p-4 shadow-[0px_0px_5px_2px]',
       )}
     >
-      <div className="flex flex-col gap-3">
-        <div className="ma-h-[100px] flex flex-wrap gap-2 overflow-y-auto">
-          {characters.map((character) => (
-            <button
-              type="button"
-              key={character.id}
-              className={cn(
-                'group relative flex flex-col items-center gap-2 p-1',
-                'hover:bg-shadow/70 cursor-pointer rounded',
-                'rounded-xl border-3 transition-all duration-200',
-                'transition-primary-light shadow-shadow cursor-pointer shadow-sm',
-              )}
-              onClick={() => dispatch(toggle(character))}
-            >
-              <img
-                src={character.image}
-                alt={character.image}
-                loading="lazy"
-                decoding="async"
-                className="h-8 w-8 rounded-full object-cover"
+      <div className="flex items-center gap-2 overflow-hidden">
+        <div className="relative flex-1">
+          <div className="flex w-full gap-2 overflow-x-auto scroll-smooth">
+            {characters.map((character) => (
+              <CharacterThumbnail
+                key={character.id}
+                character={character}
+                onRemove={() => dispatch(toggle(character))}
               />
-              <span className="text-xs">{character.name}</span>
-              <X
-                className={cn(
-                  'absolute flex h-10 w-10 items-center justify-center',
-                  'opacity-0 transition-opacity group-hover:opacity-100',
-                  'items-center justify-center rounded-full transition-all',
-                  'bg-primary-light/20 backdrop-blur-xs duration-150',
-                )}
-              />
-            </button>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
-      <div className="flex items-center gap-4">
-        <span>{ids.length} selected</span>
+      <div className="flex flex-col gap-1 pl-5 whitespace-nowrap">
+        <div className="flex items-center justify-between gap-4">
+          <span className="font-medium">{ids.length} selected</span>
+          <div className="flex gap-3">
+            <button
+              onClick={() => dispatch(clearAll())}
+              className={cn(
+                'hover:bg-shadow hover:text-primary-light',
+                'hover:border-shadow cursor-pointer',
+                'rounded-xl border-2 p-1 text-sm',
+                'transition-colors duration-400',
+                'shadow-[0px_0px_7px_-1px]',
+              )}
+            >
+              Unselect all
+            </button>
+          </div>
+        </div>
         <button
-          onClick={() => dispatch(clearAll())}
+          // onClick={handleDownload}
           className={cn(
             'hover:bg-shadow hover:text-primary-light',
             'hover:border-shadow cursor-pointer',
-            'rounded-xl border-3 p-1 font-medium',
+            'rounded-xl border-2 px-10 py-1 text-sm',
             'transition-colors duration-400',
+            'shadow-[0px_0px_7px_-1px]',
           )}
         >
-          Unselect all
+          Download CSV
         </button>
       </div>
     </div>
