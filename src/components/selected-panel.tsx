@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { useAppDispatch, type RootState } from '@/app/store';
 import { clearAll, toggle } from '@/services/selected-characters';
 import { cn } from '@/utils/cn';
+import { generateCSVContent, downloadCSV, prepareCharactersForCSV } from '@/utils/csv';
 
 import { CharacterThumbnail } from './ui/character-thumbnail';
 
@@ -11,6 +12,14 @@ export function SelectedPanel() {
   const { ids, characters } = useSelector((state: RootState) => state.selectedCharacters);
 
   if (!ids.length || !characters.length) return null;
+
+  const handleDownload = () => {
+    if (characters.length === 0) return;
+
+    const data = prepareCharactersForCSV(characters);
+    const csvContent = generateCSVContent(data);
+    downloadCSV(csvContent, `${characters.length}_characters.csv`);
+  };
 
   return (
     <div
@@ -53,14 +62,16 @@ export function SelectedPanel() {
           </div>
         </div>
         <button
-          // onClick={handleDownload}
+          onClick={handleDownload}
           className={cn(
             'hover:bg-shadow hover:text-primary-light',
             'hover:border-shadow cursor-pointer',
             'rounded-xl border-2 px-10 py-1 text-sm',
             'transition-colors duration-400',
             'shadow-[0px_0px_7px_-1px]',
+            characters.length === 0 ? 'cursor-not-allowed opacity-50' : '',
           )}
+          disabled={characters.length === 0}
         >
           Download CSV
         </button>
