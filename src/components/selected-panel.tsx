@@ -27,8 +27,10 @@ export function SelectedPanel() {
               type="button"
               key={character.id}
               className={cn(
-                'flex items-center gap-2 p-1',
-                'bg-primary-light hover:bg-shadow cursor-pointer rounded',
+                'group relative flex flex-col items-center gap-2 p-1',
+                'hover:bg-shadow/70 cursor-pointer rounded',
+                'rounded-xl border-3 transition-all duration-200',
+                'transition-primary-light shadow-shadow cursor-pointer shadow-sm',
               )}
               onClick={() => dispatch(toggle(character))}
             >
@@ -40,6 +42,14 @@ export function SelectedPanel() {
                 className="h-8 w-8 rounded-full object-cover"
               />
               <span className="text-xs">{character.name}</span>
+              <X
+                className={cn(
+                  'absolute flex h-10 w-10 items-center justify-center',
+                  'opacity-0 transition-opacity group-hover:opacity-100',
+                  'items-center justify-center rounded-full transition-all',
+                  'bg-primary-light/20 backdrop-blur-xs duration-150',
+                )}
+              />
             </button>
           ))}
         </div>
