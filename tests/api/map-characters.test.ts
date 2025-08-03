@@ -1,3 +1,5 @@
+import { vi, describe, it, expect } from 'vitest';
+
 import { mapApiToCharacter } from '@/api/map-characters';
 import type { ApiCharacter } from '@/types/api';
 import type { Character } from '@/types/character';

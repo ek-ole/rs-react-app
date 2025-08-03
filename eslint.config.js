@@ -35,7 +35,7 @@ export default tseslint.config(
       'testing-library': testingLibrary,
       'jest-dom': jestDom,
       'react-hooks': reactHooks,
-      vitest: vitest,
+      vitest,
     },
     rules: {
       '@typescript-eslint/consistent-type-exports': 'error',

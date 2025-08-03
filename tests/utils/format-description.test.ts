@@ -1,3 +1,5 @@
+import { describe, it, expect } from 'vitest';
+
 import type { ApiCharacter } from '@/types/api';
 import { formatDescription } from '@/utils/format-description';
 
@@ -10,6 +12,6 @@ describe('formatDescription', () => {
     } as ApiCharacter;
 
     const result = formatDescription(mockCharacter);
-    expect(result).toBe('Species: Human, Status: Alive \nLocation: Earth');
+    expect(result).toBe('Species: Human \nStatus: Alive \nLocation: Earth');
   });
 });

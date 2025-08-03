@@ -31,7 +31,8 @@ function Search({ onSearch, resetDetails }: Props) {
       <div
         className={cn(
           'border-p-4 flex w-full max-w-sm items-center gap-2',
-          'rounded-xl border-4 p-2 sm:my-6',
+          'rounded-xl border-3 p-2 sm:my-6',
+          'shadow-inset',
         )}
       >
         <SearchInput
@@ -42,10 +43,10 @@ function Search({ onSearch, resetDetails }: Props) {
         <button
           type="submit"
           className={cn(
-            'hover:bg-foreground/80 hover:text-primary-light',
-            'hover:border-foreground cursor-pointer',
+            'hover:bg-shadow hover:text-primary-light',
+            'hover:border-shadow cursor-pointer',
             'rounded-xl border-3 px-2 font-medium',
-            'transition-colors duration-400 sm:border-4 sm:px-4 sm:py-2',
+            'transition-colors duration-400 sm:px-4 sm:py-2',
           )}
         >
           Search

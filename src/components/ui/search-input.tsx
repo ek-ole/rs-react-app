@@ -13,11 +13,7 @@ export function SearchInput({ value, onChange, placeholder }: SearchInputProps) 
       value={value}
       onChange={(e) => onChange(e.target.value)}
       placeholder={placeholder || 'Search character...'}
-      className={cn(
-        'bg-primary-light w-full flex-1',
-        'rounded-xl px-2 py-1',
-        'focus:outline-none sm:px-4',
-      )}
+      className={cn('bg-input w-full flex-1', 'rounded-xl px-2 py-1', 'focus:outline-none sm:px-4')}
     />
   );
 }

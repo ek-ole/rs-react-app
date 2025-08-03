@@ -1,4 +1,5 @@
 import { act, renderHook } from '@testing-library/react';
+import { vi, describe, it, expect, beforeEach } from 'vitest';
 
 import useLocalStorage from '@/hooks/use-local-storage';
 

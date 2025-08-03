@@ -9,14 +9,15 @@ function Page404() {
         className={cn(
           'mx-auto mt-6 flex w-full max-w-4xl',
           'flex-col items-center rounded-xl border-4 p-4',
+          'shadow-glow',
         )}
       >
         <h2 className="p-2 text-center text-xl font-semibold">Oops! Page not found...</h2>
         <Link
           to="/"
           className={cn(
-            'hover:bg-foreground/80 hover:text-primary-light',
-            'hover:border-foreground my-4 cursor-pointer',
+            'hover:bg-shadow hover:text-primary-light',
+            'hover:border-shadow my-4 cursor-pointer',
             'rounded-xl border-3 px-4 font-medium',
             'transition-colors duration-400',
             'sm:border-4 sm:px-4 sm:py-2',

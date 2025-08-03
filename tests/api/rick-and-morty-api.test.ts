@@ -1,3 +1,5 @@
+import { vi, describe, it, expect } from 'vitest';
+
 import { fetchCharacters } from '@/api/rick-and-morty-api';
 
 global.fetch = vi.fn();

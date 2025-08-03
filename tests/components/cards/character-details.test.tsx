@@ -1,8 +1,9 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
+import { vi, describe, it, expect, beforeEach } from 'vitest';
 
 import { fetchCharacter } from '@/api/rick-and-morty-api';
-import { CharacterDetails } from '@/components/character-details';
+import { CharacterDetails } from '@/components/cards/character-details';
 
 vi.mock('@/api/rick-and-morty-api');
 vi.mock('./ui/loader', () => ({

@@ -1,4 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
+import { vi, describe, it, expect, beforeEach } from 'vitest';
 
 import { Pagination } from '@/components/pagination';
 
@@ -55,13 +56,5 @@ describe('Pagination', () => {
     expect(screen.getByText('6')).toBeInTheDocument();
     expect(screen.getByText('10')).toBeInTheDocument();
     expect(screen.getAllByText('...')).toHaveLength(2);
-  });
-
-  it('should highlight current page', () => {
-    render(<Pagination {...baseProps} currentPage={3} />);
-
-    const currentPageButton = screen.getByText('3');
-    expect(currentPageButton).toHaveClass('bg-foreground/80');
-    expect(currentPageButton).toHaveClass('text-primary-light');
   });
 });

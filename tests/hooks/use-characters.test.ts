@@ -1,5 +1,6 @@
 import { renderHook, waitFor } from '@testing-library/react';
 import { useSearchParams } from 'react-router-dom';
+import { vi, describe, it, expect, beforeEach } from 'vitest';
 
 import { getErrorMessage } from '@/api/api-error-handler';
 import { useCharacters } from '@/hooks/use-characters';

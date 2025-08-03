@@ -1,3 +1,5 @@
+import { describe, it, expect, beforeEach } from 'vitest';
+
 describe('main.tsx', () => {
   beforeEach(() => {
     document.body.innerHTML = '<div id="root"></div>';

@@ -33,9 +33,9 @@ export function Pagination({ currentPage, totalPages, onPageChange }: Pagination
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
         className={cn(
-          'hover:bg-foreground/80 hover:text-primary-light',
-          'hover:border-foreground cursor-pointer',
-          'rounded-xl border-2 px-2 font-medium',
+          'hover:bg-shadow hover:text-primary-light',
+          'hover:border-shadow cursor-pointer',
+          'border-shadow rounded-xl border-2 px-2 font-medium',
           'transition-colors duration-400 sm:px-4 sm:py-2',
         )}
         aria-label="Previous page"
@@ -54,13 +54,11 @@ export function Pagination({ currentPage, totalPages, onPageChange }: Pagination
             onClick={() => onPageChange(Number(page))}
             className={cn(
               'flex h-9 w-9 items-center justify-center',
-              'hover:bg-foreground/80 hover:text-primary-light',
-              'hover:border-foreground cursor-pointer',
+              'hover:bg-shadow hover:text-primary-light',
+              'hover:border-shadow cursor-pointer',
               'rounded-xl border-2 px-2 font-medium',
               'transition-colors duration-400 sm:px-4 sm:py-2',
-              currentPage === page
-                ? 'text-primary-light bg-foreground/80 border-foreground'
-                : 'border-foreground',
+              currentPage === page ? 'text-primary-light bg-shadow border-shadow' : 'border-shadow',
             )}
           >
             {page}
@@ -72,9 +70,9 @@ export function Pagination({ currentPage, totalPages, onPageChange }: Pagination
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
         className={cn(
-          'hover:bg-foreground/80 hover:text-primary-light',
-          'hover:border-foreground cursor-pointer',
-          'rounded-xl border-2 px-2 font-medium',
+          'hover:bg-shadow hover:text-primary-light',
+          'hover:border-shadow cursor-pointer',
+          'border-shadow rounded-xl border-2 px-2 font-medium',
           'transition-colors duration-400 sm:px-4 sm:py-2',
         )}
         aria-label="Next page"

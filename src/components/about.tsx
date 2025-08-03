@@ -9,6 +9,7 @@ function About() {
         className={cn(
           'mx-auto flex w-full max-w-4xl flex-col',
           'items-center rounded-xl border-4 p-4',
+          'shadow-glow',
         )}
       >
         <h2 className="mb-6 text-center text-2xl font-bold">About the Project</h2>

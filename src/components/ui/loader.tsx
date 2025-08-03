@@ -1,6 +1,6 @@
 export function Loader() {
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
+    <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-md">
       <div className="flex h-[25vh] animate-[fadeIn_0.3s_ease-in-out_forwards] flex-col items-center">
         <video
           autoPlay

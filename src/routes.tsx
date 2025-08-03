@@ -4,7 +4,7 @@ import About from '@/components/about';
 import Page404 from '@/components/page-404';
 
 import App from './App';
-import { CharacterDetails } from './components/character-details';
+import { CharacterDetails } from './components/cards/character-details';
 import { Layout } from './components/layout';
 
 export const router = createBrowserRouter([
