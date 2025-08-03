@@ -53,7 +53,7 @@ export function CharacterCard({ character, isActive, onClick }: characterProps) 
             : 'scale-90 opacity-0',
         )}
       >
-        <Checkbox checked={isChecked} onChange={() => dispatch(toggle(character.id))} />
+        <Checkbox checked={isChecked} onChange={() => dispatch(toggle(character))} />
       </div>
       {image && (
         <img
