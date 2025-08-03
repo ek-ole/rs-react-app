@@ -1,7 +1,9 @@
 import { render, screen } from '@testing-library/react';
+import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 import { describe, it, expect } from 'vitest';
 
+import { store } from '@/app/store';
 import Results from '@/components/results';
 
 describe('Results', () => {
@@ -13,7 +15,9 @@ describe('Results', () => {
   it('should render characters grid with all items', () => {
     render(
       <MemoryRouter>
-        <Results characters={mockCharacters} />
+        <Provider store={store}>
+          <Results characters={mockCharacters} />
+        </Provider>
       </MemoryRouter>,
     );
 
