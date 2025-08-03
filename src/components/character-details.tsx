@@ -59,7 +59,7 @@ export function CharacterDetails() {
             alt={character.name}
             className="error-message mb-3 h-full w-full rounded-lg object-cover"
           />
-          <p>{character.description}</p>
+          <p className="items-center text-center whitespace-pre">{character.description}</p>
         </div>
       ) : (
         <p>Character not found</p>

@@ -16,7 +16,7 @@ type characterProps = {
 };
 
 export function CharacterCard({ character, isActive, onClick }: characterProps) {
-  const { image, name, description } = character;
+  const { image, name } = character;
 
   const [isHovered, setIsHovered] = useState(false);
 
@@ -63,8 +63,7 @@ export function CharacterCard({ character, isActive, onClick }: characterProps) 
           loading="lazy"
         />
       )}
-      <h3 className="text-lg font-semibold lg:text-base">{name}</h3>
-      <p className="text-center text-sm whitespace-pre-line">{description}</p>
+      <h3 className="text-center text-lg font-semibold lg:text-base">{name}</h3>
     </div>
   );
 }
