@@ -32,7 +32,7 @@ function App() {
           }}
         />
       )}
-      <div className={`flex w-full justify-center ${hasDetails ? 'gap-6' : ''}`}>
+      <div className={`flex w-full ${hasDetails ? 'gap-6' : ''}`}>
         <div className={hasDetails ? 'w-[65%]' : 'w-full'}>
           {!state.isLoading && !state.error && (
             <>

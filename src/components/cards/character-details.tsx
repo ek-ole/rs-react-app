@@ -28,7 +28,7 @@ export function CharacterDetails() {
   };
 
   return (
-    <div className="sticky top-0 flex h-[100vh] flex-col py-10">
+    <div className="sticky top-0 flex w-[35%] max-w-xl flex-col py-10">
       <div className="flex justify-end">
         <button
           onClick={handleClose}
