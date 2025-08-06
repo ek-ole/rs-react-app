@@ -1,5 +1,5 @@
 import { renderHook, waitFor } from '@testing-library/react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router';
 import { vi, describe, it, expect, beforeEach } from 'vitest';
 
 import { getErrorMessage } from '@/api/api-error-handler';
@@ -9,8 +9,8 @@ import { loadAndProcessCharacters } from '@/services/app-service';
 import type { Character } from '@/types/character';
 
 vi.mock('@/hooks/use-local-storage');
-vi.mock('react-router-dom', async () => {
-  const actual = await vi.importActual('react-router-dom');
+vi.mock('react-router', async () => {
+  const actual = await vi.importActual('react-router');
   return {
     ...actual,
     useSearchParams: vi.fn(),

@@ -1,3 +1,4 @@
+import type { ErrorInfo, ReactNode } from 'react';
 import { Component } from 'react';
 
 import { cn } from '@/utils/cn';
@@ -7,7 +8,7 @@ type ErrorBoundaryState = {
   error: Error | null;
 };
 
-export class ErrorBoundary extends Component<{ children: React.ReactNode }, ErrorBoundaryState> {
+export class ErrorBoundary extends Component<{ children: ReactNode }, ErrorBoundaryState> {
   state: ErrorBoundaryState = {
     hasError: false,
     error: null,
@@ -20,7 +21,7 @@ export class ErrorBoundary extends Component<{ children: React.ReactNode }, Erro
     };
   }
 
-  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     console.error('Error Boundary caught:', error, errorInfo);
   }
 

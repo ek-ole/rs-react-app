@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router';
 
 import { getErrorMessage } from '@/api/api-error-handler';
 import { loadAndProcessCharacters } from '@/services/app-service';

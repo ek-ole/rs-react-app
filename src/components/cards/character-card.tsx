@@ -12,7 +12,7 @@ import { Checkbox } from '../ui/checkbox';
 type characterProps = {
   character: Character;
   isActive?: boolean;
-  onClick?: () => void;
+  onClick?: VoidFunction;
 };
 
 export function CharacterCard({ character, isActive, onClick }: characterProps) {

@@ -1,4 +1,4 @@
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router';
 
 import type { Character } from '@/types/character';
 import { cn } from '@/utils/cn';

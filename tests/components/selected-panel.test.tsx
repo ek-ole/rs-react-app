@@ -21,7 +21,6 @@ vi.mock('@/utils/csv', () => ({
 }));
 
 describe('SelectedPanel Component', () => {
-  const user = userEvent.setup();
   let store: ReturnType<typeof configureStore>;
 
   const mockCharacters: Character[] = [
@@ -76,6 +75,7 @@ describe('SelectedPanel Component', () => {
   });
 
   it('dispatches clearAll action when "Unselect all" clicked', async () => {
+    const user = userEvent.setup();
     const mockDispatch = vi.spyOn(store, 'dispatch');
 
     render(
@@ -91,6 +91,7 @@ describe('SelectedPanel Component', () => {
   });
 
   it('calls downloadCSV when "Download CSV" clicked', async () => {
+    const user = userEvent.setup();
     const { downloadCSV } = await import('@/utils/csv');
 
     render(

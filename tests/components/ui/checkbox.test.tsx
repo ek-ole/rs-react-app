@@ -5,8 +5,6 @@ import { vi, describe, it, expect } from 'vitest';
 import { Checkbox } from '@/components/ui/checkbox';
 
 describe('Checkbox Component', () => {
-  const user = userEvent.setup();
-
   it('renders without checkmark when unchecked', () => {
     render(<Checkbox checked={false} onChange={() => {}} />);
 
@@ -16,6 +14,7 @@ describe('Checkbox Component', () => {
   });
 
   it('calls onChange with inverted value on click', async () => {
+    const user = userEvent.setup();
     const mockOnChange = vi.fn();
     render(<Checkbox checked={false} onChange={mockOnChange} />);
 
@@ -26,6 +25,7 @@ describe('Checkbox Component', () => {
   });
 
   it('handles keyboard events (Enter/Space)', async () => {
+    const user = userEvent.setup();
     const mockOnChange = vi.fn();
     render(<Checkbox checked={false} onChange={mockOnChange} />);
 

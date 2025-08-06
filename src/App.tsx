@@ -1,4 +1,4 @@
-import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router';
 
 import { Pagination } from './components/pagination';
 import Results from './components/results';
@@ -12,7 +12,16 @@ function App() {
   const { pathname } = useLocation();
   const hasDetails = pathname.includes('/characters/');
   const navigate = useNavigate();
-  const resetDetails = () => {
+  const handleSearchWithReset = (searchTerm: string) => {
+    handleSearch(searchTerm);
+
+    if (hasDetails) {
+      void navigate('/');
+    }
+  };
+
+  const handleReset = () => {
+    handleSearch('');
     if (hasDetails) {
       void navigate('/');
     }
@@ -21,20 +30,12 @@ function App() {
   return (
     <div className="mx-auto my-6 flex w-full flex-col items-center px-8 py-4">
       <h1>Rick & Morty</h1>
-      <Search onSearch={handleSearch} resetDetails={resetDetails} />
+      <Search onSearch={handleSearchWithReset} />
       {appState.isLoading && <Loader />}
-      {appState.error && (
-        <NotFound
-          error={appState.error}
-          onReset={() => {
-            handleSearch('');
-            resetDetails();
-          }}
-        />
-      )}
+      {appState.error && <NotFound error={appState.error} onReset={handleReset} />}
       <div className={`flex w-full ${hasDetails ? 'gap-6' : ''}`}>
         <div className={hasDetails ? 'w-[65%]' : 'w-full'}>
-          {!appState.isLoading && !appState.error && (
+          {appState.characters.length > 0 && (
             <>
               <Pagination
                 currentPage={currentPage}

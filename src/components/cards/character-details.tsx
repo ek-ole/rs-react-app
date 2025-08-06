@@ -1,4 +1,4 @@
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router';
 
 import { Loader } from '@/components/ui/loader';
 import { useCharacterDetails } from '@/hooks/use-character-details';
