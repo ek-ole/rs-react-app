@@ -8,7 +8,7 @@ import { NotFound } from './components/ui/not-found';
 import { useCharacters } from './hooks/use-characters';
 
 function App() {
-  const { state, currentPage, handleSearch, handlePageChange } = useCharacters();
+  const { appState, currentPage, handleSearch, handlePageChange } = useCharacters();
   const { pathname } = useLocation();
   const hasDetails = pathname.includes('/characters/');
   const navigate = useNavigate();
@@ -22,10 +22,10 @@ function App() {
     <div className="mx-auto my-6 flex w-full flex-col items-center px-8 py-4">
       <h1>Rick & Morty</h1>
       <Search onSearch={handleSearch} resetDetails={resetDetails} />
-      {state.isLoading && <Loader />}
-      {state.error && (
+      {appState.isLoading && <Loader />}
+      {appState.error && (
         <NotFound
-          error={state.error}
+          error={appState.error}
           onReset={() => {
             handleSearch('');
             resetDetails();
@@ -34,14 +34,14 @@ function App() {
       )}
       <div className={`flex w-full ${hasDetails ? 'gap-6' : ''}`}>
         <div className={hasDetails ? 'w-[65%]' : 'w-full'}>
-          {!state.isLoading && !state.error && (
+          {!appState.isLoading && !appState.error && (
             <>
               <Pagination
                 currentPage={currentPage}
-                totalPages={state.totalPages}
+                totalPages={appState.totalPages}
                 onPageChange={handlePageChange}
               />
-              <Results characters={state.characters} />
+              <Results characters={appState.characters} />
             </>
           )}
         </div>

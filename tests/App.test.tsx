@@ -22,7 +22,7 @@ describe('App component', () => {
 
   it('renders loader when loading', () => {
     vi.mocked(useCharacters).mockReturnValue({
-      state: {
+      appState: {
         isLoading: true,
         error: null,
         characters: [],
@@ -44,7 +44,7 @@ describe('App component', () => {
 
   it('renders NotFound when error exists', () => {
     vi.mocked(useCharacters).mockReturnValue({
-      state: {
+      appState: {
         isLoading: false,
         error: 'Something went wrong',
         characters: [],
@@ -68,7 +68,7 @@ describe('App component', () => {
 
   it('renders results and pagination when data is available', () => {
     vi.mocked(useCharacters).mockReturnValue({
-      state: {
+      appState: {
         isLoading: false,
         error: null,
         characters: [

@@ -10,7 +10,7 @@ import useLocalStorage from './use-local-storage';
 
 export function useCharacters() {
   const [searchTerm, setSearchTerm] = useLocalStorage(SEARCH_TERM_KEY, '');
-  const [state, setState] = useState<Omit<AppState, 'searchValue'>>({
+  const [appState, setAppState] = useState<Omit<AppState, 'searchValue'>>({
     characters: [],
     isLoading: false,
     error: null,
@@ -20,19 +20,19 @@ export function useCharacters() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const loadData = async (searchTerm = '', page = 1) => {
-    setState((prev) => ({ ...prev, isLoading: true, error: null }));
+    setAppState((prev) => ({ ...prev, isLoading: true, error: null }));
     try {
       const { characters, totalPages } = await loadAndProcessCharacters(searchTerm, page);
-      setState((prev) => ({ ...prev, characters, totalPages }));
+      setAppState((prev) => ({ ...prev, characters, totalPages }));
     } catch (error) {
-      setState((prev) => ({
+      setAppState((prev) => ({
         ...prev,
         error: getErrorMessage(error),
         characters: [],
         totalPages: 1,
       }));
     } finally {
-      setState((prev) => ({ ...prev, isLoading: false }));
+      setAppState((prev) => ({ ...prev, isLoading: false }));
     }
   };
 
@@ -61,5 +61,5 @@ export function useCharacters() {
     void loadData(searchTerm, page);
   }, [searchParams, setSearchTerm]);
 
-  return { state, currentPage, handleSearch, handlePageChange };
+  return { appState, currentPage, handleSearch, handlePageChange };
 }

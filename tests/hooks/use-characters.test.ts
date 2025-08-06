@@ -47,12 +47,12 @@ describe('useCharacters', () => {
 
     const { result } = renderHook(() => useCharacters());
     await waitFor(() => {
-      expect(result.current.state.isLoading).toBe(false);
+      expect(result.current.appState.isLoading).toBe(false);
     });
 
     expect(loadAndProcessCharacters).toHaveBeenCalledWith('Morty', 2);
-    expect(result.current.state.characters).toEqual([mockCharacter]);
-    expect(result.current.state.totalPages).toBe(5);
+    expect(result.current.appState.characters).toEqual([mockCharacter]);
+    expect(result.current.appState.totalPages).toBe(5);
     expect(result.current.currentPage).toBe(2);
   });
 
@@ -62,10 +62,10 @@ describe('useCharacters', () => {
 
     const { result } = renderHook(() => useCharacters());
     await waitFor(() => {
-      expect(result.current.state.isLoading).toBe(false);
+      expect(result.current.appState.isLoading).toBe(false);
     });
 
-    expect(result.current.state.error).toBe('Something went wrong');
-    expect(result.current.state.characters).toEqual([]);
+    expect(result.current.appState.error).toBe('Something went wrong');
+    expect(result.current.appState.characters).toEqual([]);
   });
 });
