@@ -1,30 +1,19 @@
-import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 
-import { fetchCharacter } from '@/api/rick-and-morty-api';
 import { Loader } from '@/components/ui/loader';
-import type { Character } from '@/types/character';
+import { useCharacterDetails } from '@/hooks/use-character-details';
 import { cn } from '@/utils/cn';
 
 export function CharacterDetails() {
   const { id } = useParams();
+  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const [character, setCharacter] = useState<Character | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    if (!id) return;
-    setIsLoading(true);
-    void fetchCharacter(id)
-      .then((data) => setCharacter(data))
-      .finally(() => setIsLoading(false));
-  }, [id]);
+  const { character, isLoading, error } = useCharacterDetails(id);
 
   if (!id) return null;
 
   const handleClose = () => {
-    const params = new URLSearchParams(window.location.search);
-    void navigate(`/?${params.toString()}`);
+    void navigate(`/?${searchParams.toString()}`);
   };
 
   return (
@@ -42,8 +31,38 @@ export function CharacterDetails() {
           ×
         </button>
       </div>
+
       {isLoading ? (
         <Loader />
+      ) : error ? (
+        <div
+          className={cn(
+            'mx-auto mt-6 flex w-full max-w-4xl',
+            'flex-col items-center rounded-xl border-4 p-4',
+            'shadow-glow',
+          )}
+        >
+          <h2 className="text-lg font-semibold lg:text-base">Oops! Something went wrong...</h2>
+          <p className="mb-4 text-center text-sm">{error}</p>
+          <img
+            src="/404.webp"
+            alt="404"
+            className="mb-4 rounded-2xl object-contain"
+            loading="lazy"
+          />
+          <button
+            onClick={() => window.location.reload()}
+            className={cn(
+              'hover:bg-shadow hover:text-primary-light',
+              'hover:border-shadow cursor-pointer',
+              'rounded-xl border-3 px-4 font-medium',
+              'transition-colors duration-400',
+              'sm:border-4 sm:px-4 sm:py-1',
+            )}
+          >
+            Try Again
+          </button>
+        </div>
       ) : character ? (
         <div
           className={cn(
@@ -52,16 +71,17 @@ export function CharacterDetails() {
             'shadow-reverse rounded-xl lg:p-3',
           )}
         >
-          <h2 className="text-lg font-semibold lg:text-base">{character.name}</h2>
+          <h2 className="text-center text-lg font-semibold lg:text-base">{character.name}</h2>
           <img
             src={character.image}
             alt={character.name}
-            className="error-message mb-3 h-full w-full rounded-lg object-cover"
+            className="mb-3 h-full w-full rounded-lg object-cover"
+            loading="lazy"
           />
-          <p className="items-center text-center whitespace-pre">{character.description}</p>
+          <p className="text-center whitespace-pre-line">{character.description}</p>
         </div>
       ) : (
-        <p>Character not found</p>
+        <p className="p-4 text-center">Character not found</p>
       )}
     </div>
   );
