@@ -5,6 +5,7 @@ import useLocalStorage from '@/hooks/use-local-storage';
 import { SEARCH_TERM_KEY } from '@/services/constants';
 import { cn } from '@/utils/cn';
 
+import { Loader } from './ui/loader';
 import { SearchInput } from './ui/search-input';
 
 type Props = {
@@ -14,6 +15,7 @@ type Props = {
 function Search({ onSearch }: Props) {
   const [searchTerm] = useLocalStorage(SEARCH_TERM_KEY, '');
   const [inputValue, setInputValue] = useState(searchTerm);
+  const [isSearching, setIsSearching] = useState(false);
 
   useEffect(() => {
     setInputValue(searchTerm);
@@ -21,8 +23,10 @@ function Search({ onSearch }: Props) {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
+    setIsSearching(true);
     const trimmedValue = inputValue.trim();
     onSearch(trimmedValue);
+    setIsSearching(false);
   };
 
   return (
@@ -41,6 +45,7 @@ function Search({ onSearch }: Props) {
         />
         <button
           type="submit"
+          disabled={isSearching}
           className={cn(
             'hover:bg-shadow hover:text-primary-light',
             'hover:border-shadow cursor-pointer',
@@ -48,7 +53,8 @@ function Search({ onSearch }: Props) {
             'transition-colors duration-400 sm:px-4 sm:py-2',
           )}
         >
-          Search
+          {' '}
+          {isSearching ? <Loader /> : 'Search'}
         </button>
       </div>
     </form>
