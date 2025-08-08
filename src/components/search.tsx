@@ -53,7 +53,6 @@ function Search({ onSearch }: Props) {
             'transition-colors duration-400 sm:px-4 sm:py-2',
           )}
         >
-          {' '}
           {isSearching ? <Loader /> : 'Search'}
         </button>
       </div>
