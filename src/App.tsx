@@ -44,8 +44,8 @@ function App() {
                 totalPages={appState.totalPages}
                 onPageChange={handlePageChange}
               />
-              <RefreshButton />
               <Results characters={appState.characters} />
+              <RefreshButton />
             </>
           )}
         </div>

@@ -9,7 +9,13 @@ export function Header() {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <header className="shadow-shadow flex items-center justify-between px-4 shadow-[0px_0px_15px_2px]">
+    <header
+      className={cn(
+        'shadow-shadow fixed top-0 z-100 w-[100vw]',
+        'bg-background flex items-center justify-between px-6',
+        'shadow-[0px_0px_15px_2px]',
+      )}
+    >
       <NavLink to="/">
         <img
           src="/favicon.svg"
