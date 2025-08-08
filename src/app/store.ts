@@ -10,12 +10,14 @@ const rickAndMortyApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://rickandmortyapi.com/api/',
   }),
+  tagTypes: ['Characters'],
   endpoints: (builder) => ({
     getCharacters: builder.query<ApiResponse, { name?: string; page: number }>({
       query: ({ name, page }) => ({
         url: 'character',
         params: { name, page },
       }),
+      providesTags: ['Characters'],
     }),
   }),
 });

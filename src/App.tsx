@@ -5,6 +5,7 @@ import Results from './components/results';
 import Search from './components/search';
 import { Loader } from './components/ui/loader';
 import { NotFound } from './components/ui/not-found';
+import { RefreshButton } from './components/ui/refresh-button';
 import { useCharacters } from './hooks/use-characters';
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
                 totalPages={appState.totalPages}
                 onPageChange={handlePageChange}
               />
+              <RefreshButton />
               <Results characters={appState.characters} />
             </>
           )}
