@@ -22,13 +22,32 @@ const rickAndMortyApi = createApi({
         result
           ? [
               ...result.results.map(({ id }) => ({ type: 'Character' as const, id })),
-              { type: 'Characters', id: 'LIST' },
+              { type: 'Characters', page: result.info.pages },
+              { type: 'Characters', id: 'ALL' },
             ]
-          : [{ type: 'Characters', id: 'LIST' }],
+          : [{ type: 'Characters', id: 'ALL' }],
     }),
+
     getCharacterById: builder.query<Character, string>({
       query: (id) => `character/${id}`,
       providesTags: (result, error, id) => [{ type: 'Character', id }],
+    }),
+
+    updateCharacter: builder.mutation<void, { id: string; data: Partial<Character> }>({
+      query: ({ id, data }) => ({
+        url: `character/${id}`,
+        method: 'PATCH',
+        body: data,
+      }),
+      invalidatesTags: (result, error, { id }) => [
+        { type: 'Character', id },
+        { type: 'Characters', id: 'LIST' },
+      ],
+    }),
+
+    invalidateCharacters: builder.mutation<void, void>({
+      queryFn: () => ({ data: void 0 }),
+      invalidatesTags: [{ type: 'Characters', id: 'All' }],
     }),
   }),
 });
@@ -44,4 +63,9 @@ export const store = configureStore({
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 export const useAppDispatch = () => useDispatch<AppDispatch>();
-export const { useGetCharactersQuery, useGetCharacterByIdQuery } = rickAndMortyApi;
+export const {
+  useGetCharactersQuery,
+  useGetCharacterByIdQuery,
+  useUpdateCharacterMutation,
+  useInvalidateCharactersMutation,
+} = rickAndMortyApi;

@@ -11,6 +11,7 @@ import { useCharacters } from './hooks/use-characters';
 function App() {
   const { appState, currentPage, handleSearch, handlePageChange } = useCharacters();
   const { pathname } = useLocation();
+
   const hasDetails = pathname.includes('/characters/');
   const navigate = useNavigate();
   const handleSearchWithReset = (searchTerm: string) => {
