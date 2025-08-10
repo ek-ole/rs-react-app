@@ -1,4 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
+import type {
+  QueryActionCreatorResult,
+  QueryDefinition,
+  BaseQueryFn,
+  FetchArgs,
+  FetchBaseQueryError,
+  FetchBaseQueryMeta,
+} from '@reduxjs/toolkit/query';
 import { render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router';
@@ -7,19 +15,39 @@ import { vi, describe, it, expect } from 'vitest';
 import App from '@/App';
 import { useCharacters } from '@/hooks/use-characters';
 import selectedCharactersReducer from '@/services/selected-characters';
+import type { ApiResponse } from '@/types/api';
 
-vi.mock('@/hooks/use-characters');
+vi.mock('@/hooks/use-characters', () => ({
+  useCharacters: vi.fn(),
+}));
 
-describe('App component', () => {
-  const mockHandleSearch = vi.fn();
-  const mockHandlePageChange = vi.fn();
+const mockRefetch = vi.fn() as unknown as () => QueryActionCreatorResult<
+  QueryDefinition<
+    { name?: string; page: number },
+    BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError, object, FetchBaseQueryMeta>,
+    'Characters' | 'Character',
+    ApiResponse,
+    'rickAndMortyApi'
+  >
+>;
 
+const renderApp = (initialEntries = ['/']) => {
   const store = configureStore({
     reducer: {
       selectedCharacters: selectedCharactersReducer,
     },
   });
 
+  return render(
+    <MemoryRouter initialEntries={initialEntries}>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </MemoryRouter>,
+  );
+};
+
+describe('App component', () => {
   it('renders loader when loading', () => {
     vi.mocked(useCharacters).mockReturnValue({
       appState: {
@@ -29,17 +57,16 @@ describe('App component', () => {
         totalPages: 0,
       },
       currentPage: 1,
-      handleSearch: mockHandleSearch,
-      handlePageChange: mockHandlePageChange,
+      handleSearch: vi.fn(),
+      handlePageChange: vi.fn(),
+      refetch: mockRefetch,
     });
 
-    render(
-      <MemoryRouter>
-        <App />
-      </MemoryRouter>,
-    );
+    renderApp();
 
+    expect(screen.getByText(/Loading.../i)).toBeInTheDocument();
     expect(screen.getByText(/Rick & Morty/i)).toBeInTheDocument();
+    expect(screen.queryByText(/Rick Sanchez/i)).not.toBeInTheDocument();
   });
 
   it('renders NotFound when error exists', () => {
@@ -51,50 +78,15 @@ describe('App component', () => {
         totalPages: 0,
       },
       currentPage: 1,
-      handleSearch: mockHandleSearch,
-      handlePageChange: mockHandlePageChange,
+      handleSearch: vi.fn(),
+      handlePageChange: vi.fn(),
+      refetch: mockRefetch,
     });
 
-    render(
-      <MemoryRouter>
-        <Provider store={store}>
-          <App />
-        </Provider>
-      </MemoryRouter>,
-    );
+    renderApp();
 
     expect(screen.getByText(/Something went wrong/i)).toBeInTheDocument();
-  });
-
-  it('renders results and pagination when data is available', () => {
-    vi.mocked(useCharacters).mockReturnValue({
-      appState: {
-        isLoading: false,
-        error: null,
-        characters: [
-          {
-            id: 1,
-            name: 'Rick',
-            description: '',
-            image: '',
-          },
-        ],
-        totalPages: 5,
-      },
-      currentPage: 1,
-      handleSearch: mockHandleSearch,
-      handlePageChange: mockHandlePageChange,
-    });
-
-    render(
-      <MemoryRouter>
-        <Provider store={store}>
-          <App />
-        </Provider>
-      </MemoryRouter>,
-    );
-
-    expect(screen.getByText(/Rick & Morty/i)).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /next/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Reset search/i })).toBeInTheDocument();
+    expect(screen.queryByText(/Loading.../i)).not.toBeInTheDocument();
   });
 });

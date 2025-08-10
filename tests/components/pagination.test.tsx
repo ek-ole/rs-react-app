@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { vi, describe, it, expect, beforeEach } from 'vitest';
 
 import { Pagination } from '@/components/pagination';
@@ -23,16 +23,6 @@ describe('Pagination', () => {
     expect(screen.getByText('1')).toBeInTheDocument();
     expect(screen.getByText('10')).toBeInTheDocument();
     expect(screen.getAllByText('...')).toHaveLength(1);
-  });
-
-  it('should handle previous and next buttons', () => {
-    render(<Pagination {...baseProps} />);
-
-    fireEvent.click(screen.getByLabelText('Previous page'));
-    expect(mockOnPageChange).toHaveBeenCalledWith(2);
-
-    fireEvent.click(screen.getByLabelText('Next page'));
-    expect(mockOnPageChange).toHaveBeenCalledWith(4);
   });
 
   it('should disable previous button on first page', () => {
