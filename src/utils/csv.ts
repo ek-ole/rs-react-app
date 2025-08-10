@@ -8,7 +8,8 @@ export type CharacterForCSV = {
   image: string;
 };
 
-export const parseDescription = (description: string): { status: string; location: string } => {
+export const parseDescription = (description?: string): { status: string; location: string } => {
+  if (!description) return { status: 'Unknown', location: 'Unknown' };
   const lines = description.split('\n');
   return {
     status: lines[0]?.replace('Status: ', '').trim() || 'Unknown',
@@ -41,12 +42,23 @@ export const generateCSVContent = (data: CharacterForCSV[]): string => {
   return [headers.join(','), ...rows.map((row) => row.join(','))].join('\n');
 };
 
-export const downloadCSV = (content: string, filename: string): void => {
-  const blob = new Blob(['\uFEFF' + content], { type: 'text/csv;charset=utf-8;' });
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement('a');
-  link.href = url;
-  link.setAttribute('download', filename);
-  document.body.appendChild(link);
-  link.click();
+export const csvDownloadHandler = (
+  characters: Character[],
+  downloadRef: React.RefObject<HTMLAnchorElement | null>,
+) => {
+  return () => {
+    if (!characters.length || !downloadRef.current) return;
+
+    const data = prepareCharactersForCSV(characters);
+    const csvContent = generateCSVContent(data);
+    const blob = new Blob(['\uFEFF' + csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+
+    const link = downloadRef.current;
+    link.href = url;
+    link.download = `${characters.length}_characters.csv`;
+    link.click();
+
+    setTimeout(() => URL.revokeObjectURL(url), 100);
+  };
 };

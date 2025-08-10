@@ -1,25 +1,21 @@
+import { useRef } from 'react';
 import { useSelector } from 'react-redux';
 
 import { useAppDispatch, type RootState } from '@/app/store';
 import { clearAll, toggle } from '@/services/selected-characters';
 import { cn } from '@/utils/cn';
-import { generateCSVContent, downloadCSV, prepareCharactersForCSV } from '@/utils/csv';
+import { csvDownloadHandler } from '@/utils/csv';
 
 import { CharacterThumbnail } from './ui/character-thumbnail';
 
 export function SelectedPanel() {
   const dispatch = useAppDispatch();
   const { ids, characters } = useSelector((state: RootState) => state.selectedCharacters);
+  const downloadLinkRef = useRef<HTMLAnchorElement>(null);
 
   if (!ids.length || !characters.length) return null;
 
-  const handleDownload = () => {
-    if (characters.length === 0) return;
-
-    const data = prepareCharactersForCSV(characters);
-    const csvContent = generateCSVContent(data);
-    downloadCSV(csvContent, `${characters.length}_characters.csv`);
-  };
+  const handleDownload = csvDownloadHandler(characters, downloadLinkRef);
 
   return (
     <div
@@ -75,6 +71,9 @@ export function SelectedPanel() {
         >
           Download CSV
         </button>
+        <a ref={downloadLinkRef} href="about:blank" aria-hidden="true">
+          download link
+        </a>
       </div>
     </div>
   );
