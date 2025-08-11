@@ -77,5 +77,9 @@
         inset 30px -30px 10px -50px var(--gradient-middle),
         inset -30px 50px 10px -50px var(--gradient-middle);
     }
+
+    .header {
+      background-color: var(--background);
+    }
   }
 }
