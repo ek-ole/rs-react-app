@@ -21,16 +21,15 @@ const rickAndMortyApi = createApi({
       providesTags: (result) =>
         result
           ? [
-              ...result.results.map(({ id }) => ({ type: 'Character' as const, id })),
-              { type: 'Characters', page: result.info.pages },
-              { type: 'Characters', id: 'ALL' },
+              ...result.results.map(({ id }) => ({ type: 'Character' as const, id: String(id) })),
+              { type: 'Characters', id: 'LIST' },
             ]
-          : [{ type: 'Characters', id: 'ALL' }],
+          : [{ type: 'Characters', id: 'LIST' }],
     }),
 
     getCharacterById: builder.query<Character, string>({
       query: (id) => `character/${id}`,
-      providesTags: (result, error, id) => [{ type: 'Character', id }],
+      providesTags: (_result, _error, id) => [{ type: 'Character', id }],
     }),
 
     updateCharacter: builder.mutation<void, { id: string; data: Partial<Character> }>({
@@ -39,7 +38,7 @@ const rickAndMortyApi = createApi({
         method: 'PATCH',
         body: data,
       }),
-      invalidatesTags: (result, error, { id }) => [
+      invalidatesTags: (_result, _error, { id }) => [
         { type: 'Character', id },
         { type: 'Characters', id: 'LIST' },
       ],
@@ -47,7 +46,7 @@ const rickAndMortyApi = createApi({
 
     invalidateCharacters: builder.mutation<void, void>({
       queryFn: () => ({ data: void 0 }),
-      invalidatesTags: [{ type: 'Characters', id: 'All' }],
+      invalidatesTags: [{ type: 'Characters', id: 'LIST' }],
     }),
   }),
 });
