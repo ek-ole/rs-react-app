@@ -1,6 +1,6 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 
-import { checkResponse, getErrorMessage } from '@/api/api-error-handler';
+import { checkResponse, getErrorMessage, logError } from '@/api/api-error-handler';
 
 describe('ApiErrorHandler', () => {
   describe('checkResponse', () => {
@@ -17,6 +17,31 @@ describe('ApiErrorHandler', () => {
       } as Response;
 
       expect(() => checkResponse(response)).toThrow('API request failed: 404 Not Found');
+    });
+  });
+
+  describe('logError', () => {
+    it('should log and return error message for Error instance', () => {
+      const spy = vi.spyOn(console, 'error').mockImplementation(() => {});
+      const error = new Error('Test error');
+
+      const result = logError(error);
+
+      expect(spy).toHaveBeenCalledWith('API Error:', 'Test error');
+      expect(result).toBe('Test error');
+
+      spy.mockRestore();
+    });
+
+    it('should log and return default message for non-Error value', () => {
+      const spy = vi.spyOn(console, 'error').mockImplementation(() => {});
+
+      const result = logError('Not an error');
+
+      expect(spy).toHaveBeenCalledWith('API Error:', 'Unknown API error');
+      expect(result).toBe('Unknown API error');
+
+      spy.mockRestore();
     });
   });
 
