@@ -6,7 +6,7 @@ import selectedReducer from '@/services/selected-characters';
 import type { ApiResponse } from '@/types/api';
 import type { Character } from '@/types/character';
 
-const rickAndMortyApi = createApi({
+export const rickAndMortyApi = createApi({
   reducerPath: 'rickAndMortyApi',
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://rickandmortyapi.com/api/',
