@@ -11,8 +11,8 @@ export function Header() {
   return (
     <header
       className={cn(
-        'shadow-shadow fixed top-0 z-100 w-[100vw]',
-        'bg-background flex items-center justify-between px-6',
+        'shadow-shadow header fixed top-0 z-100 w-[100vw]',
+        'flex items-center justify-between px-6',
         'shadow-[0px_0px_15px_2px]',
       )}
     >
