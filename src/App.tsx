@@ -7,6 +7,7 @@ import { Loader } from './components/ui/loader';
 import { NotFound } from './components/ui/not-found';
 import { RefreshButton } from './components/ui/refresh-button';
 import { useCharacters } from './hooks/use-characters';
+import { cn } from './utils/cn';
 
 function App() {
   const { appState, currentPage, handleSearch, handlePageChange } = useCharacters();
@@ -35,7 +36,7 @@ function App() {
       <Search onSearch={handleSearchWithReset} />
       {appState.isLoading && <Loader />}
       {appState.error && <NotFound error={appState.error} onReset={handleReset} />}
-      <div className={`flex w-full ${hasDetails ? 'gap-6' : ''}`}>
+      <div className={cn('flex w-full', hasDetails ? 'gap-6' : '')}>
         <div className={hasDetails ? 'w-[65%]' : 'w-full'}>
           {appState.characters.length > 0 && (
             <>
