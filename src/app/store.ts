@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { useDispatch } from 'react-redux';
 
 import selectedReducer from '@/services/selected-characters';
-import type { ApiResponse } from '@/types/api';
+import type { ApiCharacter, ApiResponse } from '@/types/api';
 import type { Character } from '@/types/character';
 
 export const rickAndMortyApi = createApi({
@@ -27,7 +27,7 @@ export const rickAndMortyApi = createApi({
           : [{ type: 'Characters', id: 'LIST' }],
     }),
 
-    getCharacterById: builder.query<Character, string>({
+    getCharacterById: builder.query<ApiCharacter, string>({
       query: (id) => `character/${id}`,
       providesTags: (_result, _error, id) => [{ type: 'Character', id }],
     }),
