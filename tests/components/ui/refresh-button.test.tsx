@@ -3,14 +3,21 @@ import { describe, it, expect, vi } from 'vitest';
 
 import { RefreshButton } from '@/components/ui/refresh-button';
 
+const mockRefetchList = vi.fn();
+const mockRefetchDetails = vi.fn();
+
 vi.mock('react-router', () => ({
   useSearchParams: () => [new URLSearchParams()],
+  useParams: () => ({}),
 }));
 
-vi.mock('../../../src/app/store', () => ({
+vi.mock('@/app/store', () => ({
   useGetCharactersQuery: () => ({
-    refetch: vi.fn(),
+    refetch: mockRefetchList,
     isFetching: false,
+  }),
+  useGetCharacterByIdQuery: () => ({
+    refetch: mockRefetchDetails,
   }),
 }));
 

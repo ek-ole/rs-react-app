@@ -1,15 +1,18 @@
 import { getErrorMessage } from '@/api/api-error-handler';
+import { mapApiToCharacter } from '@/api/map-characters';
 import { useGetCharacterByIdQuery } from '@/app/store';
 
 export function useCharacterDetails(id?: string) {
   const {
-    data: character,
+    data: apiCharacter,
     isLoading,
     isError,
     error,
   } = useGetCharacterByIdQuery(id || '', {
     skip: !id,
   });
+
+  const character = apiCharacter ? mapApiToCharacter(apiCharacter) : undefined;
 
   return {
     character,

@@ -4,6 +4,8 @@ import { vi, describe, it, expect } from 'vitest';
 import { getErrorMessage } from '@/api/api-error-handler';
 import { useGetCharacterByIdQuery } from '@/app/store';
 import { useCharacterDetails } from '@/hooks/use-character-details';
+import type { ApiCharacter } from '@/types/api';
+import type { Character } from '@/types/character';
 
 vi.mock('@/app/store', () => ({
   useGetCharacterByIdQuery: vi.fn(),
@@ -11,6 +13,10 @@ vi.mock('@/app/store', () => ({
 
 vi.mock('@/api/api-error-handler', () => ({
   getErrorMessage: vi.fn((error: Error) => `Error: ${error?.message}`),
+}));
+
+vi.mock('@/api/map-characters', () => ({
+  mapApiToCharacter: vi.fn((char: ApiCharacter): Character => char),
 }));
 
 describe('useCharacterDetails', () => {
