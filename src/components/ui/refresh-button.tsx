@@ -1,23 +1,27 @@
 import { RefreshCw } from 'lucide-react';
-import { useSearchParams } from 'react-router';
+import { useParams, useSearchParams } from 'react-router';
 
-import { useGetCharactersQuery } from '@/app/store';
+import { useGetCharacterByIdQuery, useGetCharactersQuery } from '@/app/store';
 import { cn } from '@/utils/cn';
 
 export function RefreshButton() {
   const [searchParams] = useSearchParams();
   const searchTerm = searchParams.get('search') || '';
   const page = Number(searchParams.get('page')) || 1;
+  const { id } = useParams();
 
-  const { refetch, isFetching } = useGetCharactersQuery({
+  const { refetch: refetchList, isFetching } = useGetCharactersQuery({
     name: searchTerm,
     page,
   });
 
+  const { refetch: refetchDetails } = useGetCharacterByIdQuery(id || '', {
+    skip: !id,
+  });
+
   const handleRefresh = () => {
-    refetch()
-      .then(() => console.log('Data refreshed'))
-      .catch((error) => console.error('Refresh failed:', error));
+    void refetchList();
+    if (id) void refetchDetails();
   };
 
   return (
