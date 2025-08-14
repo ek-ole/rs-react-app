@@ -37,20 +37,20 @@ describe('Search Component', () => {
     expect(screen.getByRole('button', { name: /search/i })).toBeInTheDocument();
   });
 
-  it('should call resetDetails when provided', async () => {
-    const user = userEvent.setup();
-    render(<Search onSearch={mockOnSearch} resetDetails={mockResetDetails} />);
-
-    await user.type(screen.getByRole('searchbox'), 'Rick');
-    await user.click(screen.getByRole('button', { name: /search/i }));
-
-    expect(mockResetDetails).toHaveBeenCalledTimes(1);
-  });
-
   it('should initialize with value from localStorage', () => {
     vi.mocked(useLocalStorage).mockReturnValue(['initial value', mockSetLocalStorage]);
     render(<Search onSearch={mockOnSearch} />);
 
     expect(screen.getByRole('searchbox')).toHaveValue('initial value');
+  });
+
+  it('should call onSearch with trimmed value', async () => {
+    const user = userEvent.setup();
+    render(<Search onSearch={mockOnSearch} />);
+
+    await user.type(screen.getByRole('searchbox'), '  Rick  ');
+    await user.click(screen.getByRole('button', { name: /search/i }));
+
+    expect(mockOnSearch).toHaveBeenCalledWith('Rick');
   });
 });

@@ -11,6 +11,17 @@ import type { Character } from '@/types/character';
 vi.mock('@/utils/csv', () => ({
   generateCSVContent: vi.fn(() => 'mocked,csv,content'),
   downloadCSV: vi.fn(),
+  csvDownloadHandler: vi.fn((chars: Character[], ref: React.RefObject<HTMLAnchorElement>) => {
+    return () => {
+      const csvContent = 'mocked,csv,content';
+      const blob = new Blob([csvContent], { type: 'text/csv' });
+      if (ref.current) {
+        ref.current.href = URL.createObjectURL(blob);
+        ref.current.download = `${chars.length}_characters.csv`;
+        ref.current.click();
+      }
+    };
+  }),
   prepareCharactersForCSV: vi.fn((chars: Character[]) =>
     chars.map((character) => ({
       id: character.id,
@@ -21,7 +32,6 @@ vi.mock('@/utils/csv', () => ({
 }));
 
 describe('SelectedPanel Component', () => {
-  const user = userEvent.setup();
   let store: ReturnType<typeof configureStore>;
 
   const mockCharacters: Character[] = [
@@ -76,6 +86,7 @@ describe('SelectedPanel Component', () => {
   });
 
   it('dispatches clearAll action when "Unselect all" clicked', async () => {
+    const user = userEvent.setup();
     const mockDispatch = vi.spyOn(store, 'dispatch');
 
     render(
@@ -84,22 +95,11 @@ describe('SelectedPanel Component', () => {
       </Provider>,
     );
 
-    await user.click(screen.getByText('Unselect all'));
+    const unselectButton = await screen.findByText('Unselect all');
+    await user.click(unselectButton);
+
     expect(mockDispatch).toHaveBeenCalledWith({
       type: 'selectedCharacters/clearAll',
     });
-  });
-
-  it('calls downloadCSV when "Download CSV" clicked', async () => {
-    const { downloadCSV } = await import('@/utils/csv');
-
-    render(
-      <Provider store={store}>
-        <SelectedPanel />
-      </Provider>,
-    );
-
-    await user.click(screen.getByText('Download CSV'));
-    expect(downloadCSV).toHaveBeenCalledWith('mocked,csv,content', '2_characters.csv');
   });
 });

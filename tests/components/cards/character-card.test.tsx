@@ -16,7 +16,6 @@ const mockCharacter: Character = {
 };
 
 describe('CharacterCard Component', () => {
-  const user = userEvent.setup();
   let store: ReturnType<typeof configureStore>;
 
   beforeEach(() => {
@@ -40,6 +39,7 @@ describe('CharacterCard Component', () => {
   });
 
   it('should call onClick when card is clicked', async () => {
+    const user = userEvent.setup();
     const mockOnClick = vi.fn();
     render(
       <Provider store={store}>

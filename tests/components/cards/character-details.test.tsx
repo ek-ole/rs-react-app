@@ -1,14 +1,11 @@
-import { render, screen, waitFor } from '@testing-library/react';
-import { MemoryRouter, Route, Routes } from 'react-router-dom';
+import { render, screen } from '@testing-library/react';
+import { MemoryRouter, Route, Routes } from 'react-router';
 import { vi, describe, it, expect, beforeEach } from 'vitest';
 
-import { fetchCharacter } from '@/api/rick-and-morty-api';
 import { CharacterDetails } from '@/components/cards/character-details';
+import { useCharacterDetails } from '@/hooks/use-character-details';
 
-vi.mock('@/api/rick-and-morty-api');
-vi.mock('./ui/loader', () => ({
-  Loader: () => <div>Loading...</div>,
-}));
+vi.mock('@/hooks/use-character-details');
 
 const mockCharacter = {
   id: 1,
@@ -19,11 +16,15 @@ const mockCharacter = {
 
 describe('CharacterDetails Component', () => {
   beforeEach(() => {
-    vi.mocked(fetchCharacter).mockReset();
+    vi.resetAllMocks();
   });
 
   it('should render loading state initially', () => {
-    vi.mocked(fetchCharacter).mockImplementation(() => new Promise(() => {}));
+    vi.mocked(useCharacterDetails).mockReturnValue({
+      character: undefined,
+      isLoading: true,
+      error: null,
+    });
 
     render(
       <MemoryRouter initialEntries={['/characters/1']}>
@@ -36,8 +37,12 @@ describe('CharacterDetails Component', () => {
     expect(screen.getByText('Loading...')).toBeInTheDocument();
   });
 
-  it('should render character details when loaded', async () => {
-    vi.mocked(fetchCharacter).mockResolvedValue(mockCharacter);
+  it('should render character details when loaded', () => {
+    vi.mocked(useCharacterDetails).mockReturnValue({
+      character: mockCharacter,
+      isLoading: false,
+      error: null,
+    });
 
     render(
       <MemoryRouter initialEntries={['/characters/1']}>
@@ -47,11 +52,9 @@ describe('CharacterDetails Component', () => {
       </MemoryRouter>,
     );
 
-    await waitFor(() => {
-      expect(screen.getByText(mockCharacter.name)).toBeInTheDocument();
-      expect(screen.getByText(mockCharacter.description)).toBeInTheDocument();
-      expect(screen.getByRole('img')).toHaveAttribute('src', mockCharacter.image);
-    });
+    expect(screen.getByText(mockCharacter.name)).toBeInTheDocument();
+    expect(screen.getByText(mockCharacter.description)).toBeInTheDocument();
+    expect(screen.getByRole('img')).toHaveAttribute('src', mockCharacter.image);
   });
 
   it('should not render when no id in params', () => {

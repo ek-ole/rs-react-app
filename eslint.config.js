@@ -21,6 +21,7 @@ export default tseslint.config(
       reactPlugin.configs.flat['jsx-runtime'],
       jsxA11y.flatConfigs.recommended,
       eslintConfigPrettier,
+      reactHooks.configs['recommended-latest'],
     ],
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
@@ -34,7 +35,6 @@ export default tseslint.config(
     plugins: {
       'testing-library': testingLibrary,
       'jest-dom': jestDom,
-      'react-hooks': reactHooks,
       vitest,
     },
     rules: {
@@ -43,8 +43,7 @@ export default tseslint.config(
       '@typescript-eslint/no-inferrable-types': 'error',
       '@typescript-eslint/array-type': 'error',
       '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
-      'react-hooks/rules-of-hooks': 'error',
-      'react-hooks/exhaustive-deps': 'warn',
+      'react-hooks/exhaustive-deps': 'error',
       'import/order': [
         'error',
         {

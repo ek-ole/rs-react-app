@@ -13,8 +13,6 @@ const mockCharacter: Character = {
 };
 
 describe('CharacterThumbnail Component', () => {
-  const user = userEvent.setup();
-
   it('renders character image', () => {
     render(<CharacterThumbnail character={mockCharacter} onRemove={() => {}} />);
 
@@ -26,6 +24,7 @@ describe('CharacterThumbnail Component', () => {
   });
 
   it('calls onRemove when clicked', async () => {
+    const user = userEvent.setup();
     const mockOnRemove = vi.fn();
     render(<CharacterThumbnail character={mockCharacter} onRemove={mockOnRemove} />);
 

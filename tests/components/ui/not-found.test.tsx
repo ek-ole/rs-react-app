@@ -17,8 +17,6 @@ vi.mock('@/services/storage', () => ({
 }));
 
 describe('NotFound', () => {
-  const user = userEvent.setup();
-
   it('should render error message', () => {
     render(<NotFound {...defaultProps} />);
     expect(screen.getByText('Test error message')).toBeInTheDocument();
@@ -32,6 +30,7 @@ describe('NotFound', () => {
   });
 
   it('should call onReset on button click', async () => {
+    const user = userEvent.setup();
     render(<NotFound {...defaultProps} />);
     const button = screen.getByRole('button', { name: /reset search/i });
 
