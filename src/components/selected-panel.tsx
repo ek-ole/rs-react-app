@@ -1,8 +1,8 @@
 import { useRef } from 'react';
 import { useSelector } from 'react-redux';
 
-import { useAppDispatch, type RootState } from '@/app/store';
 import { clearAll, toggle } from '@/services/selected-characters';
+import { useAppDispatch, type RootState } from '@/store/store';
 import { cn } from '@/utils/cn';
 import { csvDownloadHandler } from '@/utils/csv';
 

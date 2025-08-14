@@ -1,6 +1,6 @@
 import { getErrorMessage } from '@/api/api-error-handler';
 import { mapApiToCharacter } from '@/api/map-characters';
-import { useGetCharacterByIdQuery } from '@/app/store';
+import { useGetCharacterByIdQuery } from '@/store/store';
 
 export function useCharacterDetails(id?: string) {
   const {

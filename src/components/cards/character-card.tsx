@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import type { RootState } from '@/app/store';
-import { useAppDispatch } from '@/app/store';
 import { toggle } from '@/services/selected-characters';
+import type { RootState } from '@/store/store';
+import { useAppDispatch } from '@/store/store';
 import type { Character } from '@/types/character';
 import { cn } from '@/utils/cn';
 

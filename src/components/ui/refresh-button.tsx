@@ -1,7 +1,7 @@
 import { RefreshCw } from 'lucide-react';
 import { useParams, useSearchParams } from 'react-router';
 
-import { useGetCharacterByIdQuery, useGetCharactersQuery } from '@/app/store';
+import { useGetCharacterByIdQuery, useGetCharactersQuery } from '@/store/store';
 import { cn } from '@/utils/cn';
 
 export function RefreshButton() {
