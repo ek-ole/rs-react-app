@@ -3,14 +3,13 @@ import globals from 'globals';
 import reactPlugin from 'eslint-plugin-react';
 import tseslint from 'typescript-eslint';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
-import testingLibrary from 'eslint-plugin-testing-library';
-import jestDom from 'eslint-plugin-jest-dom';
 import importPlugin from 'eslint-plugin-import';
 import eslintConfigPrettier from 'eslint-config-prettier/flat';
 import reactHooks from 'eslint-plugin-react-hooks';
+import nextPlugin from '@next/eslint-plugin-next';
 
 export default tseslint.config(
-  { ignores: ['dist', 'coverage'] },
+  { ignores: ['dist', 'coverage', '.next'] },
   {
     extends: [
       js.configs.recommended,
@@ -31,6 +30,9 @@ export default tseslint.config(
         tsconfigRootDir: import.meta.dirname,
       },
     },
+    plugins: {
+      '@next/next': nextPlugin,
+    },
     rules: {
       '@typescript-eslint/consistent-type-exports': 'error',
       '@typescript-eslint/consistent-type-imports': 'error',
@@ -38,6 +40,8 @@ export default tseslint.config(
       '@typescript-eslint/array-type': 'error',
       '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
       'react-hooks/exhaustive-deps': 'error',
+      '@next/next/no-html-link-for-pages': 'error',
+      '@next/next/no-img-element': 'warn',
       'import/order': [
         'error',
         {
@@ -48,6 +52,11 @@ export default tseslint.config(
               pattern: '@/**',
               group: 'internal',
             },
+            {
+              pattern: 'next/**',
+              group: 'external',
+              position: 'before',
+            },
           ],
           alphabetize: {
             order: 'asc',
@@ -57,9 +66,10 @@ export default tseslint.config(
     },
   },
   {
-    files: ['src/vite-env.d.ts'],
+    files: ['app/**/*.{ts,tsx}', 'pages/**/*.{ts,tsx}'],
     rules: {
-      '@typescript-eslint/consistent-type-definitions': 'off',
+      '@next/next/no-head-element': 'error',
+      '@next/next/no-sync-scripts': 'error',
     },
   },
   {
