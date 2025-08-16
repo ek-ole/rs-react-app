@@ -2,7 +2,7 @@
 import Image from 'next/image';
 import { useParams, useRouter, useSearchParams } from 'next/navigation';
 
-import { Loader } from '@/app/_components/loader';
+import { Loader } from '@/app/(server)/_components/ui/loader';
 import { cn } from '@/app/_lib/cn';
 import { useCharacterDetails } from '@/app/_lib/hooks/use-character-details';
 

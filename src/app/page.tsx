@@ -1,7 +1,7 @@
 'use client';
 import { usePathname, useRouter } from 'next/navigation';
 
-import { Loader } from '@/app/_components/loader';
+import { Loader } from '@/app/(server)/_components/ui/loader';
 import { Pagination } from '@/app/_components/pagination';
 import { RefreshButton } from '@/app/_components/refresh-button';
 import Results from '@/app/_components/results';

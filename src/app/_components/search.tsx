@@ -6,7 +6,8 @@ import { cn } from '@/app/_lib/cn';
 import { SEARCH_TERM_KEY } from '@/app/_lib/constants';
 import useLocalStorage from '@/app/_lib/hooks/use-local-storage';
 
-import { Loader } from './loader';
+import { Loader } from '../(server)/_components/ui/loader';
+
 import { SearchInput } from './search-input';
 
 type Props = {
