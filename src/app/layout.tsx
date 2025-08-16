@@ -24,6 +24,10 @@ const cookie = Cookie({
 
 export const metadata: Metadata = {
   title: 'Rick & Morty',
+  icons: {
+    icon: '/favicon.svg',
+    shortcut: '/favicon.svg',
+  },
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
