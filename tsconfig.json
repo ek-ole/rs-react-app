@@ -27,7 +27,11 @@
     /* Path aliases */
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@/_components/*": ["./src/app/_components/*"],
+      "@/_hooks/*": ["./src/app/_hooks/*"],
+      "@/_server/*": ["./src/app/(server)/*"],
+      "@/_client/*": ["./src/app/(client)/*"]
     },
     "plugins": [
       {

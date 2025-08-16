@@ -3,10 +3,10 @@ import type { FormEvent } from 'react';
 import { useEffect, useState } from 'react';
 
 import { cn } from '@/app/_lib/cn';
-import { SEARCH_TERM_KEY } from '@/app/_lib/constants';
-import useLocalStorage from '@/app/_lib/hooks/use-local-storage';
 
+import useLocalStorage from '../(client)/_hooks/use-local-storage';
 import { Loader } from '../(server)/_components/ui/loader';
+import { SEARCH_TERM_KEY } from '../_lib/constants';
 
 import { SearchInput } from './search-input';
 
