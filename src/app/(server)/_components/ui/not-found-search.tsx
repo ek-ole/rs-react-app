@@ -1,14 +1,14 @@
 import Image from 'next/image';
-import type { ReactNode } from 'react';
 
+import { ResetSearchButton } from '@/app/(client)/_components/interactive/reset-search-button';
 import { cn } from '@/app/_lib/cn';
 
 type Props = {
   error: string;
-  resetComponent: ReactNode;
+  onReset?: VoidFunction;
 };
 
-export function NotFound({ error, resetComponent }: Props) {
+export function NotSearchFound({ error, onReset }: Props) {
   return (
     <div
       className={cn(
@@ -19,7 +19,7 @@ export function NotFound({ error, resetComponent }: Props) {
       )}
     >
       <p className="text-center whitespace-pre-line">{error}</p>
-      {resetComponent}
+      <ResetSearchButton onClick={onReset} />
       <Image
         src="/not-found.webp"
         alt="Not found"
