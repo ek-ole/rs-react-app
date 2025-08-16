@@ -1,4 +1,3 @@
-'use client';
 import { X } from 'lucide-react';
 import Image from 'next/image';
 
@@ -16,6 +15,7 @@ export function CharacterThumbnail({
     <button
       type="button"
       key={character.id}
+      aria-label="remove"
       className={cn(
         'group relative flex flex-col items-center gap-2 p-1',
         'hover:bg-shadow/70 cursor-pointer rounded',
