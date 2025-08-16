@@ -8,7 +8,7 @@ function Page404() {
     <div className="flex min-h-[80vh] items-center justify-center p-4">
       <div
         className={cn(
-          'mx-auto mt-6 flex w-full max-w-4xl',
+          'mx-auto mt-20 flex w-full max-w-4xl',
           'flex-col items-center rounded-xl border-4 p-4',
           'shadow-glow',
         )}

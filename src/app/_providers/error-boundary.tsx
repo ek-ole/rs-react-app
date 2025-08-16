@@ -38,7 +38,7 @@ export class ErrorBoundary extends Component<{ children: ReactNode }, ErrorBound
         >
           <div
             className={cn(
-              'mx-auto mt-6 flex w-full max-w-4xl flex-col',
+              'mx-auto mt-20 flex w-full max-w-4xl flex-col',
               'items-center rounded-xl border-4 p-4',
               'shadow-glow',
             )}
