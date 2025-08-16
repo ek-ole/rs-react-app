@@ -2,9 +2,9 @@
 import Image from 'next/image';
 import { useParams, useRouter, useSearchParams } from 'next/navigation';
 
+import { useCharacterDetails } from '@/app/(client)/_hooks/use-character-details';
 import { Loader } from '@/app/(server)/_components/ui/loader';
 import { cn } from '@/app/_lib/cn';
-import { useCharacterDetails } from '@/app/_lib/hooks/use-character-details';
 
 export default function CharacterDetails() {
   const router = useRouter();
