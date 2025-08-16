@@ -36,14 +36,14 @@ function About() {
             </Link>
           </p>
         </div>
-        <div className="h-[50vh] overflow-hidden rounded-2xl">
+        <div className="mb-6 h-[50vh] overflow-hidden rounded-2xl">
           <Image
             src="/about-image.webp"
             alt="About project"
-            className="object-contain"
-            loading="lazy"
             width={1000}
             height={1000}
+            className="rounded-2xl object-contain"
+            loading="lazy"
           />
         </div>
       </div>
