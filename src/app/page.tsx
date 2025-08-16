@@ -8,11 +8,11 @@ import { Pagination } from '@/app/_components/pagination';
 import { RefreshButton } from '@/app/_components/refresh-button';
 import Results from '@/app/_components/results';
 import Search from '@/app/_components/search';
-import { cn } from '@/app/_lib/cn';
 
 import { useCharacters } from './(client)/_hooks/use-characters';
 import { Loader } from './(server)/_components/ui/loader';
 import { NotSearchFound } from './(server)/_components/ui/not-found-search';
+import { cn } from './(server)/_lib/cn';
 import { fetchCharacters } from './(server)/_services/fetch-characters';
 import type { ApiResponse } from './_types/api';
 

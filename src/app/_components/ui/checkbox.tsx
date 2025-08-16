@@ -1,7 +1,7 @@
 'use client';
 import { Check } from 'lucide-react';
 
-import { cn } from '@/app/_lib/cn';
+import { cn } from '@/app/(server)/_lib/cn';
 
 type CheckboxProps = {
   checked: boolean;

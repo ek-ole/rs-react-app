@@ -2,7 +2,7 @@
 import { useRef } from 'react';
 import { useSelector } from 'react-redux';
 
-import { cn } from '@/app/_lib/cn';
+import { cn } from '@/app/(server)/_lib/cn';
 import { csvDownloadHandler } from '@/app/_lib/csv';
 import { clearAll, toggle } from '@/app/_services/selected-characters';
 import { useAppDispatch, type RootState } from '@/app/_store/store';

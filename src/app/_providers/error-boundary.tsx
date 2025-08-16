@@ -3,7 +3,7 @@ import Image from 'next/image';
 import type { ErrorInfo, ReactNode } from 'react';
 import { Component } from 'react';
 
-import { cn } from '@/app/_lib/cn';
+import { cn } from '@/app/(server)/_lib/cn';
 
 type ErrorBoundaryState = {
   hasError: boolean;

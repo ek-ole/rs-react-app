@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import { cn } from '@/app/_lib/cn';
+import { cn } from '@/app/(server)/_lib/cn';
 import { toggle } from '@/app/_services/selected-characters';
 import type { RootState } from '@/app/_store/store';
 import { useAppDispatch } from '@/app/_store/store';

@@ -1,6 +1,6 @@
 'use client';
-import { getErrorMessage } from '@/app/_lib/api-error-handler';
-import { mapApiToCharacter } from '@/app/_lib/map-characters';
+import { getErrorMessage } from '@/app/(server)/_lib/api-error-handler';
+import { mapApiToCharacter } from '@/app/(server)/_lib/map-characters';
 import { useGetCharacterByIdQuery } from '@/app/_store/store';
 
 export function useCharacterDetails(id?: string) {

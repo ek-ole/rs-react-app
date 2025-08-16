@@ -1,8 +1,8 @@
 'use client';
 import { useRouter } from 'next/navigation';
 
-import { cn } from '@/app/_lib/cn';
-import { SEARCH_TERM_KEY } from '@/app/_lib/constants';
+import { cn } from '@/app/(server)/_lib/cn';
+import { SEARCH_TERM_KEY } from '@/app/(server)/_lib/constants';
 
 import useLocalStorage from '../../_hooks/use-local-storage';
 

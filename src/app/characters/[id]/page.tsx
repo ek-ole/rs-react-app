@@ -4,7 +4,7 @@ import { useParams, useRouter, useSearchParams } from 'next/navigation';
 
 import { useCharacterDetails } from '@/app/(client)/_hooks/use-character-details';
 import { Loader } from '@/app/(server)/_components/ui/loader';
-import { cn } from '@/app/_lib/cn';
+import { cn } from '@/app/(server)/_lib/cn';
 
 export default function CharacterDetails() {
   const router = useRouter();

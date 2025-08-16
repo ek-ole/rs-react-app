@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import { cn } from '@/app/_lib/cn';
+import { cn } from '@/app/(server)/_lib/cn';
 import { useTheme } from '@/app/_providers/theme-context';
 
 export function Header() {

@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { cn } from '@/app/_lib/cn';
+import { cn } from '@/app/(server)/_lib/cn';
 
 function About() {
   return (

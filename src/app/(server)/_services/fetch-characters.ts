@@ -1,4 +1,4 @@
-import { getErrorMessage } from '@/app/_lib/api-error-handler';
+import { getErrorMessage } from '@/app/(server)/_lib/api-error-handler';
 import type { ApiResponse } from '@/app/_types/api';
 
 export async function fetchCharacters(params: {

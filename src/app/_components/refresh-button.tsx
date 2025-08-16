@@ -2,7 +2,7 @@
 import { RefreshCw } from 'lucide-react';
 import { useParams, useSearchParams } from 'next/navigation';
 
-import { cn } from '@/app/_lib/cn';
+import { cn } from '@/app/(server)/_lib/cn';
 import { useGetCharacterByIdQuery, useGetCharactersQuery } from '@/app/_store/store';
 
 export function RefreshButton() {

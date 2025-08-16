@@ -1,7 +1,7 @@
 import Image from 'next/image';
 
 import { ResetSearchButton } from '@/app/(client)/_components/interactive/reset-search-button';
-import { cn } from '@/app/_lib/cn';
+import { cn } from '@/app/(server)/_lib/cn';
 
 type Props = {
   error: string;

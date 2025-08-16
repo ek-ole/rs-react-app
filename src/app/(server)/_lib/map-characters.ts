@@ -1,4 +1,4 @@
-import { formatDescription } from '@/app/_lib/format-description';
+import { formatDescription } from '@/app/(server)/_lib/format-description';
 import type { ApiCharacter } from '@/app/_types/api';
 import type { Character } from '@/app/_types/character';
 

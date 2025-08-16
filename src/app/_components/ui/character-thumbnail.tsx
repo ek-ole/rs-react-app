@@ -1,7 +1,7 @@
 import { X } from 'lucide-react';
 import Image from 'next/image';
 
-import { cn } from '@/app/_lib/cn';
+import { cn } from '@/app/(server)/_lib/cn';
 import type { Character } from '@/app/_types/character';
 
 export function CharacterThumbnail({

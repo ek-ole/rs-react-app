@@ -1,7 +1,7 @@
 'use client';
 import { useRouter, useParams, useSearchParams } from 'next/navigation';
 
-import { cn } from '@/app/_lib/cn';
+import { cn } from '@/app/(server)/_lib/cn';
 import type { Character } from '@/app/_types/character';
 
 import { CharacterCard } from './character-card';
