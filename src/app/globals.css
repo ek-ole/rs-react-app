@@ -39,9 +39,17 @@
   }
 
   body {
-    font-family: var(--font-primary);
+    font-family: var(--font-josefin), sans-serif;
     background-color: var(--background);
     color: var(--foreground);
+  }
+
+  .font-sans {
+    font-family: var(--font-josefin), sans-serif;
+  }
+
+  .font-cookie {
+    font-family: var(--font-cookie), cursive;
   }
 
   @keyframes fadeIn {

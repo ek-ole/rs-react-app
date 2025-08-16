@@ -10,15 +10,16 @@ import Provider from './_providers/provider';
 
 const josefin = Josefin_Sans({
   subsets: ['latin'],
-  variable: '--font-josefin',
   display: 'swap',
+  variable: '--font-josefin',
+  weight: 'variable',
 });
 
 const cookie = Cookie({
-  weight: '400',
   subsets: ['latin'],
-  variable: '--font-cookie',
   display: 'swap',
+  variable: '--font-cookie',
+  weight: '400',
 });
 
 export const metadata: Metadata = {
@@ -28,7 +29,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={`${josefin.variable} ${cookie.variable}`}>
-      <body>
+      <body className="font-sans">
         <Provider>
           <Header />
           <main>{children}</main>
