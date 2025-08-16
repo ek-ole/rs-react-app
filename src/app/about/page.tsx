@@ -5,7 +5,7 @@ import { cn } from '@/app/_lib/cn';
 
 function About() {
   return (
-    <div className="flex min-h-[60vh] items-center justify-center p-4 md:p-14">
+    <div className="mt-20 flex min-h-[60vh] items-center justify-center p-4 md:p-14">
       <div
         className={cn(
           'mx-auto flex w-full max-w-4xl flex-col',
@@ -36,15 +36,16 @@ function About() {
             </Link>
           </p>
         </div>
-
-        <Image
-          src="/about-image.webp"
-          alt="About project"
-          className="mb-6 h-[50vh] rounded-2xl object-contain"
-          loading="lazy"
-          width={240}
-          height={240}
-        />
+        <div className="h-[50vh] overflow-hidden rounded-2xl">
+          <Image
+            src="/about-image.webp"
+            alt="About project"
+            className="object-contain"
+            loading="lazy"
+            width={1000}
+            height={1000}
+          />
+        </div>
       </div>
     </div>
   );

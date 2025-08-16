@@ -27,8 +27,8 @@ export default function Home() {
   };
 
   return (
-    <div className="mx-auto my-6 flex w-full flex-col items-center px-8 py-4">
-      <h1>Rick & Morty</h1>
+    <div className="mx-auto my-20 flex w-full flex-col items-center px-8 py-4">
+      <h1 className="text-2xl font-bold">Rick & Morty</h1>
       <Search onSearch={handleSearchWithReset} />
       {appState.isLoading && <Loader />}
       {appState.error && <NotFound error={appState.error} onReset={handleReset} />}
