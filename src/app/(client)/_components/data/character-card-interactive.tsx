@@ -1,10 +1,10 @@
 'use client';
 import { useSelector } from 'react-redux';
 
+import { toggle } from '@/app/(client)/_store/selected-characters';
+import type { RootState } from '@/app/(client)/_store/store';
+import { useAppDispatch } from '@/app/(client)/_store/store';
 import { cn } from '@/app/(server)/_lib/cn';
-import { toggle } from '@/app/_services/selected-characters';
-import type { RootState } from '@/app/_store/store';
-import { useAppDispatch } from '@/app/_store/store';
 import type { Character } from '@/app/_types/character';
 
 import { Checkbox } from '../interactive/checkbox';

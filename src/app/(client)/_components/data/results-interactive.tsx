@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import type { Character } from '@/app/_types/character';
 
 import { CharacterCard } from '../../../(server)/_components/data/character-card';
-import type { RootState } from '../../../_store/store';
+import type { RootState } from '../../_store/store';
 
 type ResultsProps = {
   characters: Character[];

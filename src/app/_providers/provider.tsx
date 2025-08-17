@@ -5,7 +5,7 @@ import { Provider as ReduxProvider } from 'react-redux';
 import { ErrorBoundary } from '@/app/_providers/error-boundary';
 import { ThemeProvider } from '@/app/_providers/theme-context';
 
-import { store } from '../_store/store';
+import { store } from '../(client)/_store/store';
 
 export default function Provider({ children }: { children: ReactNode }) {
   return (

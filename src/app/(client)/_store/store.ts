@@ -3,7 +3,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { useDispatch } from 'react-redux';
 
-import selectedReducer from '@/app/_services/selected-characters';
+import selectedReducer from '@/app/(client)/_store/selected-characters';
 import type { ApiCharacter, ApiResponse } from '@/app/_types/api';
 import type { Character } from '@/app/_types/character';
 

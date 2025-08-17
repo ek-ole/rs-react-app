@@ -5,7 +5,7 @@ import type { ReactNode } from 'react';
 import './globals.css';
 import { Header } from '@/app/_components/layout/header';
 
-import { SelectedPanel } from './_components/selected-panel';
+import { SelectedPanelProvider } from './(client)/_components/selected-panel-provider';
 import Provider from './_providers/provider';
 
 const josefin = Josefin_Sans({
@@ -37,7 +37,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <Provider>
           <Header />
           <main>{children}</main>
-          <SelectedPanel />
+          <SelectedPanelProvider />
         </Provider>
       </body>
     </html>

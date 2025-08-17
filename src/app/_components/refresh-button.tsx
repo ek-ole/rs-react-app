@@ -2,8 +2,8 @@
 import { RefreshCw } from 'lucide-react';
 import { useParams, useSearchParams } from 'next/navigation';
 
+import { useGetCharacterByIdQuery, useGetCharactersQuery } from '@/app/(client)/_store/store';
 import { cn } from '@/app/(server)/_lib/cn';
-import { useGetCharacterByIdQuery, useGetCharactersQuery } from '@/app/_store/store';
 
 export function RefreshButton() {
   const searchParams = useSearchParams();
