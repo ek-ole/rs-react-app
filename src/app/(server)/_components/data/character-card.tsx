@@ -9,9 +9,16 @@ type characterProps = {
   isActive?: boolean;
   onClick?: VoidFunction;
   isChecked?: boolean;
+  priority?: boolean;
 };
 
-export function CharacterCard({ character, isActive, onClick, isChecked }: characterProps) {
+export function CharacterCard({
+  character,
+  isActive,
+  onClick,
+  isChecked,
+  priority,
+}: characterProps) {
   const { image, name } = character;
 
   return (
@@ -40,8 +47,8 @@ export function CharacterCard({ character, isActive, onClick, isChecked }: chara
             alt={name}
             width={240}
             height={240}
+            priority={priority}
             className="error-message mb-3 w-full rounded-lg object-cover"
-            loading="lazy"
           />
         )}
         <h3 className="text-center text-lg font-semibold lg:text-base">{name}</h3>

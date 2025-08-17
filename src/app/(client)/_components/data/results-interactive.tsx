@@ -25,10 +25,11 @@ function ResultsInteractive({ characters }: ResultsProps) {
   return (
     <div className="w-full">
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
-        {characters.map((character) => (
+        {characters.map((character, index) => (
           <CharacterCard
             key={character.id}
             character={character}
+            priority={index === 0}
             isActive={id === String(character.id)}
             onClick={() => handleCharacterClick(character.id)}
             isChecked={selectedIds.includes(character.id)}

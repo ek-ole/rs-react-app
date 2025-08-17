@@ -25,7 +25,7 @@ export function Header() {
           alt="Logo"
           width={48}
           height={48}
-          loading="lazy"
+          priority
           className={cn(
             'shadow-shadow duration-300',
             'my-2 flex flex-col rounded-xl shadow-[0px_0px_5px_2px]',
