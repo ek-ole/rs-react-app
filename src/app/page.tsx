@@ -20,7 +20,7 @@ import type { ApiResponse } from './_types/api';
 
 export default function Home() {
   const router = useRouter();
-  const { handleSearch, handlePageChange, currentSearch, currentPage } = useCharacters();
+  const { handleSearch, currentSearch, currentPage } = useCharacters();
   const pathname = usePathname();
   const { data, error, isLoading }: SWRResponse<ApiResponse, Error> = useSWR(
     ['characters', currentSearch, currentPage],
@@ -48,11 +48,7 @@ export default function Home() {
             <div className={hasDetails ? 'w-[65%]' : 'w-full'}>
               {data.results.length > 0 && (
                 <>
-                  <Pagination
-                    currentPage={currentPage}
-                    totalPages={data.info.pages}
-                    onPageChange={handlePageChange}
-                  />
+                  <Pagination currentPage={currentPage} totalPages={data.info.pages} />
                   <Results characters={data.results} />
                   <RefreshButton />
                 </>

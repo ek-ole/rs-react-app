@@ -1,13 +1,24 @@
 'use client';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+
 import { cn } from '@/app/(server)/_lib/cn';
 
 type PaginationProps = {
   currentPage: number;
   totalPages: number;
-  onPageChange: (page: number) => void;
 };
 
-export function PaginationButtons({ currentPage, totalPages, onPageChange }: PaginationProps) {
+export function PaginationButtons({ currentPage, totalPages }: PaginationProps) {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const handlePageChange = (page: number) => {
+    const params = new URLSearchParams(searchParams);
+    params.set('page', String(page));
+    router.replace(`${pathname}?${params.toString()}`);
+  };
+
   const getPagesToShow = () => {
     const pages = [];
     const maxVisible = 3;
@@ -31,7 +42,7 @@ export function PaginationButtons({ currentPage, totalPages, onPageChange }: Pag
   return (
     <>
       <button
-        onClick={() => onPageChange(currentPage - 1)}
+        onClick={() => handlePageChange(currentPage - 1)}
         disabled={currentPage === 1}
         className={cn(
           'hover:bg-shadow hover:text-primary-light',
@@ -52,7 +63,7 @@ export function PaginationButtons({ currentPage, totalPages, onPageChange }: Pag
         ) : (
           <button
             key={page}
-            onClick={() => onPageChange(Number(page))}
+            onClick={() => handlePageChange(Number(page))}
             className={cn(
               'flex h-9 w-9 items-center justify-center',
               'hover:bg-shadow hover:text-primary-light',
@@ -68,7 +79,7 @@ export function PaginationButtons({ currentPage, totalPages, onPageChange }: Pag
       )}
 
       <button
-        onClick={() => onPageChange(currentPage + 1)}
+        onClick={() => handlePageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
         className={cn(
           'hover:bg-shadow hover:text-primary-light',
