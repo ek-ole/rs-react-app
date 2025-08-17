@@ -4,8 +4,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
+import { useTheme } from '@/app/(client)/_components/_providers/theme-context';
 import { cn } from '@/app/(server)/_lib/cn';
-import { useTheme } from '@/app/_providers/theme-context';
 
 export function Header() {
   const { theme, toggleTheme } = useTheme();

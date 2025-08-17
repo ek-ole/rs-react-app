@@ -1,7 +1,7 @@
 'use client';
 import { useRef } from 'react';
 
-import { generateCSV } from '@/app/(server)/actions/csv';
+import { generateCSV } from '@/app/(server)/_actions/csv';
 import type { Character } from '@/app/_types/character';
 
 export function useCSVDownload(characters: Character[]) {

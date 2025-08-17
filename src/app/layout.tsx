@@ -3,10 +3,8 @@ import { Josefin_Sans, Cookie } from 'next/font/google';
 import type { ReactNode } from 'react';
 
 import './globals.css';
-import { Header } from '@/app/_components/layout/header';
 
-import { SelectedPanelProvider } from './(client)/_components/selected-panel-provider';
-import Provider from './_providers/provider';
+import { LayoutWrapper } from './(client)/layout-wrapper';
 
 const josefin = Josefin_Sans({
   subsets: ['latin'],
@@ -34,11 +32,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={`${josefin.variable} ${cookie.variable}`}>
       <body className="font-sans">
-        <Provider>
-          <Header />
-          <main>{children}</main>
-          <SelectedPanelProvider />
-        </Provider>
+        <LayoutWrapper>{children}</LayoutWrapper>
       </body>
     </html>
   );
