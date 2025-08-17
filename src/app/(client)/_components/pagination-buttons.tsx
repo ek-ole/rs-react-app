@@ -7,7 +7,7 @@ type PaginationProps = {
   onPageChange: (page: number) => void;
 };
 
-export function Pagination({ currentPage, totalPages, onPageChange }: PaginationProps) {
+export function PaginationButtons({ currentPage, totalPages, onPageChange }: PaginationProps) {
   const getPagesToShow = () => {
     const pages = [];
     const maxVisible = 3;
@@ -29,7 +29,7 @@ export function Pagination({ currentPage, totalPages, onPageChange }: Pagination
   };
 
   return (
-    <div className={cn('mt-6 flex items-center justify-center gap-1', 'text-sm font-medium')}>
+    <>
       <button
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
@@ -80,6 +80,6 @@ export function Pagination({ currentPage, totalPages, onPageChange }: Pagination
       >
         &rarr;
       </button>
-    </div>
+    </>
   );
 }

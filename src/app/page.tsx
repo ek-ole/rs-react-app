@@ -4,12 +4,12 @@ import { Suspense } from 'react';
 import type { SWRResponse } from 'swr';
 import useSWR from 'swr';
 
-import { Pagination } from '@/app/_components/pagination';
 import { RefreshButton } from '@/app/_components/refresh-button';
 
 import { useCharacters } from './(client)/_hooks/use-characters';
 import useLocalStorage from './(client)/_hooks/use-local-storage';
 import Results from './(server)/_components/data/results';
+import { Pagination } from './(server)/_components/pagination';
 import Search from './(server)/_components/search';
 import { Loader } from './(server)/_components/ui/loader';
 import { NotSearchFound } from './(server)/_components/ui/not-found-search';
