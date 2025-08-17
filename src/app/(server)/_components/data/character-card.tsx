@@ -40,7 +40,7 @@ export function CharacterCard({ character, isActive, onClick, isChecked }: chara
             alt={name}
             width={240}
             height={240}
-            className="error-message mb-3 h-60 w-full rounded-lg object-cover lg:h-40"
+            className="error-message mb-3 w-full rounded-lg object-cover"
             loading="lazy"
           />
         )}

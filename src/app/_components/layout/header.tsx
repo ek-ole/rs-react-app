@@ -28,7 +28,7 @@ export function Header() {
           loading="lazy"
           className={cn(
             'shadow-shadow duration-300',
-            'my-2 flex h-12 w-12 flex-col rounded-xl shadow-[0px_0px_5px_2px]',
+            'my-2 flex flex-col rounded-xl shadow-[0px_0px_5px_2px]',
             'transition-transform duration-400 hover:scale-105',
           )}
         />

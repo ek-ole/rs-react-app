@@ -32,7 +32,7 @@ function About() {
                 width={20}
                 height={20}
                 loading="lazy"
-                className="ml-2 h-5 w-5 transition-transform duration-300 hover:scale-110"
+                className="ml-2 transition-transform duration-300 hover:scale-110"
               />
             </Link>
           </p>
