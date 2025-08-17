@@ -4,8 +4,7 @@ import { Suspense } from 'react';
 import type { SWRResponse } from 'swr';
 import useSWR from 'swr';
 
-import { RefreshButton } from '@/app/_components/refresh-button';
-
+import { RefreshButton } from './(client)/_components/interactive/refresh-button';
 import { useCharacters } from './(client)/_hooks/use-characters';
 import useLocalStorage from './(client)/_hooks/use-local-storage';
 import Results from './(server)/_components/data/results';
