@@ -6,10 +6,10 @@ import useSWR from 'swr';
 
 import { Pagination } from '@/app/_components/pagination';
 import { RefreshButton } from '@/app/_components/refresh-button';
-import Results from '@/app/_components/results';
 import Search from '@/app/_components/search';
 
 import { useCharacters } from './(client)/_hooks/use-characters';
+import Results from './(server)/_components/data/results';
 import { Loader } from './(server)/_components/ui/loader';
 import { NotSearchFound } from './(server)/_components/ui/not-found-search';
 import { cn } from './(server)/_lib/cn';
