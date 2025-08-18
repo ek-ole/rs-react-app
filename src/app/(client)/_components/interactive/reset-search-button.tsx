@@ -1,5 +1,6 @@
 'use client';
 import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 
 import { cn } from '@/app/(server)/_lib/cn';
 import { SEARCH_TERM_KEY } from '@/app/(server)/_lib/constants';
@@ -11,6 +12,7 @@ type Props = {
 };
 
 export function ResetSearchButton({ onClick }: Props) {
+  const t = useTranslations('Search');
   const router = useRouter();
   const [, setSearchTerm] = useLocalStorage(SEARCH_TERM_KEY, '');
 
@@ -30,7 +32,7 @@ export function ResetSearchButton({ onClick }: Props) {
         'duration-400 sm:border-4 sm:px-4 sm:py-2',
       )}
     >
-      Reset search
+      {t('reset')}
     </button>
   );
 }

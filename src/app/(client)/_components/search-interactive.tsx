@@ -1,5 +1,6 @@
 'use client';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import type { FormEvent } from 'react';
 import { useState } from 'react';
 
@@ -17,6 +18,7 @@ type Props = {
 };
 
 function Search({ initialSearchTerm }: Props) {
+  const t = useTranslations('Search');
   const [inputValue, setInputValue] = useState(initialSearchTerm);
   const [isSearching, setIsSearching] = useState(false);
 
@@ -46,7 +48,7 @@ function Search({ initialSearchTerm }: Props) {
         'shadow-inset',
       )}
     >
-      <SearchInput value={inputValue} onChange={setInputValue} placeholder="Search character..." />
+      <SearchInput value={inputValue} onChange={setInputValue} placeholder={t('placeholder')} />
       <button
         type="submit"
         disabled={isSearching}
@@ -57,7 +59,7 @@ function Search({ initialSearchTerm }: Props) {
           'transition-colors duration-400 sm:px-4 sm:py-2',
         )}
       >
-        {isSearching ? <Loader /> : 'Search'}
+        {isSearching ? <Loader /> : t('button')}
       </button>
     </form>
   );

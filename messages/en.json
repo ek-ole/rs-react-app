@@ -5,5 +5,37 @@
 
   "Home": {
     "title": "Rick & Morty"
+  },
+
+  "About": {
+    "title": "About the Project",
+    "description1": "This is a React application for exploring Rick and Morty characters.",
+    "description2": "Created by Ekaterina Dmitrenko as part",
+    "rsSchoolLink": "RS School React Course"
+  },
+
+  "Not found": {
+    "title": "Oops! Page not found...",
+    "back": "Back to Home"
+  },
+
+  "Search": {
+    "placeholder": "Search character...",
+    "button": "Search",
+    "reset": "Reset search"
+  },
+
+  "Error": {
+    "title": "Oh my gosh! Everything is broken!",
+    "button": "Fix it back!",
+    "imageAlt": "Error illustration"
+  },
+
+  "CharacterDetails": {
+    "error": "Error loading character",
+    "notFound": "Character not found",
+    "species": "Species",
+    "status": "Status",
+    "location": "Location"
   }
 }
