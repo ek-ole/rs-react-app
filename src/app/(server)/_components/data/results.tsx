@@ -15,7 +15,7 @@ function Results({ characters }: ResultsProps) {
         'shadow-glow',
       )}
     >
-      <h2>Characters</h2>
+      <h2 className="text-xl font-bold">Characters</h2>
       <ResultsInteractive characters={characters} />
     </div>
   );
