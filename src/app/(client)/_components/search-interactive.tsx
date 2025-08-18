@@ -1,25 +1,27 @@
 'use client';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import type { FormEvent } from 'react';
 import { useState } from 'react';
 
 import { Loader } from '@/app/(server)/_components/ui/loader';
-import { SearchInput } from '@/app/(server)/_components/ui/search-input';
 import { cn } from '@/app/(server)/_lib/cn';
 import { SEARCH_TERM_KEY } from '@/app/(server)/_lib/constants';
 
 import useLocalStorage from '../_hooks/use-local-storage';
+
+import { SearchInput } from './search-input';
 
 type Props = {
   initialSearchTerm: string;
   onSearch?: (term: string) => void;
 };
 
-function SearchInteractive({ initialSearchTerm }: Props) {
+function Search({ initialSearchTerm }: Props) {
   const [inputValue, setInputValue] = useState(initialSearchTerm);
   const [isSearching, setIsSearching] = useState(false);
 
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [, setSearchTerm] = useLocalStorage(SEARCH_TERM_KEY, '');
 
   const handleSubmit = (e: FormEvent) => {
@@ -27,7 +29,11 @@ function SearchInteractive({ initialSearchTerm }: Props) {
     setIsSearching(true);
     const trimmedValue = inputValue.trim();
     setSearchTerm(trimmedValue);
-    router.push(`/?search=${encodeURIComponent(trimmedValue)}&page=1`);
+    const params = new URLSearchParams(searchParams);
+    params.set('search', trimmedValue);
+    params.set('page', '1');
+    router.push(`/?${params.toString()}`);
+
     setIsSearching(false);
   };
 
@@ -40,11 +46,7 @@ function SearchInteractive({ initialSearchTerm }: Props) {
         'shadow-inset',
       )}
     >
-      <SearchInput
-        value={inputValue}
-        onChange={(value) => setInputValue(value)}
-        placeholder="Search character..."
-      />
+      <SearchInput value={inputValue} onChange={setInputValue} placeholder="Search character..." />
       <button
         type="submit"
         disabled={isSearching}
@@ -61,4 +63,4 @@ function SearchInteractive({ initialSearchTerm }: Props) {
   );
 }
 
-export default SearchInteractive;
+export default Search;
