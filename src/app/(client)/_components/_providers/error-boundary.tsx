@@ -27,6 +27,11 @@ export class ErrorBoundary extends Component<{ children: ReactNode }, ErrorBound
     console.error('Error Boundary caught:', error, errorInfo);
   }
 
+  handleReset = () => {
+    this.setState({ hasError: false, error: null });
+    window.location.href = '/';
+  };
+
   render() {
     if (this.state.hasError) {
       return (
@@ -55,7 +60,7 @@ export class ErrorBoundary extends Component<{ children: ReactNode }, ErrorBound
               loading="lazy"
             />
             <button
-              onClick={() => this.setState({ hasError: false })}
+              onClick={this.handleReset}
               className={cn(
                 'hover:bg-shadow hover:text-primary-light',
                 'hover:border-shadow m-8 cursor-pointer',
