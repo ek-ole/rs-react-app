@@ -14,11 +14,12 @@ import type { ApiResponse } from './_types/api';
 export default async function Home({
   searchParams,
 }: {
-  searchParams: { search?: string; page?: string; detailsId?: string };
+  searchParams: Promise<{ search?: string; page?: string; detailsId?: string }>;
 }) {
-  const currentSearch = searchParams.search || '';
-  const currentPage = Number(searchParams.page) || 1;
-  const detailsId = searchParams.detailsId;
+  const params = await searchParams;
+  const currentSearch = params.search || '';
+  const currentPage = Number(params.page) || 1;
+  const detailsId = params.detailsId;
 
   let data: ApiResponse | null = null;
   let error: string | null = null;
