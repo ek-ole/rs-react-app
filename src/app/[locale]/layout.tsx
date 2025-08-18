@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
 import { Josefin_Sans, Cookie } from 'next/font/google';
+import { NextIntlClientProvider } from 'next-intl';
 import type { ReactNode } from 'react';
 
-import './globals.css';
+import '../globals.css';
 
-import { LayoutWrapper } from './(client)/layout-wrapper';
+import { LayoutWrapper } from '../(client)/layout-wrapper';
 
 const josefin = Josefin_Sans({
   subsets: ['latin'],
@@ -28,11 +29,19 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default function RootLayout({
+  children,
+  params: { locale },
+}: {
+  children: ReactNode;
+  params: { locale: string };
+}) {
   return (
-    <html lang="en" className={`${josefin.variable} ${cookie.variable}`}>
+    <html lang={locale} className={`${josefin.variable} ${cookie.variable}`}>
       <body className="font-sans">
-        <LayoutWrapper>{children}</LayoutWrapper>
+        <NextIntlClientProvider locale={locale}>
+          <LayoutWrapper>{children}</LayoutWrapper>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

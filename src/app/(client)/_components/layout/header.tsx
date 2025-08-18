@@ -1,13 +1,15 @@
 'use client';
 import { Eclipse, SunMedium } from 'lucide-react';
 import Image from 'next/image';
-import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 
 import { useTheme } from '@/app/(client)/_components/_providers/theme-context';
 import { cn } from '@/app/(server)/_lib/cn';
+import { Link } from '@/i18n/navigation';
 
 export function Header() {
+  const t = useTranslations('Header');
   const { theme, toggleTheme } = useTheme();
   const pathname = usePathname();
 
@@ -42,7 +44,7 @@ export function Header() {
             pathname === '/about' ? 'underline' : '',
           )}
         >
-          About us
+          {t('about')}
         </Link>
         <button
           onClick={toggleTheme}
