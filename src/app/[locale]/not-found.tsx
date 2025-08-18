@@ -5,7 +5,7 @@ import { cn } from '@/app/(server)/_lib/cn';
 import { Link } from '@/i18n/navigation';
 
 function Page404() {
-  const t = useTranslations('Header');
+  const t = useTranslations('Not found');
   return (
     <div className="flex min-h-[80vh] items-center justify-center p-4">
       <div
@@ -26,7 +26,7 @@ function Page404() {
             'sm:border-4 sm:px-4 sm:py-2',
           )}
         >
-          Back to Home
+          {t('back')}
         </Link>
         <Image
           src="/404.webp"

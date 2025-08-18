@@ -43,7 +43,6 @@ export default async function Home({
 
   return (
     <div className="mx-auto my-20 flex w-full flex-col items-center px-8 py-4">
-      <h1 className="text-2xl font-bold">Rick & Morty</h1>
       <Suspense fallback={<Loader />}>
         <Search initialSearchTerm={currentSearch} />
       </Suspense>

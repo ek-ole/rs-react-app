@@ -20,9 +20,14 @@
   },
 
   "Search": {
+    "title": "Rick & Morty",
     "placeholder": "Search character...",
     "button": "Search",
     "reset": "Reset search"
+  },
+
+  "Results": {
+    "title": "Characters"
   },
 
   "Error": {

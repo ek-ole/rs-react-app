@@ -1,3 +1,5 @@
+import { useTranslations } from 'next-intl';
+
 import ResultsInteractive from '@/app/(client)/_components/data/results-interactive';
 import { cn } from '@/app/(server)/_lib/cn';
 import type { Character } from '@/app/_types/character';
@@ -7,6 +9,7 @@ type ResultsProps = {
 };
 
 function Results({ characters }: ResultsProps) {
+  const t = useTranslations('Results');
   return (
     <div
       className={cn(
@@ -15,7 +18,7 @@ function Results({ characters }: ResultsProps) {
         'shadow-glow',
       )}
     >
-      <h2 className="text-xl font-bold">Characters</h2>
+      <h2 className="text-xl font-bold">{t('title')}</h2>
       <ResultsInteractive characters={characters} />
     </div>
   );
