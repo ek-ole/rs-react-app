@@ -1,17 +1,22 @@
 'use client';
-import { Eclipse, SunMedium } from 'lucide-react';
+import { Eclipse, SunMedium, Languages } from 'lucide-react';
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 
 import { useTheme } from '@/app/(client)/_components/_providers/theme-context';
 import { cn } from '@/app/(server)/_lib/cn';
-import { Link } from '@/i18n/navigation';
+import { Link, usePathname, useRouter } from '@/i18n/navigation';
 
 export function Header() {
   const t = useTranslations('Header');
   const { theme, toggleTheme } = useTheme();
   const pathname = usePathname();
+  const router = useRouter();
+
+  const toggleLanguage = () => {
+    const newLocale = pathname.startsWith('/ru') ? 'en' : 'ru';
+    router.push(pathname, { locale: newLocale });
+  };
 
   return (
     <header
@@ -56,6 +61,17 @@ export function Header() {
           )}
         >
           {theme === 'light' ? <SunMedium /> : <Eclipse />}
+        </button>
+        <button
+          onClick={toggleLanguage}
+          aria-label="Toggle language"
+          className={cn(
+            'flex h-10 w-10 cursor-pointer items-center',
+            'justify-center p-2 transition-transform',
+            'duration-300 hover:scale-110',
+          )}
+        >
+          <Languages size={20} />
         </button>
       </div>
     </header>
