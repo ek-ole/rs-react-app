@@ -1,6 +1,7 @@
 'use client';
 import { Eclipse, SunMedium, Languages } from 'lucide-react';
 import Image from 'next/image';
+import { useParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 
 import { useTheme } from '@/app/(client)/_components/_providers/theme-context';
@@ -12,9 +13,12 @@ export function Header() {
   const { theme, toggleTheme } = useTheme();
   const pathname = usePathname();
   const router = useRouter();
+  const params = useParams();
+
+  const currentLocale = (params.locale as string) || 'en';
 
   const toggleLanguage = () => {
-    const newLocale = pathname.startsWith('/ru') ? 'en' : 'ru';
+    const newLocale = currentLocale === 'ru' ? 'en' : 'ru';
     router.push(pathname, { locale: newLocale });
   };
 
