@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl';
 import { cn } from '@/app/(server)/_lib/cn';
 import { Link } from '@/i18n/navigation';
 
-function Page404() {
+export default function NotFound() {
   const t = useTranslations('Not found');
   return (
     <div className="flex min-h-[80vh] items-center justify-center p-4">
@@ -40,5 +40,3 @@ function Page404() {
     </div>
   );
 }
-
-export default Page404;
