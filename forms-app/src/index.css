@@ -40,7 +40,7 @@
 
   body {
     font-family: var(--font-primary);
-    background: linear-gradient(315deg, rgb(66, 90, 105) 19%, rgb(255, 239, 158) 78%);
+    background: linear-gradient(45deg, rgb(74, 61, 86), rgb(184, 234, 155) 24%, rgb(242, 217, 208) 93%);
     color: var(--foreground);
      min-height: 100vh;
   }
