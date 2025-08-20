@@ -18,8 +18,8 @@
   --primary-light: oklch(94.278% 0.0523 92.944);
   --input: oklch(61.145% 0.1005 159.555 / 0.24);
   --error-message: rgb(255, 51, 0);
-  --gradient-cold: oklch(73.9% 0.15155 166.971);
-  --gradient-hot: oklch(72.445% 0.18897 50.929 / 0.904);
+  --gradient-cold: oklch(67.074% 0.1145 172.529 / 0.726);
+  --gradient-hot: oklch(73.628% 0.13417 60.857 / 0.904);
   --gradient-middle: oklch(71.159% 0.18121 22.817 / 0.644);
   --shadow: oklch(54.083% 0.16045 289.86 / 0.829);
 }
@@ -40,8 +40,9 @@
 
   body {
     font-family: var(--font-primary);
-    background-color: var(--background);
+    background: linear-gradient(315deg, rgb(66, 90, 105) 19%, rgb(255, 239, 158) 78%);
     color: var(--foreground);
+     min-height: 100vh;
   }
 
   @keyframes fadeIn {
@@ -56,9 +57,9 @@
   @layer utilities {
     .shadow-glow {
       box-shadow:
-        30px 30px 20px -20px var(--gradient-hot),
-        -30px -30px 20px -20px var(--gradient-cold),
-        30px -30px 20px -20px var(--gradient-middle),
+        30px 30px 30px -20px var(--gradient-hot),
+        -30px -30px 40px -20px var(--gradient-cold),
+        30px -30px 40px -20px var(--gradient-middle),
         -30px 50px 50px -10px var(--gradient-middle);
     }
 
