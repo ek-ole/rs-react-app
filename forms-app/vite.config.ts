@@ -8,6 +8,10 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
   plugins: [react(), tsconfigPaths(), tailwindcss()],
+  build: {
+    assetsDir: 'assets',
+    copyPublicDir: true, 
+  },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
