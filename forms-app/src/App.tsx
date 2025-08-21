@@ -11,37 +11,37 @@ function App() {
             'shadow-glow',
           )}
         >
-        <h1 className="text-3xl font-bold">Forms</h1>
-         <div
-        className={cn(
-          'border-p-4 flex w-full max-w-sm items-center gap-2',
-          'rounded-xl border-3 p-2 sm:my-6',
-          'shadow-inset',
-        )}
-      >
-        <input
-          type="search"
-          placeholder="Search character..."
-          className={cn(
-            'bg-input w-full flex-1',
-            'rounded-xl px-2 py-1',
-            'focus:outline-none sm:px-4',
-          )}
-        /></div>
-        <div className="mb-8 space-y-4 text-center">
-          <p>This is a React application for exploring React Forms.</p>
-          
+          <h1 className="text-3xl font-bold">Forms</h1>
+          <div
+            className={cn(
+              'border-p-4 flex w-full max-w-sm items-center gap-2',
+              'rounded-xl border-3 p-2 sm:my-6',
+              'shadow-inset',
+            )}
+          >
+            <input
+              type="search"
+              placeholder="Search character..."
+              className={cn(
+                'bg-input w-full flex-1',
+                'rounded-xl px-2 py-1',
+                'focus:outline-none sm:px-4',
+              )}
+            />
+          </div>
+          <div className="mb-8 space-y-4 text-center">
+            <p>This is a React application for exploring React Forms.</p>
+          </div>
         </div>
       </div>
-      </div>
-    <p className="flex absolute bottom-2 w-full flex-wrap items-center justify-center">
-            Created by Ekaterina Dmitrenko as part RS School React Course
-            <img
-              src="/rss-logo.svg"
-              alt="RS School"
-              className="ml-2 h-5 w-5 transition-transform duration-300 hover:scale-110"
-            />
-          </p>
+      <p className="absolute bottom-2 flex w-full flex-wrap items-center justify-center">
+        Created by Ekaterina Dmitrenko as part of the RS School React Course
+        <img
+          src="/rss-logo.svg"
+          alt="RS School"
+          className="ml-2 h-5 w-5 transition-transform duration-300 hover:scale-110"
+        />
+      </p>
     </>
   );
 }
