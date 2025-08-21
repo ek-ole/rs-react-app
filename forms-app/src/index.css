@@ -14,6 +14,7 @@
   --font-primary: 'Josefin Sans', sans-serif;
   --font-cookie: 'Cookie', cursive;
   --background: oklch(97.989% 0.11354 108.347);
+  --linear: linear-gradient(45deg, rgb(74, 61, 86), rgb(184, 234, 155) 24%, rgb(242, 217, 208) 93%);
   --foreground: oklch(29.978% 0.14974 300.291);
   --primary-light: oklch(94.278% 0.0523 92.944);
   --input: oklch(61.145% 0.1005 159.555 / 0.24);
@@ -21,7 +22,7 @@
   --gradient-cold: oklch(67.074% 0.1145 172.529 / 0.726);
   --gradient-hot: oklch(73.628% 0.13417 60.857 / 0.904);
   --gradient-middle: oklch(71.159% 0.18121 22.817 / 0.644);
-  --shadow: oklch(54.083% 0.16045 289.86 / 0.829);
+  --shadow: oklch(35.711% 0.09421 291.594 / 0.829);
 }
 
 .dark {
@@ -86,6 +87,10 @@
 
     .header {
       background-color: var(--background);
+    }
+
+    .bg-custom-linear {
+      background: var(--linear);
     }
   }
 }
