@@ -1,9 +1,11 @@
 import Image from 'next/image';
-import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 
 import { cn } from '@/app/(server)/_lib/cn';
+import { Link } from '@/i18n/navigation';
 
 function About() {
+  const t = useTranslations('About');
   return (
     <div className="mt-20 flex min-h-[60vh] items-center justify-center p-4 md:p-14">
       <div
@@ -13,19 +15,20 @@ function About() {
           'shadow-glow',
         )}
       >
-        <h2 className="mb-6 text-center text-2xl font-bold">About the Project</h2>
+        <h2 className="mb-6 text-center text-2xl font-bold">{t('title')}</h2>
 
         <div className="mb-8 space-y-4 text-center">
-          <p>This is a React application for exploring Rick and Morty characters.</p>
+          <p>{t('description1')}</p>
           <p className="flex flex-wrap items-center justify-center">
-            Created by Ekaterina Dmitrenko as part of&nbsp;
+            {t('description2')}
+            {'\u00A0'}
             <Link
               href="https://rs.school/courses/reactjs"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center font-bold hover:underline"
             >
-              RS School React Course
+              {t('rsSchoolLink')}
               <Image
                 src="/rss-logo.svg"
                 alt="RS School"

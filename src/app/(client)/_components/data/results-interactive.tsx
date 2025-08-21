@@ -19,7 +19,8 @@ function ResultsInteractive({ characters }: ResultsProps) {
 
   const handleCharacterClick = (characterId: number) => {
     const params = new URLSearchParams(searchParams);
-    router.push(`/characters/${characterId}?${params.toString()}`);
+    params.set('detailsId', String(characterId));
+    router.push(`/?${params.toString()}`);
   };
 
   return (

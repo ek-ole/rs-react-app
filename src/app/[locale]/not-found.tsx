@@ -1,9 +1,11 @@
 import Image from 'next/image';
-import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 
 import { cn } from '@/app/(server)/_lib/cn';
+import { Link } from '@/i18n/navigation';
 
-function Page404() {
+export default function NotFound() {
+  const t = useTranslations('Not found');
   return (
     <div className="flex min-h-[80vh] items-center justify-center p-4">
       <div
@@ -13,7 +15,7 @@ function Page404() {
           'shadow-glow',
         )}
       >
-        <h2 className="p-2 text-center text-xl font-semibold">Oops! Page not found...</h2>
+        <h2 className="p-2 text-center text-xl font-semibold">{t('title')}</h2>
         <Link
           href="/"
           className={cn(
@@ -24,7 +26,7 @@ function Page404() {
             'sm:border-4 sm:px-4 sm:py-2',
           )}
         >
-          Back to Home
+          {t('back')}
         </Link>
         <Image
           src="/404.webp"
@@ -38,5 +40,3 @@ function Page404() {
     </div>
   );
 }
-
-export default Page404;

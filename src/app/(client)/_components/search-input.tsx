@@ -1,3 +1,4 @@
+'use client';
 import { cn } from '@/app/(server)/_lib/cn';
 
 type SearchInputProps = {
