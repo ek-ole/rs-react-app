@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import { cn } from '@/utils/cn';
 
+import UncontrolledForm from './forms/uncontrolled-form';
 import Modal from './modal/modal';
 
 function HomePage() {
@@ -57,6 +58,10 @@ function HomePage() {
             title="Uncontrolled Form"
           >
             <p>Look, it&apos;s Uncontrolled Form</p>
+            <UncontrolledForm onSubmit={(data) => {
+              console.log('Uncontrolled form:', data);
+              setIsUncontrolledModalOpen(false)
+            }} />
           </Modal>
 
           <Modal
