@@ -1,6 +1,4 @@
-import type { FormEvent} from "react";
-import { useRef } from "react";
-
+import { useUncontrolledForm } from "@/hooks/useUncontrolledForm";
 import type { FormData } from '@/store/types'
 import { cn } from "@/utils/cn";
 
@@ -9,32 +7,10 @@ type Props = {
 }
 
 function UncontrolledForm({ onSubmit }: Props) {
-  const formRef = useRef<HTMLFormElement>(null);
-
-  const handleSubmit = (event: FormEvent) => {
-    event.preventDefault();
-
-    if (!formRef.current) return;
-
-    const formData = new FormData(formRef.current);
-
-    const data: FormData = {
-      name: formData.get('name') as string,
-      age: Number(formData.get('age')),
-      email: formData.get('email') as string,
-      password: formData.get('password') as string,
-      confirmPassword: formData.get('confirmPassword') as string,
-      gender: formData.get('name') as string,
-      acceptTerms: formData.get('acceptTerms') === 'on',
-      picture: '',
-      country: formData.get('country') as string,
-    };
-
-    onSubmit(data);
-  };
+const { formRef, handleSubmit } = useUncontrolledForm(onSubmit);
 
   return (
-    <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
+    <form ref={formRef} onSubmit={(e) => void handleSubmit(e)} className="space-y-4">
       <div className="flex items-center gap-4">
         <label htmlFor="name" className="font-medium">
           Name
