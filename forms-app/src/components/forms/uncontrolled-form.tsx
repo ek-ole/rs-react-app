@@ -190,9 +190,9 @@ const {
           )}
         >
           <option value="">Select country</option>
-          <option value="usa">USA</option>
-          <option value="russia">Russia</option>
-          <option value="germany">Germany</option>
+          <option value="USA">USA</option>
+          <option value="Russia">Russia</option>
+          <option value="Germany">Germany</option>
         </select>
       </div>
       {errors.country && <p className="text-error-message text-sm">{errors.country}</p>}

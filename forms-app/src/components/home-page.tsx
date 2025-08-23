@@ -1,17 +1,21 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
+import { addSubmission } from '@/store/form-slice';
 import { cn } from '@/utils/cn';
 
+import FormSubmissions from './form-submissions/form-submissions';
 import UncontrolledForm from './forms/uncontrolled-form';
 import Modal from './modal/modal';
 
 function HomePage() {
   const [isUncontrolledModalOpen, setIsUncontrolledModalOpen] = useState(false);
   const [isHookFormModalOpen, setIsHookFormModalOpen] = useState(false);
+  const dispatch = useDispatch();
 
   return (
     <>
-      <div className="mx-2 flex min-h-[60vh] items-center justify-center p-4 md:p-14">
+      <div className="mx-2 flex min-h-[80vh] gap-26 flex-col items-center justify-center p-4 md:p-14">
         <div
           className={cn(
             'mx-auto flex w-full max-w-3xl flex-col',
@@ -58,10 +62,18 @@ function HomePage() {
             title="Uncontrolled Form"
           >
             <p>Look, it&apos;s Uncontrolled Form</p>
-            <UncontrolledForm onSubmit={(data) => {
-              console.log('Uncontrolled form:', data);
-              setIsUncontrolledModalOpen(false)
-            }} />
+            <UncontrolledForm
+              onSubmit={(data) => {
+                console.log('Uncontrolled form:', data);
+                dispatch(
+                  addSubmission({
+                    formType: 'uncontrolled',
+                    data: data,
+                  }),
+                );
+                setIsUncontrolledModalOpen(false);
+              }}
+            />
           </Modal>
 
           <Modal
@@ -72,8 +84,9 @@ function HomePage() {
             <p>Look, it&apos;s React Hook Form</p>
           </Modal>
         </div>
+        <FormSubmissions />
       </div>
-
+      
       <p className="absolute bottom-2 flex w-full flex-wrap items-center justify-center">
         Created by Ekaterina Dmitrenko as part of the RS School React Course
         <img
