@@ -1,5 +1,3 @@
-import z from 'zod';
-
 import type { FormValues } from '@/store/types';
 
 import { formSchema } from './validation-schema';
@@ -46,13 +44,20 @@ export const validateForm = (data: FormValues) => {
   const result = formSchema.safeParse(zodData);
 
   if (!result.success) {
-    const tree = z.treeifyError(result.error);
+    const errors: Record<string, string> = {};
+
+    for (const error of result.error.issues) {
+      const fieldName = error.path[0];
+      if (fieldName && typeof fieldName === 'string') {
+        errors[fieldName] = error.message;
+      }
+    }
 
     return {
-      isValid: false, 
-      errors: tree,
+      isValid: false,
+      errors,
     };
   }
-  
-return { isValid: true, errors: {} }
+
+  return { isValid: true, errors: {} };
 };

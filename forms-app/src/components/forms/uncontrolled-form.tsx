@@ -7,10 +7,15 @@ type Props = {
 };
 
 function UncontrolledForm({ onSubmit }: Props) {
-const { formRef, handleSubmit } = useUncontrolledForm(onSubmit);
+const {
+  formRef,
+  handleSubmit,
+  errors,
+  handleFormChange,
+} = useUncontrolledForm(onSubmit);
 
   return (
-    <form ref={formRef} onSubmit={(e) => void handleSubmit(e)} className="space-y-4">
+    <form ref={formRef} onSubmit={handleSubmit} onChange={handleFormChange} className="space-y-4">
       <div className="flex items-center gap-4">
         <label htmlFor="name" className="font-medium">
           Name
@@ -25,9 +30,11 @@ const { formRef, handleSubmit } = useUncontrolledForm(onSubmit);
             'rounded-xl px-2 py-1',
             'focus:outline-none sm:px-4',
             'focus:ring-2',
+            errors.name && 'border-2 border-red-500',
           )}
         />
       </div>
+      {errors.name && <p className="text-sm text-red-500">{errors.name}</p>}
       <div className="flex items-center gap-4">
         <label htmlFor="age" className="font-medium">
           Age
@@ -42,9 +49,11 @@ const { formRef, handleSubmit } = useUncontrolledForm(onSubmit);
             'rounded-xl px-2 py-1',
             'focus:outline-none sm:px-4',
             'focus:ring-2',
+            errors.age && 'border-2 border-red-500',
           )}
         />
       </div>
+      {errors.age && <p className="text-error-message text-sm">{errors.age}</p>}
       <div className="flex items-center gap-4">
         <label htmlFor="email" className="font-medium">
           Email
@@ -59,9 +68,11 @@ const { formRef, handleSubmit } = useUncontrolledForm(onSubmit);
             'rounded-xl px-2 py-1',
             'focus:outline-none sm:px-4',
             'focus:ring-2',
+            errors.email && 'border-error-message border-2',
           )}
         />
       </div>
+      {errors.email && <p className="text-error-message text-sm">{errors.email}</p>}
       <div className="flex items-center gap-4">
         <label htmlFor="password" className="font-medium">
           Password
@@ -76,11 +87,13 @@ const { formRef, handleSubmit } = useUncontrolledForm(onSubmit);
             'rounded-xl px-2 py-1',
             'focus:outline-none sm:px-4',
             'focus:ring-2',
+            errors.password && 'border-error-message border-2',
           )}
         />
       </div>
+      {errors.password && <p className="text-error-message text-sm">{errors.password}</p>}
       <div className="flex items-center gap-4">
-        <label htmlFor="password" className="font-medium">
+        <label htmlFor="confirmPassword" className="font-medium">
           Confirm password
         </label>
         <input
@@ -93,9 +106,13 @@ const { formRef, handleSubmit } = useUncontrolledForm(onSubmit);
             'rounded-xl px-2 py-1',
             'focus:outline-none sm:px-4',
             'focus:ring-2',
+            errors.confirmPassword && 'border-error-message border-2',
           )}
         />
       </div>
+      {errors.confirmPassword && (
+        <p className="text-error-message text-sm">{errors.confirmPassword}</p>
+      )}
       <div className="flex items-center gap-4">
         <label htmlFor="gender" className="font-medium">
           Gender
@@ -108,6 +125,7 @@ const { formRef, handleSubmit } = useUncontrolledForm(onSubmit);
             'rounded-xl px-2 py-1',
             'focus:outline-none sm:px-4',
             'focus:ring-2',
+            errors.gender && 'border-error-message border-2',
           )}
         >
           <option value="">Select gender</option>
@@ -116,6 +134,7 @@ const { formRef, handleSubmit } = useUncontrolledForm(onSubmit);
           <option value="other">Other</option>
         </select>
       </div>
+      {errors.gender && <p className="text-error-message text-sm">{errors.gender}</p>}
       <div className="flex items-center gap-4">
         <label htmlFor="acceptTerms" className="font-medium">
           Accept Terms and Conditions agreement
@@ -130,9 +149,11 @@ const { formRef, handleSubmit } = useUncontrolledForm(onSubmit);
             'rounded-xl px-2 py-1',
             'focus:outline-none sm:px-4',
             'focus:ring-2',
+            errors.acceptTerms && 'border-error-message border-2',
           )}
         />
       </div>
+      {errors.acceptTerms && <p className="text-error-message text-sm">{errors.acceptTerms}</p>}
       <div className="flex items-center gap-4">
         <label htmlFor="picture" className="font-medium">
           Download picture
@@ -148,9 +169,11 @@ const { formRef, handleSubmit } = useUncontrolledForm(onSubmit);
             'rounded-xl px-2 py-1',
             'focus:outline-none sm:px-4',
             'focus:ring-2',
+            errors.picture && 'border-error-message border-2',
           )}
         />
       </div>
+      {errors.picture && <p className="text-error-message text-sm">{errors.picture}</p>}
       <div className="flex items-center gap-4">
         <label htmlFor="country" className="font-medium">
           Country
@@ -163,6 +186,7 @@ const { formRef, handleSubmit } = useUncontrolledForm(onSubmit);
             'rounded-xl px-2 py-1',
             'focus:outline-none sm:px-4',
             'focus:ring-2',
+            errors.country && 'border-error-message border-2',
           )}
         >
           <option value="">Select country</option>
@@ -171,6 +195,7 @@ const { formRef, handleSubmit } = useUncontrolledForm(onSubmit);
           <option value="germany">Germany</option>
         </select>
       </div>
+      {errors.country && <p className="text-error-message text-sm">{errors.country}</p>}
       <button
         type="submit"
         className={cn(
