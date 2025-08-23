@@ -1,6 +1,10 @@
+import type { ChangeEvent} from "react";
+import { useState } from "react";
+
 import { useUncontrolledForm } from "@/hooks/useUncontrolledForm";
 import type { FormValues } from '@/store/types';
 import { cn } from "@/utils/cn";
+import { getPasswordStrength } from "@/utils/form-helpers";
 
 type Props = {
   onSubmit: (data: FormValues) => void;
@@ -9,6 +13,13 @@ type Props = {
 function UncontrolledForm({ onSubmit }: Props) {
 const { formRef, handleSubmit, errors, handleFormChange, imagePreview, handleImageChange } =
   useUncontrolledForm(onSubmit);
+
+  const [passwordStrength, setPasswordStrngth] = useState({strength: 'weak', message: ''});
+
+  const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>) =>  {
+    const strength = getPasswordStrength(event.target.value);
+    setPasswordStrngth(strength);
+  }
 
   return (
     <form ref={formRef} onSubmit={handleSubmit} onChange={handleFormChange} className="space-y-4">
@@ -78,6 +89,7 @@ const { formRef, handleSubmit, errors, handleFormChange, imagePreview, handleIma
           id="password"
           name="password"
           placeholder="Enter password"
+          onChange={handlePasswordChange}
           className={cn(
             'bg-input w-full',
             'rounded-xl px-2 py-1',
@@ -87,6 +99,25 @@ const { formRef, handleSubmit, errors, handleFormChange, imagePreview, handleIma
           )}
         />
       </div>
+
+      {passwordStrength.message && (
+        <div className="flex items-baseline justify-center gap-2">
+          <div className={cn(
+            'w-3 h-3 rounded-full',
+            passwordStrength.strength === 'weak' && 'bg-red-500',
+            passwordStrength.strength === 'medium' && 'bg-yellow-500',
+            passwordStrength.strength === 'strong' && 'bg-green-500'
+          )} />
+          <span className={cn(
+            'text-sm',
+            passwordStrength.strength === 'weak' && 'text-red-500',
+            passwordStrength.strength === 'medium' && 'text-yellow-600',
+            passwordStrength.strength === 'strong' && 'text-green-600'
+          )}>
+            {passwordStrength.message}
+          </span>
+        </div>
+      )}
       {errors.password && <p className="text-error-message text-sm">{errors.password}</p>}
       <div className="flex items-center gap-4">
         <label htmlFor="confirmPassword" className="font-medium">
@@ -172,7 +203,11 @@ const { formRef, handleSubmit, errors, handleFormChange, imagePreview, handleIma
       </div>
       {imagePreview && (
         <div className="flex justify-center">
-          <img src={imagePreview} alt="Preview" className="w-32 h-32 object-cover rounded lg border" />
+          <img
+            src={imagePreview}
+            alt="Preview"
+            className="lg h-32 w-32 rounded border object-cover"
+          />
         </div>
       )}
       {errors.picture && <p className="text-error-message text-sm">{errors.picture}</p>}

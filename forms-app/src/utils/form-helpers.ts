@@ -61,3 +61,24 @@ export const validateForm = (data: FormValues) => {
 
   return { isValid: true, errors: {} };
 };
+
+export const getPasswordStrength = (password: string): {
+  strength: 'weak' | 'medium' | 'strong';
+  message: string;
+} => {
+  if (password.length === 0) {
+return { strength: 'weak', message: '' };
+  }
+
+  const hasUpperCase = /[A-Z]/.test(password);
+  const hasLowerCase = /[a-z]/.test(password);
+  const hasNumber = /[0-9]/.test(password);
+  const hasSpecialChar = /[^A-Za-z0-9]/.test(password);
+  const isLongEnough = password.length >= 8;
+
+  const score = [hasUpperCase, hasLowerCase, hasNumber, hasSpecialChar, isLongEnough].filter(Boolean).length;
+
+  if (score <= 2) return {strength: 'weak', message: 'Weak password' };
+   if (score <= 4) return { strength: 'medium', message: 'Medium password' };
+   return {strength: 'strong', message: 'Strong password' };
+}
