@@ -1,3 +1,9 @@
+import z from 'zod';
+
+import type { FormValues } from '@/store/types';
+
+import { formSchema } from './validation-schema';
+
 export const getStringValue = (formData: FormData, key: string): string => {
   const value = formData.get(key);
   return value instanceof File ? '' : String(value ?? '');
@@ -28,4 +34,25 @@ export const convertFileToBase64 = (file: File): Promise<string> => {
       }
     };
   });
+};
+
+export const validateForm = (data: FormValues) => {
+  const zodData = {
+    ...data,
+    age: Number(data.age),
+    acceptTerms: Boolean(data.acceptTerms),
+  };
+
+  const result = formSchema.safeParse(zodData);
+
+  if (!result.success) {
+    const tree = z.treeifyError(result.error);
+
+    return {
+      isValid: false, 
+      errors: tree,
+    };
+  }
+  
+return { isValid: true, errors: {} }
 };

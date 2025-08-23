@@ -1,10 +1,10 @@
 import type { FormEvent} from "react";
 import { useRef } from "react";
 
-import type { FormData } from '@/store/types'
-import { convertFileToBase64, getBooleanValue, getNumberValue, getStringValue } from "@/utils/form-helpers";
+import type { FormValues } from '@/store/types';
+import { convertFileToBase64, getBooleanValue, getNumberValue, getStringValue, validateForm } from "@/utils/form-helpers";
 
-export const useUncontrolledForm = (onSubmit: (data: FormData) => void) => {
+export const useUncontrolledForm = (onSubmit: (data: FormValues) => void) => {
   const formRef = useRef<HTMLFormElement>(null);
 
   const handleSubmit = async (event: FormEvent) => {
@@ -20,7 +20,7 @@ export const useUncontrolledForm = (onSubmit: (data: FormData) => void) => {
       pictureBase64 = await convertFileToBase64(pictureFile);
     }
 
-    const data: FormData = {
+    const data: FormValues = {
       name: getStringValue(formData, 'name'),
       age: getNumberValue(formData, 'age'),
       email: getStringValue(formData, 'email'),
@@ -31,6 +31,12 @@ export const useUncontrolledForm = (onSubmit: (data: FormData) => void) => {
       picture: pictureBase64,
       country: getStringValue(formData, 'country'),
     };
+
+    const validation = validateForm(data);
+    if (!validation.isValid) {
+      console.log('Validation error:', validation.errors);
+      return;
+    }
 
     onSubmit(data);
   };

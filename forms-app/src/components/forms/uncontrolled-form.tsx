@@ -1,10 +1,10 @@
 import { useUncontrolledForm } from "@/hooks/useUncontrolledForm";
-import type { FormData } from '@/store/types'
+import type { FormValues } from '@/store/types';
 import { cn } from "@/utils/cn";
 
 type Props = {
-  onSubmit: (data: FormData) => void;
-}
+  onSubmit: (data: FormValues) => void;
+};
 
 function UncontrolledForm({ onSubmit }: Props) {
 const { formRef, handleSubmit } = useUncontrolledForm(onSubmit);
@@ -26,7 +26,6 @@ const { formRef, handleSubmit } = useUncontrolledForm(onSubmit);
             'focus:outline-none sm:px-4',
             'focus:ring-2',
           )}
-          required
         />
       </div>
       <div className="flex items-center gap-4">
@@ -44,8 +43,6 @@ const { formRef, handleSubmit } = useUncontrolledForm(onSubmit);
             'focus:outline-none sm:px-4',
             'focus:ring-2',
           )}
-          required
-          min="0"
         />
       </div>
       <div className="flex items-center gap-4">
@@ -63,7 +60,6 @@ const { formRef, handleSubmit } = useUncontrolledForm(onSubmit);
             'focus:outline-none sm:px-4',
             'focus:ring-2',
           )}
-          required
         />
       </div>
       <div className="flex items-center gap-4">
@@ -81,7 +77,6 @@ const { formRef, handleSubmit } = useUncontrolledForm(onSubmit);
             'focus:outline-none sm:px-4',
             'focus:ring-2',
           )}
-          required
         />
       </div>
       <div className="flex items-center gap-4">
@@ -99,7 +94,6 @@ const { formRef, handleSubmit } = useUncontrolledForm(onSubmit);
             'focus:outline-none sm:px-4',
             'focus:ring-2',
           )}
-          required
         />
       </div>
       <div className="flex items-center gap-4">
@@ -115,7 +109,6 @@ const { formRef, handleSubmit } = useUncontrolledForm(onSubmit);
             'focus:outline-none sm:px-4',
             'focus:ring-2',
           )}
-          required
         >
           <option value="">Select gender</option>
           <option value="male">Male</option>
@@ -138,7 +131,6 @@ const { formRef, handleSubmit } = useUncontrolledForm(onSubmit);
             'focus:outline-none sm:px-4',
             'focus:ring-2',
           )}
-          required
         />
       </div>
       <div className="flex items-center gap-4">
@@ -157,7 +149,6 @@ const { formRef, handleSubmit } = useUncontrolledForm(onSubmit);
             'focus:outline-none sm:px-4',
             'focus:ring-2',
           )}
-          required
         />
       </div>
       <div className="flex items-center gap-4">
@@ -173,7 +164,6 @@ const { formRef, handleSubmit } = useUncontrolledForm(onSubmit);
             'focus:outline-none sm:px-4',
             'focus:ring-2',
           )}
-          required
         >
           <option value="">Select country</option>
           <option value="usa">USA</option>
