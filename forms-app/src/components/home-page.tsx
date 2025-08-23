@@ -14,7 +14,7 @@ function HomePage() {
   const dispatch = useDispatch();
 
   return (
-    <>
+    <div className='flex h-[100vh] flex-col justify-between'>
       <div className="mx-2 flex min-h-[80vh] gap-26 flex-col items-center justify-center p-4 md:p-14">
         <div
           className={cn(
@@ -87,15 +87,15 @@ function HomePage() {
         <FormSubmissions />
       </div>
       
-      <p className="absolute bottom-2 flex w-full flex-wrap items-center justify-center">
+      <div className="p-3 flex w-full flex-wrap items-center justify-center">
         Created by Ekaterina Dmitrenko as part of the RS School React Course
         <img
           src="/rss-logo.svg"
           alt="RS School"
           className="ml-2 h-5 w-5 transition-transform duration-300 hover:scale-110"
         />
-      </p>
-    </>
+      </div>
+    </div>
   );
 }
 

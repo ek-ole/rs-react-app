@@ -1,4 +1,4 @@
-import type { FormEvent } from 'react';
+import type { ChangeEvent, FormEvent } from 'react';
 import { useRef, useState } from 'react';
 
 import type { FormValues } from '@/store/types';
@@ -13,6 +13,7 @@ import {
 export const useUncontrolledForm = (onSubmit: (data: FormValues) => void) => {
   const formRef = useRef<HTMLFormElement>(null);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [imagePreview, setImagePreview] = useState<string>('');
 
   const handleSubmitAsync = async (event: FormEvent) => {
     event.preventDefault();
@@ -60,10 +61,23 @@ export const useUncontrolledForm = (onSubmit: (data: FormValues) => void) => {
      setErrors({});
    };
 
+   const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setImagePreview(e.target?.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+   }
+
   return {
     formRef,
     handleSubmit,
     errors,
     handleFormChange,
+    imagePreview,
+    handleImageChange,
   };
 };

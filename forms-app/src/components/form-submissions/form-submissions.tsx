@@ -29,7 +29,7 @@ function FormSubmissions() {
       )}
     >
       <h2 className="font bold mb-6 text-center text-2xl">Submitted Forms</h2>
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
         {submissions.map((submission: FormSubmission) => (
           <div
             key={submission.id}
@@ -46,7 +46,7 @@ function FormSubmissions() {
               </h3>
             </div>
 
-            <div className="space-y-2">
+            <div className="space-y-1">
               <p>
                 <span className="font-medium">Name: </span>
                 {submission.data.name}
@@ -71,10 +71,12 @@ function FormSubmissions() {
                 <span className="font-medium">Country: </span>
                 {submission.data.country}
               </p>
-              <p>
-                <span className="font-medium">Picture: </span>
-                
-              </p>
+              {submission.data.picture && (
+                <div className="flex justify-center mb-4">
+                  <img src={submission.data.picture} alt="Uploaded" className="w-full h-40 object-cover rounded-xl border" />
+              </div>
+              )}
+              
             </div>
 
             <div className="mt-4 border-t pt-4">

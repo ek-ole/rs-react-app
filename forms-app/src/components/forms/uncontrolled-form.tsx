@@ -7,12 +7,8 @@ type Props = {
 };
 
 function UncontrolledForm({ onSubmit }: Props) {
-const {
-  formRef,
-  handleSubmit,
-  errors,
-  handleFormChange,
-} = useUncontrolledForm(onSubmit);
+const { formRef, handleSubmit, errors, handleFormChange, imagePreview, handleImageChange } =
+  useUncontrolledForm(onSubmit);
 
   return (
     <form ref={formRef} onSubmit={handleSubmit} onChange={handleFormChange} className="space-y-4">
@@ -164,6 +160,7 @@ const {
           name="picture"
           accept=".png,.jpeg,.jpg"
           placeholder="Download picture .png,.jpg or .jpeg"
+          onChange={handleImageChange}
           className={cn(
             'bg-input w-full',
             'rounded-xl px-2 py-1',
@@ -173,6 +170,11 @@ const {
           )}
         />
       </div>
+      {imagePreview && (
+        <div className="flex justify-center">
+          <img src={imagePreview} alt="Preview" className="w-32 h-32 object-cover rounded lg border" />
+        </div>
+      )}
       {errors.picture && <p className="text-error-message text-sm">{errors.picture}</p>}
       <div className="flex items-center gap-4">
         <label htmlFor="country" className="font-medium">
