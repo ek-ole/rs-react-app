@@ -92,5 +92,19 @@
     .bg-custom-linear {
       background: var(--linear);
     }
+
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: var(--primary-light);
+      border-radius: 10px;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: var(--input);
+      border-radius: 10px;
+    }
   }
 }

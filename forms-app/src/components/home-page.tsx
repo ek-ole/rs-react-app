@@ -61,7 +61,6 @@ function HomePage() {
             onClose={() => setIsUncontrolledModalOpen(false)}
             title="Uncontrolled Form"
           >
-            <p>Look, it&apos;s Uncontrolled Form</p>
             <UncontrolledForm
               onSubmit={(data) => {
                 console.log('Uncontrolled form:', data);

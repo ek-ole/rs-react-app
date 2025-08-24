@@ -49,14 +49,14 @@ function Modal({ isOpen, onClose, children, title }: ModalProps) {
           'bg-custom-linear w-full rounded-lg',
           'inset-shadow-shadow flex flex-col inset-shadow-[0px_0px_20px_-2px]',
           'max-h-[90vh] max-w-md items-center',
-          'justify-center overflow-y-auto',
+          'custom-scrollbar justify-center overflow-y-auto',
         )}
         role="dialog"
         aria-modal="true"
         aria-labelledby="modal-title"
       >
         {title && (
-          <div className="relative flex w-full items-center justify-center p-6">
+          <div className="relative flex w-full items-center justify-center pt-6 pb-2">
             <h2 id="modal-title" className="text-xl font-semibold">
               {title}
             </h2>

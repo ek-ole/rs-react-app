@@ -25,7 +25,7 @@ const [country, setCountry] = useState('');
   }
 
   return (
-    <form ref={formRef} onSubmit={handleSubmit} onChange={handleFormChange} className="space-y-4">
+    <form ref={formRef} onSubmit={handleSubmit} onChange={handleFormChange} className="space-y-2">
       <div className="flex items-center gap-4">
         <label htmlFor="name" className="font-medium">
           Name
@@ -44,7 +44,7 @@ const [country, setCountry] = useState('');
           )}
         />
       </div>
-      {errors.name && <p className="text-sm text-red-500">{errors.name}</p>}
+      {errors.name && <p className="text-error-message text-end text-sm">{errors.name}</p>}
       <div className="flex items-center gap-4">
         <label htmlFor="age" className="font-medium">
           Age
@@ -63,7 +63,7 @@ const [country, setCountry] = useState('');
           )}
         />
       </div>
-      {errors.age && <p className="text-error-message text-sm">{errors.age}</p>}
+      {errors.age && <p className="text-error-message text-end text-sm">{errors.age}</p>}
       <div className="flex items-center gap-4">
         <label htmlFor="email" className="font-medium">
           Email
@@ -82,7 +82,7 @@ const [country, setCountry] = useState('');
           )}
         />
       </div>
-      {errors.email && <p className="text-error-message text-sm">{errors.email}</p>}
+      {errors.email && <p className="text-error-message text-end text-sm">{errors.email}</p>}
       <div className="flex items-center gap-4">
         <label htmlFor="password" className="font-medium">
           Password
@@ -125,7 +125,7 @@ const [country, setCountry] = useState('');
           </span>
         </div>
       )}
-      {errors.password && <p className="text-error-message text-sm">{errors.password}</p>}
+      {errors.password && <p className="text-error-message text-end text-sm">{errors.password}</p>}
       <div className="flex items-center gap-4">
         <label htmlFor="confirmPassword" className="font-medium">
           Confirm password
@@ -145,7 +145,7 @@ const [country, setCountry] = useState('');
         />
       </div>
       {errors.confirmPassword && (
-        <p className="text-error-message text-sm">{errors.confirmPassword}</p>
+        <p className="text-error-message text-end text-sm">{errors.confirmPassword}</p>
       )}
       <div className="flex items-center gap-4">
         <label htmlFor="gender" className="font-medium">
@@ -156,7 +156,7 @@ const [country, setCountry] = useState('');
           name="gender"
           className={cn(
             'bg-input w-full',
-            'rounded-xl px-2 py-1',
+            'rounded-xl px-2 py-2',
             'focus:outline-none sm:px-4',
             'focus:ring-2',
             errors.gender && 'border-error-message border-2',
@@ -168,7 +168,7 @@ const [country, setCountry] = useState('');
           <option value="other">Other</option>
         </select>
       </div>
-      {errors.gender && <p className="text-error-message text-sm">{errors.gender}</p>}
+      {errors.gender && <p className="text-error-message text-end text-sm">{errors.gender}</p>}
       <div className="flex items-center gap-4">
         <label htmlFor="acceptTerms" className="font-medium">
           Accept Terms and Conditions agreement
@@ -187,7 +187,9 @@ const [country, setCountry] = useState('');
           )}
         />
       </div>
-      {errors.acceptTerms && <p className="text-error-message text-sm">{errors.acceptTerms}</p>}
+      {errors.acceptTerms && (
+        <p className="text-error-message text-end text-sm">{errors.acceptTerms}</p>
+      )}
       <div className="flex items-center gap-4">
         <label htmlFor="picture" className="font-medium">
           Download picture
@@ -217,7 +219,7 @@ const [country, setCountry] = useState('');
           />
         </div>
       )}
-      {errors.picture && <p className="text-error-message text-sm">{errors.picture}</p>}
+      {errors.picture && <p className="text-error-message text-end text-sm">{errors.picture}</p>}
       <div className="flex items-center gap-4">
         <label htmlFor="country" className="font-medium">
           Country
@@ -225,7 +227,7 @@ const [country, setCountry] = useState('');
         <CountryAutocomplete value={country} onChange={setCountry} error={errors.country} />
         <input type="hidden" name="country" value={country} />
       </div>
-      {errors.country && <p className="text-error-message text-sm">{errors.country}</p>}
+      {errors.country && <p className="text-error-message text-end text-sm">{errors.country}</p>}
       <button
         type="submit"
         className={cn(
