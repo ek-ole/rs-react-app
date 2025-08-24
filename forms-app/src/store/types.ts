@@ -24,4 +24,5 @@ export type AddSubmissionPayload = {
 
 export type FormState = {
   submissions: FormSubmission[];
+  lastAddedId: number | null;
 };

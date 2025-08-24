@@ -5,6 +5,7 @@ import type { AddSubmissionPayload, FormState, FormSubmission } from './types';
 
 const initialState: FormState = {
   submissions: [],
+  lastAddedId: null,
 };
 
 export const formSlice = createSlice({
@@ -19,6 +20,7 @@ export const formSlice = createSlice({
         submittedAt: new Date().toISOString(),
       };
       state.submissions.push(newSubmission);
+      state.lastAddedId = newSubmission.id;
     },
   },
 });
