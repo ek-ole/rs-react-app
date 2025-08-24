@@ -14,6 +14,7 @@ export const useUncontrolledForm = (onSubmit: (data: FormValues) => void) => {
   const formRef = useRef<HTMLFormElement>(null);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [imagePreview, setImagePreview] = useState<string>('');
+  const [password, setPassword] = useState('');
 
   const handleSubmitAsync = async (event: FormEvent) => {
     event.preventDefault();
@@ -72,6 +73,11 @@ export const useUncontrolledForm = (onSubmit: (data: FormValues) => void) => {
     }
    }
 
+     const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
+      setPassword(event.target.value);
+     };
+
+
   return {
     formRef,
     handleSubmit,
@@ -79,5 +85,7 @@ export const useUncontrolledForm = (onSubmit: (data: FormValues) => void) => {
     handleFormChange,
     imagePreview,
     handleImageChange,
+    password,
+    handlePasswordChange,
   };
 };

@@ -1,28 +1,32 @@
-import type { ChangeEvent} from "react";
-import { useState } from "react";
+import { useState } from 'react';
 
-import { useUncontrolledForm } from "@/hooks/use-uncontrolled-form";
+import { useUncontrolledForm } from '@/hooks/use-uncontrolled-form';
 import type { FormValues } from '@/store/types';
-import { cn } from "@/utils/cn";
-import { getPasswordStrength } from "@/utils/form-helpers";
+import { cn } from '@/utils/cn';
 
-import CountryAutocomplete from "../country-autocomplete/country-autocomplete";
+import CountryAutocomplete from '../country-autocomplete/country-autocomplete';
+import { FormError } from '../ui/form-error';
+import { PasswordStrengthIndicator } from '../ui/password-strength-indicator';
+
+import { ImageUpload } from './image-upload';
 
 type Props = {
   onSubmit: (data: FormValues) => void;
 };
 
 function UncontrolledForm({ onSubmit }: Props) {
-const { formRef, handleSubmit, errors, handleFormChange, imagePreview, handleImageChange } =
-  useUncontrolledForm(onSubmit);
+  const {
+    formRef,
+    handleSubmit,
+    errors,
+    handleFormChange,
+    imagePreview,
+    handleImageChange,
+    password,
+    handlePasswordChange,
+  } = useUncontrolledForm(onSubmit);
+  const [country, setCountry] = useState('');
 
-  const [passwordStrength, setPasswordStrngth] = useState({strength: 'weak', message: ''});
-const [country, setCountry] = useState('');
-
-  const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>) =>  {
-    const strength = getPasswordStrength(event.target.value);
-    setPasswordStrngth(strength);
-  }
 
   return (
     <form ref={formRef} onSubmit={handleSubmit} onChange={handleFormChange} className="space-y-2">
@@ -40,11 +44,12 @@ const [country, setCountry] = useState('');
             'rounded-xl px-2 py-1',
             'focus:outline-none sm:px-4',
             'focus:ring-2',
-            errors.name && 'border-2 border-red-500',
+            errors.name && 'border-error-message border-2',
           )}
         />
       </div>
-      {errors.name && <p className="text-error-message text-end text-sm">{errors.name}</p>}
+      <FormError error={errors.name} />
+
       <div className="flex items-center gap-4">
         <label htmlFor="age" className="font-medium">
           Age
@@ -59,11 +64,12 @@ const [country, setCountry] = useState('');
             'rounded-xl px-2 py-1',
             'focus:outline-none sm:px-4',
             'focus:ring-2',
-            errors.age && 'border-2 border-red-500',
+            errors.age && 'border-error-message border-2',
           )}
         />
       </div>
-      {errors.age && <p className="text-error-message text-end text-sm">{errors.age}</p>}
+      <FormError error={errors.age} />
+
       <div className="flex items-center gap-4">
         <label htmlFor="email" className="font-medium">
           Email
@@ -82,7 +88,8 @@ const [country, setCountry] = useState('');
           )}
         />
       </div>
-      {errors.email && <p className="text-error-message text-end text-sm">{errors.email}</p>}
+      <FormError error={errors.email} />
+
       <div className="flex items-center gap-4">
         <label htmlFor="password" className="font-medium">
           Password
@@ -102,30 +109,9 @@ const [country, setCountry] = useState('');
           )}
         />
       </div>
+      <PasswordStrengthIndicator password={password} />
+      <FormError error={errors.password} />
 
-      {passwordStrength.message && (
-        <div className="flex items-baseline justify-center gap-2">
-          <div
-            className={cn(
-              'h-3 w-3 rounded-full',
-              passwordStrength.strength === 'weak' && 'bg-red-500',
-              passwordStrength.strength === 'medium' && 'bg-yellow-500',
-              passwordStrength.strength === 'strong' && 'bg-green-500',
-            )}
-          />
-          <span
-            className={cn(
-              'text-sm',
-              passwordStrength.strength === 'weak' && 'text-red-500',
-              passwordStrength.strength === 'medium' && 'text-yellow-600',
-              passwordStrength.strength === 'strong' && 'text-green-600',
-            )}
-          >
-            {passwordStrength.message}
-          </span>
-        </div>
-      )}
-      {errors.password && <p className="text-error-message text-end text-sm">{errors.password}</p>}
       <div className="flex items-center gap-4">
         <label htmlFor="confirmPassword" className="font-medium">
           Confirm password
@@ -144,9 +130,8 @@ const [country, setCountry] = useState('');
           )}
         />
       </div>
-      {errors.confirmPassword && (
-        <p className="text-error-message text-end text-sm">{errors.confirmPassword}</p>
-      )}
+      <FormError error={errors.confirmPassword} />
+
       <div className="flex items-center gap-4">
         <label htmlFor="gender" className="font-medium">
           Gender
@@ -168,7 +153,8 @@ const [country, setCountry] = useState('');
           <option value="other">Other</option>
         </select>
       </div>
-      {errors.gender && <p className="text-error-message text-end text-sm">{errors.gender}</p>}
+      <FormError error={errors.gender} />
+
       <div className="flex items-center gap-4">
         <label htmlFor="acceptTerms" className="font-medium">
           Accept Terms and Conditions agreement
@@ -187,39 +173,15 @@ const [country, setCountry] = useState('');
           )}
         />
       </div>
-      {errors.acceptTerms && (
-        <p className="text-error-message text-end text-sm">{errors.acceptTerms}</p>
-      )}
-      <div className="flex items-center gap-4">
-        <label htmlFor="picture" className="font-medium">
-          Download picture
-        </label>
-        <input
-          type="file"
-          id="picture"
-          name="picture"
-          accept=".png,.jpeg,.jpg"
-          placeholder="Download picture .png,.jpg or .jpeg"
-          onChange={handleImageChange}
-          className={cn(
-            'bg-input w-full',
-            'rounded-xl px-2 py-1',
-            'focus:outline-none sm:px-4',
-            'focus:ring-2',
-            errors.picture && 'border-error-message border-2',
-          )}
-        />
-      </div>
-      {imagePreview && (
-        <div className="flex justify-center">
-          <img
-            src={imagePreview}
-            alt="Preview"
-            className="lg h-32 w-32 rounded border object-cover"
-          />
-        </div>
-      )}
-      {errors.picture && <p className="text-error-message text-end text-sm">{errors.picture}</p>}
+      <FormError error={errors.acceptTerms} />
+
+      <ImageUpload
+        onImageChange={handleImageChange}
+        imagePreview={imagePreview}
+        error={errors.picture}
+      />
+      <FormError error={errors.picture} />
+
       <div className="flex items-center gap-4">
         <label htmlFor="country" className="font-medium">
           Country
@@ -227,7 +189,7 @@ const [country, setCountry] = useState('');
         <CountryAutocomplete value={country} onChange={setCountry} error={errors.country} />
         <input type="hidden" name="country" value={country} />
       </div>
-      {errors.country && <p className="text-error-message text-end text-sm">{errors.country}</p>}
+      <FormError error={errors.country} />
       <button
         type="submit"
         className={cn(
