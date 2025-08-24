@@ -1,10 +1,12 @@
 import type { ChangeEvent} from "react";
 import { useState } from "react";
 
-import { useUncontrolledForm } from "@/hooks/useUncontrolledForm";
+import { useUncontrolledForm } from "@/hooks/use-uncontrolled-form";
 import type { FormValues } from '@/store/types';
 import { cn } from "@/utils/cn";
 import { getPasswordStrength } from "@/utils/form-helpers";
+
+import CountryAutocomplete from "../country-autocomplete/country-autocomplete";
 
 type Props = {
   onSubmit: (data: FormValues) => void;
@@ -15,6 +17,7 @@ const { formRef, handleSubmit, errors, handleFormChange, imagePreview, handleIma
   useUncontrolledForm(onSubmit);
 
   const [passwordStrength, setPasswordStrngth] = useState({strength: 'weak', message: ''});
+const [country, setCountry] = useState('');
 
   const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>) =>  {
     const strength = getPasswordStrength(event.target.value);
@@ -102,18 +105,22 @@ const { formRef, handleSubmit, errors, handleFormChange, imagePreview, handleIma
 
       {passwordStrength.message && (
         <div className="flex items-baseline justify-center gap-2">
-          <div className={cn(
-            'w-3 h-3 rounded-full',
-            passwordStrength.strength === 'weak' && 'bg-red-500',
-            passwordStrength.strength === 'medium' && 'bg-yellow-500',
-            passwordStrength.strength === 'strong' && 'bg-green-500'
-          )} />
-          <span className={cn(
-            'text-sm',
-            passwordStrength.strength === 'weak' && 'text-red-500',
-            passwordStrength.strength === 'medium' && 'text-yellow-600',
-            passwordStrength.strength === 'strong' && 'text-green-600'
-          )}>
+          <div
+            className={cn(
+              'h-3 w-3 rounded-full',
+              passwordStrength.strength === 'weak' && 'bg-red-500',
+              passwordStrength.strength === 'medium' && 'bg-yellow-500',
+              passwordStrength.strength === 'strong' && 'bg-green-500',
+            )}
+          />
+          <span
+            className={cn(
+              'text-sm',
+              passwordStrength.strength === 'weak' && 'text-red-500',
+              passwordStrength.strength === 'medium' && 'text-yellow-600',
+              passwordStrength.strength === 'strong' && 'text-green-600',
+            )}
+          >
             {passwordStrength.message}
           </span>
         </div>
@@ -215,22 +222,8 @@ const { formRef, handleSubmit, errors, handleFormChange, imagePreview, handleIma
         <label htmlFor="country" className="font-medium">
           Country
         </label>
-        <select
-          id="country"
-          name="country"
-          className={cn(
-            'bg-input w-full',
-            'rounded-xl px-2 py-1',
-            'focus:outline-none sm:px-4',
-            'focus:ring-2',
-            errors.country && 'border-error-message border-2',
-          )}
-        >
-          <option value="">Select country</option>
-          <option value="USA">USA</option>
-          <option value="Russia">Russia</option>
-          <option value="Germany">Germany</option>
-        </select>
+        <CountryAutocomplete value={country} onChange={setCountry} error={errors.country} />
+        <input type="hidden" name="country" value={country} />
       </div>
       {errors.country && <p className="text-error-message text-sm">{errors.country}</p>}
       <button
