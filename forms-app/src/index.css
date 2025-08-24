@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Cookie&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+@import 'tailwindcss';
+
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary-light: var(--primary-light);
+  --color-error-message: var(--error-message);
+  --color-shadow: var(--shadow);
+  --color-input: var(--input);
+}
+
+:root {
+  --font-primary: 'Josefin Sans', sans-serif;
+  --font-cookie: 'Cookie', cursive;
+  --background: oklch(97.989% 0.11354 108.347);
+  --linear: linear-gradient(45deg, rgb(74, 61, 86), rgb(184, 234, 155) 24%, rgb(242, 217, 208) 93%);
+  --foreground: oklch(29.978% 0.14974 300.291);
+  --primary-light: oklch(94.278% 0.0523 92.944);
+  --input: oklch(61.145% 0.1005 159.555 / 0.24);
+  --error-message: rgb(255, 51, 0);
+  --gradient-cold: oklch(67.074% 0.1145 172.529 / 0.726);
+  --gradient-hot: oklch(73.628% 0.13417 60.857 / 0.904);
+  --gradient-middle: oklch(71.159% 0.18121 22.817 / 0.644);
+  --shadow: oklch(35.711% 0.09421 291.594 / 0.829);
+}
+
+.dark {
+  --background: oklch(21.815% 0.04261 292.974);
+  --foreground: oklch(91.32% 0.04845 298.446);
+  --primary-light: oklch(43.23% 0.05265 175.619 / 0.8);
+  --gradient-cold: oklch(73.9% 0.15155 166.971 / 0.8);
+  --gradient-hot: oklch(67.631% 0.21154 24.793 / 0.8);
+  --gradient-middle: oklch(69.279% 0.19574 302.059 / 0.7);
+}
+
+@layer base {
+  html {
+    overflow-y: scroll;
+  }
+
+  body {
+    font-family: var(--font-primary);
+    background: linear-gradient(
+      45deg,
+      rgb(74, 61, 86),
+      rgb(184, 234, 155) 24%,
+      rgb(242, 217, 208) 93%
+    );
+    color: var(--foreground);
+    min-height: 100vh;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @layer utilities {
+    .shadow-glow {
+      box-shadow:
+        30px 30px 30px -20px var(--gradient-hot),
+        -30px -30px 40px -20px var(--gradient-cold),
+        30px -30px 40px -20px var(--gradient-middle),
+        -30px 50px 50px -10px var(--gradient-middle);
+    }
+
+    .shadow-reverse {
+      box-shadow:
+        30px 30px 20px -20px var(--gradient-cold),
+        -20px -25px 20px -20px var(--gradient-hot),
+        30px -30px 20px -20px var(--gradient-middle),
+        -20px 30px 20px -20px var(--gradient-middle);
+    }
+
+    .shadow-inset {
+      box-shadow:
+        inset 30px 30px 20px -30px var(--gradient-hot),
+        inset -30px -30px 15px -30px var(--gradient-cold),
+        inset 30px -30px 10px -50px var(--gradient-middle),
+        inset -30px 50px 10px -50px var(--gradient-middle);
+    }
+
+    .header {
+      background-color: var(--background);
+    }
+
+    .bg-custom-linear {
+      background: var(--linear);
+    }
+
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: var(--primary-light);
+      border-radius: 10px;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: var(--input);
+      border-radius: 10px;
+    }
+  }
+}
