@@ -5,7 +5,7 @@ type FormErrorProps = {
 };
 
 export const FormError = ({ error }: FormErrorProps) => {
-  if (!error) return null;
+  if (!error) return <div className='p-2.5'></div>;
 
   return <p className={cn('text-error-message text-end text-sm')}>{error}</p>;
 };

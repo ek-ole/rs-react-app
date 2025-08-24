@@ -2,9 +2,11 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { addSubmission } from '@/store/form-slice';
+import type { FormValues } from '@/store/types';
 import { cn } from '@/utils/cn';
 
 import FormSubmissions from './form-submissions/form-submissions';
+import HookForm from './forms/react-hook-form';
 import UncontrolledForm from './forms/uncontrolled-form';
 import Modal from './modal/modal';
 
@@ -14,8 +16,8 @@ function HomePage() {
   const dispatch = useDispatch();
 
   return (
-    <div className='flex h-[100vh] flex-col justify-between'>
-      <div className="mx-2 flex min-h-[80vh] gap-26 flex-col items-center justify-center p-4 md:p-14">
+    <div className="flex flex-col justify-between">
+      <div className="mx-2 flex min-h-[80vh] flex-col items-center justify-center gap-26 p-4 md:p-14">
         <div
           className={cn(
             'mx-auto flex w-full max-w-3xl flex-col',
@@ -80,13 +82,24 @@ function HomePage() {
             onClose={() => setIsHookFormModalOpen(false)}
             title="React Hook Form"
           >
-            <p>Look, it&apos;s React Hook Form</p>
+            <HookForm
+              onSubmit={(data: FormValues) => {
+                console.log('Hook form data:', data);
+                dispatch(
+                  addSubmission({
+                    formType: 'react-hook-form',
+                    data: data,
+                  }),
+                );
+                setIsHookFormModalOpen(false);
+              }}
+            />
           </Modal>
         </div>
         <FormSubmissions />
       </div>
-      
-      <div className="p-3 flex w-full flex-wrap items-center justify-center">
+
+      <div className="flex w-full flex-wrap items-center justify-center p-3">
         Created by Ekaterina Dmitrenko as part of the RS School React Course
         <img
           src="/rss-logo.svg"

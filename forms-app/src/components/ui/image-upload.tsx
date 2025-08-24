@@ -29,12 +29,12 @@ export const ImageUpload = ({ onImageChange, imagePreview, error }: ImageUploadP
             error && 'border-error-message border-2',
           )}
         />
-      </div>
+      
       {imagePreview && (
-        <div className="flex justify-center">
-          <img src={imagePreview} alt="Preview" className="h-32 w-32 rounded border object-cover" />
-        </div>
-      )}
+        
+          <img src={imagePreview} alt="Preview" className="h-22 w-22 rounded-2xl border object-cover" />
+        
+      )}</div>
     </>
   );
 };

@@ -5,15 +5,18 @@ export const formSchema = z
     name: z
       .string()
       .min(1, 'Name is required')
-      .regex(/^[A-Z]/, 'Name must start with capital letter'),
+      .refine((val) => /^\p{Lu}/u.test(val), 'Name must start with capital letter'),
 
     age: z
       .number()
-      .min(1, 'Age is required')
-      .min(0, 'Age cannot be negative')
-      .max(123, 'Age must be reasonable'),
+      .refine((val) => !isNaN(val), 'Age is required')
+      .refine((val) => val >= 0, 'Age cannot be negative')
+      .refine((val) => val <= 123, 'Age must be reasonable'),
 
-    email: z.string().min(1, 'Email is required').refine(val => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val), 'Invalid email address'),
+    email: z
+      .string()
+      .min(1, 'Email is required')
+      .refine((val) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val), 'Invalid email address'),
 
     password: z
       .string()
@@ -23,7 +26,7 @@ export const formSchema = z
       .regex(/[a-z]/, 'Password must contain at least 1 lowercase letter')
       .regex(/[^a-zA-Z0-9]/, 'Password must contain at least 1 special character'),
 
-    confirmPassword: z.string().min(1, 'Field is required').optional(),
+    confirmPassword: z.string().min(1, 'Field is required'),
 
     gender: z.string().min(1, 'Please select gender'),
 

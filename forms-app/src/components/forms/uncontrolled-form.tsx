@@ -6,9 +6,9 @@ import { cn } from '@/utils/cn';
 
 import CountryAutocomplete from '../country-autocomplete/country-autocomplete';
 import { FormError } from '../ui/form-error';
+import { ImageUpload } from '../ui/image-upload';
 import { PasswordStrengthIndicator } from '../ui/password-strength-indicator';
 
-import { ImageUpload } from './image-upload';
 
 type Props = {
   onSubmit: (data: FormValues) => void;
@@ -194,7 +194,7 @@ function UncontrolledForm({ onSubmit }: Props) {
         type="submit"
         className={cn(
           'hover:bg-shadow hover:text-primary-light',
-          'hover:border-shadow m-8 cursor-pointer',
+          'hover:border-shadow my-8 mx-18 cursor-pointer',
           'rounded-2xl border-3 px-2 font-medium',
           'shadow-shadow shadow-[0px_0px_5px_2px]',
           'px-14 pt-1 transition-colors duration-400 sm:border-4',

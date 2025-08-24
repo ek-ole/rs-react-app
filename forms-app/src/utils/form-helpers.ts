@@ -9,7 +9,10 @@ export const getStringValue = (formData: FormData, key: string): string => {
 
 export const getNumberValue = (formData: FormData, key: string): number => {
   const value = formData.get(key);
-  if (value instanceof File) return 0;
+   if (value instanceof File) return NaN;
+
+  const stringValue = String(value ?? '');
+  if (stringValue.trim() === '') return NaN; 
 
   const numericValue = Number(value ?? 0);
   return isNaN(numericValue) ? 0 : numericValue;
@@ -35,31 +38,36 @@ export const convertFileToBase64 = (file: File): Promise<string> => {
 };
 
 export const validateForm = (data: FormValues) => {
-  const zodData = {
-    ...data,
-    age: Number(data.age),
-    acceptTerms: Boolean(data.acceptTerms),
-  };
+  const errors: Record<string, string> = {};
 
-  const result = formSchema.safeParse(zodData);
+  if (isNaN(data.age)) {
+    errors.age = 'Age is required';
+  }
+  
+    const zodData = {
+      ...data,
+      age: Number(data.age),
+      acceptTerms: Boolean(data.acceptTerms),
+    };
 
-  if (!result.success) {
-    const errors: Record<string, string> = {};
+    const result = formSchema.safeParse(zodData);
 
-    for (const error of result.error.issues) {
-      const fieldName = error.path[0];
-      if (fieldName && typeof fieldName === 'string') {
-        errors[fieldName] = error.message;
+    if (!result.success) {
+
+      for (const error of result.error.issues) {
+        const fieldName = error.path[0];
+        if (fieldName && typeof fieldName === 'string') {
+           if (!errors[fieldName]) {
+          errors[fieldName] = error.message;
+        
+        }
       }
     }
-
-    return {
-      isValid: false,
-      errors,
-    };
   }
-
-  return { isValid: true, errors: {} };
+  return {
+    isValid: Object.keys(errors).length === 0,
+    errors,
+  };
 };
 
 export const getPasswordStrength = (password: string): {

@@ -46,7 +46,7 @@ function Modal({ isOpen, onClose, children, title }: ModalProps) {
       <div
         ref={modalRef}
         className={cn(
-          'bg-custom-linear w-full rounded-lg',
+          'bg-custom-linear w-full rounded-lg pt-8',
           'inset-shadow-shadow flex flex-col inset-shadow-[0px_0px_20px_-2px]',
           'max-h-[90vh] max-w-md items-center',
           'custom-scrollbar justify-center overflow-y-auto',
