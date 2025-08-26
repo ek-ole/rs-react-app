@@ -4,7 +4,7 @@ export default {
     'type-enum': [
       2,
       'always',
-      ['feat', 'fix', 'docs', 'style', 'refactor', 'test', 'chore', 'revert'],
+      ['feat', 'fix', 'docs', 'style', 'refactor', 'chore', 'revert'],
     ],
     'subject-max-length': [2, 'always', 72],
   },

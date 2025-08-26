@@ -1,4 +1,3 @@
-/// <reference types="vitest/config" />
 import path from 'path';
 
 import tailwindcss from '@tailwindcss/vite';
@@ -12,28 +11,5 @@ export default defineConfig({
     alias: {
       '@': path.resolve(__dirname, './src'),
     },
-  },
-  test: {
-    coverage: {
-      provider: 'istanbul',
-      reporter: ['text', 'html'],
-      include: ['src/**/*.{js,jsx,ts,tsx}'],
-      exclude: [
-        'src/**/*.test.{js,jsx,ts,tsx}',
-        'src/**/*.spec.{js,jsx,ts,tsx}',
-        'src/index.{js,jsx,ts,tsx}',
-        'src/setupTests.{js,ts}',
-        'src/**/*.d.ts',
-        'src/types/*.ts',
-      ],
-      thresholds: {
-        statements: 80,
-        branches: 50,
-        functions: 50,
-        lines: 50,
-      },
-    },
-    environment: 'jsdom',
-    setupFiles: ['./vitest-setup.js'],
   },
 });

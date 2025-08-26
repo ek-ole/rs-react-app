@@ -3,9 +3,6 @@ import globals from 'globals';
 import reactPlugin from 'eslint-plugin-react';
 import tseslint from 'typescript-eslint';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
-import testingLibrary from 'eslint-plugin-testing-library';
-import jestDom from 'eslint-plugin-jest-dom';
-import vitest from '@vitest/eslint-plugin';
 import importPlugin from 'eslint-plugin-import';
 import eslintConfigPrettier from 'eslint-config-prettier/flat';
 import reactHooks from 'eslint-plugin-react-hooks';
@@ -31,12 +28,7 @@ export default tseslint.config(
         projectService: true,
         tsconfigRootDir: import.meta.dirname,
       },
-    },
-    plugins: {
-      'testing-library': testingLibrary,
-      'jest-dom': jestDom,
-      vitest,
-    },
+    },    
     rules: {
       '@typescript-eslint/consistent-type-exports': 'error',
       '@typescript-eslint/consistent-type-imports': 'error',
@@ -61,13 +53,7 @@ export default tseslint.config(
         },
       ],
     },
-  },
-  {
-    files: ['**/*.test.{ts,tsx}'],
-    ...testingLibrary.configs['flat/react'],
-    ...jestDom.configs['flat/recommended'],
-    ...vitest.configs.recommended,
-  },
+  },  
   {
     files: ['src/vite-env.d.ts'],
     rules: {
