@@ -1,4 +1,4 @@
-#Description of the app performance
+# Description of the app performance
 
 **Commit Duration:**
  Time taken for React to render the committed updates.
