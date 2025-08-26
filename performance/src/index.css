@@ -17,7 +17,7 @@
   /* --linear: linear-gradient(45deg, rgb(66, 69, 81), rgb(86, 181, 184), rgb(30, 94, 129)); */
   --foreground: oklch(29.978% 0.14974 300.291);
   --primary-light: oklch(94.278% 0.0523 92.944);
-  --input: oklch(61.145% 0.1005 159.555 / 0.24);
+  --input: oklch(56.34% 0.08578 160.126 / 0.363);
   --error-message: rgb(255, 51, 0);
   --gradient-cold: oklch(77.555% 0.13133 210.047 / 0.726);
   --gradient-hot: oklch(73.628% 0.13417 60.857 / 0.904);
@@ -42,8 +42,8 @@
   body {
     font-family: var(--font-primary);
    background: 
-    radial-gradient(circle at 10% 20%, rgba(4, 238, 207, 0.795) 0%, transparent 50%),
-    radial-gradient(circle at 90% 30%, rgba(149, 1, 255, 0.795) 0%, transparent 50%),
+    radial-gradient(circle at 40% 10%, rgba(4, 238, 207, 0.795) 0%, transparent 50%),
+    radial-gradient(circle at 80% 30%, rgba(90, 1, 255, 0.473) 0%, transparent 50%),
     radial-gradient(circle at 40% 80%, rgba(238, 255, 0, 0.856) 0%, transparent 50%),
     linear-gradient(
       135deg,
