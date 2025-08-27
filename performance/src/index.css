@@ -41,75 +41,103 @@
 
   body {
     font-family: var(--font-primary);
-   background: 
-    radial-gradient(circle at 40% 10%, rgba(4, 238, 207, 0.795) 0%, transparent 50%),
-    radial-gradient(circle at 80% 30%, rgba(90, 1, 255, 0.473) 0%, transparent 50%),
-    radial-gradient(circle at 40% 80%, rgba(238, 255, 0, 0.856) 0%, transparent 50%),
-    linear-gradient(
-      135deg,
-      rgba(18, 22, 104, 0.301) 100%,
-      rgba(5, 50, 58, 0.185) 50%,
-      rgba(74, 1, 143, 0.281) 100%
-    );
+    background:
+      radial-gradient(circle at 40% 10%, rgba(4, 238, 207, 0.795) 0%, transparent 50%),
+      radial-gradient(circle at 80% 30%, rgba(90, 1, 255, 0.473) 0%, transparent 50%),
+      radial-gradient(circle at 40% 80%, rgba(238, 255, 0, 0.856) 0%, transparent 50%),
+      radial-gradient(circle at 90% 150%, rgba(255, 72, 0, 0.856) 0%, transparent 50%),      
+      radial-gradient(circle at 150% -20%, rgba(0, 102, 255, 0.856) 0%, transparent 50%),
+      linear-gradient(
+        135deg,
+        rgba(18, 22, 104, 0.301) 100%,
+        rgba(5, 50, 58, 0.185) 50%,
+        rgba(74, 1, 143, 0.281) 100%
+      );
     color: var(--foreground);
     min-height: 100vh;
-     background-attachment: fixed;
+    background-attachment: fixed;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@layer utilities {
+  .shadow-glow {
+    box-shadow:
+      30px 30px 30px -20px var(--gradient-hot),
+      -30px -30px 40px -20px var(--gradient-cold),
+      30px -30px 40px -20px var(--gradient-middle),
+      -30px 50px 50px -10px var(--gradient-middle);
   }
 
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
+  .shadow-reverse {
+    box-shadow:
+      30px 30px 20px -20px var(--gradient-cold),
+      -20px -25px 20px -20px var(--gradient-hot),
+      30px -30px 20px -20px var(--gradient-middle),
+      -20px 30px 20px -20px var(--gradient-middle);
   }
 
-  @layer utilities {
-    .shadow-glow {
-      box-shadow:
-        30px 30px 30px -20px var(--gradient-hot),
-        -30px -30px 40px -20px var(--gradient-cold),
-        30px -30px 40px -20px var(--gradient-middle),
-        -30px 50px 50px -10px var(--gradient-middle);
-    }
+  .shadow-inset {
+    box-shadow:
+      inset 30px 30px 20px -30px var(--gradient-hot),
+      inset -30px -30px 15px -30px var(--gradient-cold),
+      inset 30px -30px 10px -50px var(--gradient-middle),
+      inset -30px 50px 10px -50px var(--gradient-middle);
+  }
 
-    .shadow-reverse {
-      box-shadow:
-        30px 30px 20px -20px var(--gradient-cold),
-        -20px -25px 20px -20px var(--gradient-hot),
-        30px -30px 20px -20px var(--gradient-middle),
-        -20px 30px 20px -20px var(--gradient-middle);
-    }
+  .header {
+    background-color: var(--background);
+  }
 
-    .shadow-inset {
-      box-shadow:
-        inset 30px 30px 20px -30px var(--gradient-hot),
-        inset -30px -30px 15px -30px var(--gradient-cold),
-        inset 30px -30px 10px -50px var(--gradient-middle),
-        inset -30px 50px 10px -50px var(--gradient-middle);
-    }
+  .bg-custom-linear {
+    background: var(--linear);
+  }
 
-    .header {
-      background-color: var(--background);
-    }
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 10px;
+  }
 
-    .bg-custom-linear {
-      background: var(--linear);
-    }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: var(--primary-light);
+    border-radius: 10px;
+  }
 
-    .custom-scrollbar::-webkit-scrollbar {
-      width: 10px;
-    }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: var(--input);
+    border-radius: 10px;
+  }
+}
 
-    .custom-scrollbar::-webkit-scrollbar-track {
-      background: var(--primary-light);
-      border-radius: 10px;
-    }
+.custom-button {
+  margin: 2rem;
+  cursor: pointer;
+  padding: 8px 16px;
+  font-weight: 500;
+  border: 3px solid;
+  border-color: var(--shadow);
+  border-radius: 12px;
+   transition: all 0.4s;
+   box-shadow:  0px 0px 10px -0px  var(--shadow);
+}
 
-    .custom-scrollbar::-webkit-scrollbar-thumb {
-      background: var(--input);
-      border-radius: 10px;
-    }
+.custom-button:hover {
+  background-color: var(--shadow);
+  color: var(--primary-light);
+  border-color: var(--shadow);
+  scale: 110%;
+}
+
+@media (max-width: 640px) {
+  .custom-button {
+    margin: 8px 0;
+    padding: 0 16px;
   }
 }

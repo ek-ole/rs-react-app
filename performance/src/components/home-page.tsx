@@ -35,16 +35,7 @@ function HomePage() {
               practices for optimizing the performance of React apps.
             </p>
           </div>
-          <button           
-            className={cn(
-              'hover:bg-shadow hover:text-primary-light',
-              'hover:border-shadow m-8 cursor-pointer',
-              'rounded-xl border-3 px-2 font-medium',
-              'transition-colors duration-400 sm:border-4 sm:px-4 sm:py-2',
-            )}
-          >
-            Button
-          </button>
+          <button className="custom-button">Button</button>
         </div>
       </div>
       <p className="absolute bottom-2 flex w-full flex-wrap items-center justify-center">
