@@ -47,14 +47,14 @@
     background:
       radial-gradient(circle at 40% 10%, rgba(4, 238, 207, 0.795) 0%, transparent 50%),
       radial-gradient(circle at 80% 30%, rgba(90, 1, 255, 0.473) 0%, transparent 50%),
-      radial-gradient(circle at 40% 120%, rgba(238, 255, 0, 0.856) 0%, transparent 70%),
+      radial-gradient(circle at -30% 120%, rgba(238, 255, 0, 0.856) 0%, transparent 55%),
       radial-gradient(circle at 90% 150%, rgba(255, 72, 0, 0.856) 0%, transparent 50%),
       radial-gradient(circle at 150% -20%, rgba(0, 102, 255, 0.856) 0%, transparent 50%),
       linear-gradient(
         135deg,
-        rgba(18, 22, 104, 0.301) 100%,
+        rgba(18, 22, 104, 0.301) 0%,
         rgba(5, 50, 58, 0.185) 50%,
-        rgba(74, 1, 143, 0.281) 100%
+        rgba(139, 112, 165, 0.356) 100%
       );
     color: var(--foreground);
     min-height: 100vh;
