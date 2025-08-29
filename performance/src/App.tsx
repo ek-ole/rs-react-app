@@ -6,8 +6,8 @@ import { cn } from './utils/cn';
 
 function App() {
   return (
-    <>
-      <div className="flex min-h-[60vh] items-center justify-center p-4 md:p-14">
+    <div className='flex flex-col justify-between h-[100vh]'>
+      <div className="flex items-center justify-center p-4 md:p-14">
         <div
           className={cn(
             'mx-auto flex w-full max-w-4xl flex-col',
@@ -51,7 +51,7 @@ function App() {
           </Suspense>
         </div>
       </div>
-      <p className="absolute bottom-2 flex w-full flex-wrap items-center justify-center">
+      <p className="flex w-full my-3 flex-wrap items-center justify-center">
         Created by{' '}
         <a
           href="https://github.com/ek-ole"
@@ -79,7 +79,7 @@ function App() {
           <img src="/rss-logo.svg" alt="RS School" className="h-5 w-5" />
         </a>
       </p>
-    </>
+    </div>
   );
 }
 
