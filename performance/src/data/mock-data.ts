@@ -6,7 +6,7 @@ export const mockData: CO2Data = {
     data: [
       {
         year: 2020,
-        population: 39068978,        
+        population: 39068978,
         co2: 11.605929374694824,
         co2_per_capita: 0.2970625162124634,
       },
@@ -208,5 +208,70 @@ export const mockData: CO2Data = {
         co2: 4993.22119140625,
       },
     ],
+  },
+  Afghaсnistan: {
+    iso_code: 'AFG',
+    data: [],
+  },
+  Afghaсnisпаtan: {
+    iso_code: 'AFG',
+    data: [],
+  },
+  Afghaсnавistan: {
+    iso_code: 'AFG',
+    data: [],
+  },
+  Afghвыааaсnistan: {
+    iso_code: 'AFG',
+    data: [],
+  },
+  Afghaсваnistan: {
+    iso_code: 'AFG',
+    data: [],
+  },
+  Afgвыhaсваnistan: {
+    iso_code: 'AFG',
+    data: [],
+  },
+  Afghaспваnistan: {
+    iso_code: 'AFG',
+    data: [],
+  },
+  Afghaрпсnistan: {
+    iso_code: 'AFG',
+    data: [],
+  },
+
+  Afghaсроnistan: {
+    iso_code: 'AFG',
+    data: [],
+  },
+  Afghaорпсnistan: {
+    iso_code: 'AFG',
+    data: [],
+  },
+  Afghпроaсnistan: {
+    iso_code: 'AFG',
+    data: [],
+  },
+  Afghaснпnistan: {
+    iso_code: 'AFG',
+    data: [],
+  },
+  Afghaвысnistan: {
+    iso_code: 'AFG',
+    data: [],
+  },
+  Afghaвывывысnistan: {
+    iso_code: 'AFG',
+    data: [],
+  },
+  Afghaаввысnistan: {
+    iso_code: 'AFG',
+    data: [],
+  },
+  Afghaсвыnавistan: {
+    iso_code: 'AFG',
+    data: [],
   },
 };

@@ -8,15 +8,21 @@ function CountryList() {
   return (
     <div
       className={cn(
-        'border-p-4 flex w-full max-w-sm items-center gap-2',
-        'rounded-xl border-3 p-2 sm:my-6 flex-col',
+        'border-p-4 flex w-full items-center',
+        'flex-col rounded-xl border-3 sm:my-6',
         'shadow-inset',
+        'max-h-[50vh] min-h-[200px]',
+        'custom-scrollbar overflow-y-auto',
       )}
     >
-      <h2 className='text-lg font-semibold'>Countries ({countryNames.length})</h2>
-      <div className="flex flex-col gap-1">
+      <h2 className="bg-input w-full px-3 py-2 text-lg font-semibold">
+        Countries ({countryNames.length})
+      </h2>
+      <div className="custom-scrollbar flex w-full flex-col overflow-y-auto">
         {countryNames.map((countryName) => (
-          <div key={countryName}>{countryName}</div>
+          <div key={countryName} className="even:bg-input/40 px-3 py-2 odd:bg-transparent">
+            {countryName}
+          </div>
         ))}
       </div>
     </div>

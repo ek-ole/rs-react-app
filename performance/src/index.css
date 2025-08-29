@@ -5,18 +5,21 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-primary-light: var(--primary-light);
+  --color-primary-dark: var(--primary-dark);
   --color-error-message: var(--error-message);
   --color-shadow: var(--shadow);
   --color-input: var(--input);
+  --color-linear: var(--linear);
 }
 
 :root {
   --font-primary: 'Josefin Sans', sans-serif;
   --font-cookie: 'Cookie', cursive;
   --background: oklch(97.989% 0.11354 108.347);
-  /* --linear: linear-gradient(45deg, rgb(66, 69, 81), rgb(86, 181, 184), rgb(30, 94, 129)); */
+  --linear: linear-gradient(45deg, rgb(66, 69, 81), rgb(86, 181, 184), rgb(30, 94, 129));
   --foreground: oklch(29.978% 0.14974 300.291);
   --primary-light: oklch(94.278% 0.0523 92.944);
+  --primary-dark:oklch(58.954% 0.05665 162.355);
   --input: oklch(56.34% 0.08578 160.126 / 0.363);
   --error-message: rgb(255, 51, 0);
   --gradient-cold: oklch(77.555% 0.13133 210.047 / 0.726);
@@ -106,12 +109,12 @@
   }
 
   .custom-scrollbar::-webkit-scrollbar-track {
-    background: var(--primary-light);
+    background: var(--input);
     border-radius: 10px;
   }
 
   .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: var(--input);
+    background: var(--primary-dark);
     border-radius: 10px;
   }
 }
