@@ -19,7 +19,7 @@
   --linear: linear-gradient(45deg, rgb(66, 69, 81), rgb(86, 181, 184), rgb(30, 94, 129));
   --foreground: oklch(29.978% 0.14974 300.291);
   --primary-light: oklch(94.278% 0.0523 92.944);
-  --primary-dark:oklch(58.954% 0.05665 162.355);
+  --primary-dark: oklch(58.954% 0.05665 162.355);
   --input: oklch(56.34% 0.08578 160.126 / 0.363);
   --error-message: rgb(255, 51, 0);
   --gradient-cold: oklch(77.555% 0.13133 210.047 / 0.726);
@@ -47,8 +47,8 @@
     background:
       radial-gradient(circle at 40% 10%, rgba(4, 238, 207, 0.795) 0%, transparent 50%),
       radial-gradient(circle at 80% 30%, rgba(90, 1, 255, 0.473) 0%, transparent 50%),
-      radial-gradient(circle at 40% 80%, rgba(238, 255, 0, 0.856) 0%, transparent 50%),
-      radial-gradient(circle at 90% 150%, rgba(255, 72, 0, 0.856) 0%, transparent 50%),      
+      radial-gradient(circle at 40% 120%, rgba(238, 255, 0, 0.856) 0%, transparent 70%),
+      radial-gradient(circle at 90% 150%, rgba(255, 72, 0, 0.856) 0%, transparent 50%),
       radial-gradient(circle at 150% -20%, rgba(0, 102, 255, 0.856) 0%, transparent 50%),
       linear-gradient(
         135deg,
@@ -126,8 +126,8 @@
   border: 3px solid;
   border-color: var(--shadow);
   border-radius: 12px;
-   transition: all 0.4s;
-   box-shadow:  0px 0px 10px -0px  var(--shadow);
+  transition: all 0.4s;
+  box-shadow: 0px 0px 10px -0px var(--shadow);
 }
 
 .custom-button:hover {
