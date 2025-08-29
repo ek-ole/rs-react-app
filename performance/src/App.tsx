@@ -6,13 +6,13 @@ import { cn } from './utils/cn';
 
 function App() {
   return (
-    <div className='flex flex-col justify-between h-[100vh]'>
+    <div className="flex h-[100vh] flex-col justify-between">
       <div className="flex items-center justify-center p-4 md:p-14">
         <div
           className={cn(
-            'mx-auto flex w-full max-w-4xl flex-col',
+            'mx-auto flex w-full flex-col',
             'items-center rounded-xl border-4 p-4',
-            'shadow-glow',
+            'shadow-glow sm:px-6',
           )}
         >
           <h1 className="text-3xl font-bold">Global CO₂ Emissions Data</h1>
@@ -35,11 +35,11 @@ function App() {
                   'focus:outline-none sm:px-4',
                 )}
               />
-            </div>           
+            </div>
           </div>
-          <button className="custom-button ">Button</button>
+          <button className="custom-button">Button</button>
 
-          <div className="my-8 space-y-4 text-center">
+          <div className="my-8 max-w-4xl space-y-4 text-center">
             <p>
               This CO2 emissions data analysis app was created while learning about methods and best
               practices for optimizing the performance of React apps.
@@ -51,7 +51,7 @@ function App() {
           </Suspense>
         </div>
       </div>
-      <p className="flex w-full my-3 flex-wrap items-center justify-center">
+      <p className="my-3 flex w-full flex-wrap items-center justify-center">
         Created by{' '}
         <a
           href="https://github.com/ek-ole"
