@@ -1,9 +1,16 @@
+import { useState } from 'react';
+
 import { useCountries } from '@/hooks/use-countries';
 import { cn } from '@/utils/cn';
 
+import SearchInput from './search-input';
+
 function CountryList() {
   const countriesData = useCountries();
-  const countries = Object.entries(countriesData).map(([name, data]) => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const countries = Object.entries(countriesData)
+  .filter(([name]) => name.toLowerCase().includes(searchTerm.toLowerCase()))
+  .map(([name, data]) => {
     const latestYearData = data.data[data.data.length - 1];
     const latestYear = latestYearData?.year;
 
@@ -28,6 +35,7 @@ function CountryList() {
       <h2 className="bg-input w-full px-3 pt-2 text-center text-lg font-semibold">
         Countries ({countries.length})
       </h2>
+      <SearchInput value={searchTerm} onChange={setSearchTerm} placeholder="Search country..." />
       <div className="bg-input border-shadow/20 grid w-full grid-cols-[2fr_1fr_1fr_1fr] gap-4 border-b px-3 py-1 font-semibold">
         <div>Country</div>
         <div>ISO code</div>

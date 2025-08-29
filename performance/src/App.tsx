@@ -19,23 +19,7 @@ function App() {
 
           <div className="mt-4 w-full max-w-sm">
             <div className="text-center text-xl">Controls</div>
-            <div
-              className={cn(
-                'border-p-4 flex w-full max-w-sm items-center gap-2',
-                'rounded-xl border-3 p-2 sm:my-6',
-                'shadow-inset',
-              )}
-            >
-              <input
-                type="search"
-                placeholder="Search country..."
-                className={cn(
-                  'bg-input w-full flex-1',
-                  'rounded-xl px-2 py-1',
-                  'focus:outline-none sm:px-4',
-                )}
-              />
-            </div>
+            
           </div>
           <button className="custom-button">Button</button>
 
