@@ -4,12 +4,12 @@ function LoadingSpinner() {
   return (
     <div
       className={cn(
-        'border-p-4 flex w-full max-w-sm items-center gap-2',
-        'rounded-xl border-3 p-2 sm:my-6',
-        'shadow-inset',
+        'border-p-4 flex w-[80wh] items-center gap-2',
+        'rounded-xl sm:my-6 flex flex-col',
       )}
     >
-      Loading...
+      <img src="/loader.png" alt="Loading..." className="blur-edges w-full" />
+      <p className='text-xl'>Loading...</p>
     </div>
   );
 }
