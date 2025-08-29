@@ -9,18 +9,18 @@ function CountryList() {
   const countriesData = useCountries();
   const [searchTerm, setSearchTerm] = useState('');
   const countries = Object.entries(countriesData)
-  .filter(([name]) => name.toLowerCase().includes(searchTerm.toLowerCase()))
-  .map(([name, data]) => {
-    const latestYearData = data.data[data.data.length - 1];
-    const latestYear = latestYearData?.year;
+    .filter(([name]) => name.toLowerCase().includes(searchTerm.toLowerCase()))
+    .map(([name, data]) => {
+      const latestYearData = data.data[data.data.length - 1];
+      const latestYear = latestYearData?.year;
 
-    return {
-      name,
-      isoCode: data.iso_code,
-      population: latestYearData?.population,
-      year: latestYear,
-    };
-  });
+      return {
+        name,
+        isoCode: data.iso_code,
+        population: latestYearData?.population,
+        year: latestYear,
+      };
+    });
 
   return (
     <div
@@ -32,10 +32,12 @@ function CountryList() {
         'custom-scrollbar overflow-y-auto',
       )}
     >
-      <h2 className="bg-input w-full px-3 pt-2 text-center text-lg font-semibold">
-        Countries ({countries.length})
-      </h2>
-      <SearchInput value={searchTerm} onChange={setSearchTerm} placeholder="Search country..." />
+      <div className="bg-input px-2 w-full flex items-center justify-between">
+        <h2 className="px-3 pt-2 text-center justify-center text-lg font-semibold">
+          Countries ({countries.length})
+        </h2>
+        <SearchInput value={searchTerm} onChange={setSearchTerm} placeholder="Search country..." />
+      </div>
       <div className="bg-input border-shadow/20 grid w-full grid-cols-[2fr_1fr_1fr_1fr] gap-4 border-b px-3 py-1 font-semibold">
         <div>Country</div>
         <div>ISO code</div>

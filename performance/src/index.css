@@ -90,7 +90,7 @@
 
   .shadow-inset {
     box-shadow:
-      inset 30px 30px 20px -30px var(--gradient-hot),
+      inset 30px 30px 10px -30px var(--gradient-hot),
       inset -30px -30px 15px -30px var(--gradient-cold),
       inset 30px -30px 10px -50px var(--gradient-middle),
       inset -30px 50px 10px -50px var(--gradient-middle);
