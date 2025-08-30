@@ -14,7 +14,7 @@ export type CountryData = {
 export type CO2Data = Record<string, CountryData>;
 
 export type SortConfig = {
-  key: 'name' | 'population' | 'year' | 'isoCode';
+  key: 'name' | 'population' | 'isoCode';
   direction: 'asc' | 'desc';
 };
 

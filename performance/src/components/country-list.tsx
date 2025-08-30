@@ -73,12 +73,6 @@ function CountryList() {
       return sortConfig.direction === 'asc' ? aValue - bValue : bValue - aValue;
     }
 
-    if (sortConfig.key === 'year') {
-      const aValue = a.year || 0;
-      const bValue = b.year || 0;
-      return sortConfig.direction === 'asc' ? aValue - bValue : bValue - aValue;
-    }
-
     if (sortConfig.key === 'isoCode') {
       const aValue = a.isoCode || '';
       const bValue = b.isoCode || '';
@@ -94,9 +88,9 @@ function CountryList() {
     <div
       className={cn(
         'flex w-full items-center',
-        'flex-col rounded-xl border-3 sm:my-4',
+        'flex-col rounded-xl border-3',
         'shadow-inset',
-        'max-h-[50vh] min-h-[200px]',
+        'max-h-[80vh] min-h-[200px]',
       )}
     >
       <TableToolbar
@@ -109,7 +103,13 @@ function CountryList() {
         onOpenModal={() => setIsModalOpen(true)}
       />
 
-      <TableHeader sortConfig={sortConfig} onSort={handleSort} />
+      <TableHeader
+        sortConfig={sortConfig}
+        onSort={handleSort}
+        selectedYear={selectedYear}
+        onYearChange={setSelectedYear}
+        availableYears={availableYears}
+      />
 
       <CountryTable countries={sortedCountries} />
       <ColumnSelector

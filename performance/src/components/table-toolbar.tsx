@@ -1,5 +1,4 @@
 import SearchInput from './search-input';
-import YearSelector from './year-selector';
 
 type Props = {
   searchTerm: string;
@@ -15,25 +14,20 @@ function TableToolbar({
   searchTerm,
   onSearchChange,
   countriesCount,
-  selectedYear,
-  onYearChange,
-  availableYears,
   onOpenModal,
 }: Props) {
   return (
     <div className="bg-input flex w-full items-center justify-between px-2 py-2">
+      
       <h2 className="justify-center px-3 pt-2 text-center text-lg font-semibold">
         Countries ({countriesCount})
       </h2>
-      <div className="flex gap-2">
-        <button onClick={onOpenModal} className="custom-button">
-          Columns
+      <div className="flex gap-2 justify-center items-center">
+        <div className=''>
+          <button onClick={onOpenModal} className="custom-button">
+           Columns
         </button>
-        <YearSelector
-          selectedYear={selectedYear}
-          onYearChange={onYearChange}
-          availableYears={availableYears}
-        />
+        </div>
         <SearchInput value={searchTerm} onChange={onSearchChange} placeholder="Search country..." />
       </div>
     </div>

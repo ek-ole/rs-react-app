@@ -17,13 +17,7 @@ function App() {
         >
           <h1 className="text-3xl font-bold">Global CO₂ Emissions Data</h1>
 
-          <div className="mt-4 w-full max-w-sm">
-            <div className="text-center text-xl">Controls</div>
-            
-          </div>
-          <button className="custom-button">Button</button>
-
-          <div className="my-8 max-w-4xl space-y-4 text-center">
+          <div className="my-2 max-w-4xl text-center">
             <p>
               This CO2 emissions data analysis app was created while learning about methods and best
               practices for optimizing the performance of React apps.

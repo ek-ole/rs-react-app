@@ -8,26 +8,18 @@ type Props = {
 
 function YearSelector({ selectedYear, onYearChange, availableYears }: Props) {
    return (
-     <div
-       className={cn(
-         'flex items-center gap-2',
-         'bg-input/50 rounded-lg',
-         'items-baseline',
-         'border-primary-dark my-1 rounded-md border p-2',
-         'shadow-inset bg-input',
-       )}
-     >
-       <label htmlFor="year-select" className="text-sm font-semibold">
-         Year:
+     <div className={cn('flex items-center')}>
+       <label htmlFor="year-select  " className="text-center">
+         Year
        </label>
        <select
-         id="year-select"
          value={selectedYear || ''}
          onChange={(e) => onYearChange(e.target.value ? parseInt(e.target.value) : null)}
          className={cn(
-           'w-full rounded-xl p-1 text-sm',
-           'focus:bg-input focus:outline-none sm:px-4',
+           'w-full rounded-xl py-1 text-center text-sm',
+           'focus:bg-input cursor-pointer focus:outline-none',
          )}
+         aria-label="Select year"
        >
          <option value="">Latest</option>
          {availableYears.map((year) => (

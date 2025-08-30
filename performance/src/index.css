@@ -121,7 +121,7 @@
 
 .custom-button {
   cursor: pointer;
-  padding: 8px 16px;
+  padding: 4px 16px;
   font-weight: 500;
   border: 3px solid;
   border-color: var(--shadow);
@@ -139,7 +139,7 @@
 
 @media (max-width: 640px) {
   .custom-button {
-    margin: 8px 0;
+    margin: 4px 0;
     padding: 0 16px;
   }
 }
