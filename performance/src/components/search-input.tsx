@@ -22,7 +22,7 @@ return (
       onChange={(e) => onChange(e.target.value)}
       className={cn(
         'rounded-xl px-1 w-full ', 
-        'focus:outline-none focus:bg-primary-dark sm:px-4')}
+        'focus:outline-none focus:bg-primary-dark')}
     />
   </div>
 );

@@ -8,6 +8,7 @@ type Props = {
   selectedYear: number | null;
   onYearChange: (year: number | null) => void;
   availableYears: number[];
+  onOpenModal: VoidFunction;
 };
 
 function TableToolbar({
@@ -17,13 +18,17 @@ function TableToolbar({
   selectedYear,
   onYearChange,
   availableYears,
+  onOpenModal,
 }: Props) {
   return (
     <div className="bg-input flex w-full items-center justify-between px-2 py-2">
       <h2 className="justify-center px-3 pt-2 text-center text-lg font-semibold">
         Countries ({countriesCount})
       </h2>
-      <div className='flex gap-2'>
+      <div className="flex gap-2">
+        <button onClick={onOpenModal} className="custom-button">
+          Columns
+        </button>
         <YearSelector
           selectedYear={selectedYear}
           onYearChange={onYearChange}

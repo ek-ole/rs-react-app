@@ -4,6 +4,7 @@ import { useCountries } from '@/hooks/use-countries';
 import type { SortConfig } from '@/types/co2-data';
 import { cn } from '@/utils/cn';
 
+import ColumnSelector from './column-selector';
 import CountryTable from './country-table';
 import TableHeader from './table-header';
 import TableToolbar from './table-toolbar';
@@ -16,6 +17,8 @@ function CountryList() {
     direction: 'asc',
   });
   const [selectedYear, setSelectedYear] = useState<number | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedColumns, setSelectedColumns] = useState<string[]>([]); 
 
   const handleSort = (key: SortConfig['key']) => {
     setSortConfig((prev) => ({
@@ -26,8 +29,8 @@ function CountryList() {
 
   const availableYears = (() => {
     const years = new Set<number>();
-    Object.values(countriesData).forEach(country => {
-      country.data.forEach(yearData => {
+    Object.values(countriesData).forEach((country) => {
+      country.data.forEach((yearData) => {
         if (yearData.year) years.add(yearData.year);
       });
     });
@@ -39,7 +42,7 @@ function CountryList() {
     .map(([name, data]) => {
       let yearData;
       if (selectedYear) {
-        yearData = data.data.find(d => d.year === selectedYear);
+        yearData = data.data.find((d) => d.year === selectedYear);
       } else {
         yearData = data.data[data.data.length - 1];
       }
@@ -51,6 +54,11 @@ function CountryList() {
         year: yearData?.year,
       };
     });
+
+    const availableColumns = (() => {
+      const columns = new Set<string>();
+      return Array.from(columns);
+    })();
 
   const sortedCountries = [...filteredCountries].sort((a, b) => {
     if (sortConfig.key === 'name') {
@@ -98,11 +106,19 @@ function CountryList() {
         selectedYear={selectedYear}
         onYearChange={setSelectedYear}
         availableYears={availableYears}
+        onOpenModal={() => setIsModalOpen(true)}
       />
 
       <TableHeader sortConfig={sortConfig} onSort={handleSort} />
 
       <CountryTable countries={sortedCountries} />
+      <ColumnSelector
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        selectedColumns={selectedColumns}
+        availableColumns={availableColumns}
+        onColumnsChange={setSelectedColumns}
+      />
     </div>
   );
 }
