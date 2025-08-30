@@ -1,4 +1,4 @@
-import { List } from 'react-virtualized';
+import { List, AutoSizer  } from 'react-virtualized';
 
 import type { CountryItem } from '@/types/co2-data';
 import { cn } from '@/utils/cn';
@@ -37,14 +37,19 @@ function CountryTable({ countries }: Props) {
   };
 
   return (
-    <div className="custom-scrollbar flex w-full flex-col overflow-y-auto">
-      <List
-        width={800}
-        height={400}
-        rowCount={countries.length}
-        rowHeight={40}
-        rowRenderer={rowRenderer}
-      />
+    <div className="flex h-[60vh] w-full flex-col ">
+      <AutoSizer>
+        {({ width, height }) => (
+          <List
+            width={width}
+            height={height}
+            rowCount={countries.length}
+            rowHeight={40}
+            rowRenderer={rowRenderer}
+            className="custom-scrollbar"
+          />
+        )}
+      </AutoSizer>
     </div>
   );
 }

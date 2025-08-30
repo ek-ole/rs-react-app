@@ -34,6 +34,7 @@
     "react-router": "^7.7.1",
     "react-router-dom": "^7.7.0",
     "react-virtualized": "^9.22.6",
+    "react-virtualized-auto-sizer": "^1.0.26",
     "tailwind-merge": "^3.3.1",
     "tailwindcss": "^4.1.11",
     "zod": "^4.0.17"

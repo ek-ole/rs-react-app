@@ -23,7 +23,7 @@ function TableToolbar({
       <h2 className="justify-center px-3 pt-2 text-center text-lg font-semibold">
         Countries ({countriesCount})
       </h2>
-      <div className='flex'>
+      <div className='flex gap-2'>
         <YearSelector
           selectedYear={selectedYear}
           onYearChange={onYearChange}

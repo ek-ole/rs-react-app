@@ -89,7 +89,6 @@ function CountryList() {
         'flex-col rounded-xl border-3 sm:my-4',
         'shadow-inset',
         'max-h-[50vh] min-h-[200px]',
-        'custom-scrollbar overflow-y-auto',
       )}
     >
       <TableToolbar
