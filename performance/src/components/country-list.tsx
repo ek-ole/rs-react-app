@@ -93,32 +93,32 @@ function CountryList() {
       </div>
       <div
         className={cn(
-          'bg-input border-shadow/20',
-          'grid w-full grid-cols-[2fr_1fr_1fr_1fr]',
-          'gap-4 border-b font-semibold',
+          'bg-input border-shadow/20 w-full',
+          'grid grid-cols-[2fr_1fr_1fr_1fr]',
+          'border-b font-semibold sm:gap-4',
         )}
       >
         <button
           onClick={() => handleSort('name')}
-          className="flex hover:bg-input/30 px-5 py-1 text-left font-bold duration-300 hover:scale-103"
+          className="hover:bg-input/30 px-5 py-1 text-left font-bold duration-300 hover:scale-103 sm:flex"
         >
           Country {getSortIcon('name')}
         </button>
         <button
           onClick={() => handleSort('isoCode')}
-          className="flex hover:bg-input/30 px-5 py-1 text-left font-bold duration-300 hover:scale-103"
+          className="hover:bg-input/30 px-5 py-1 text-left font-bold whitespace-nowrap duration-300 hover:scale-103 sm:flex"
         >
           ISO Code {getSortIcon('isoCode')}
         </button>
         <button
           onClick={() => handleSort('year')}
-          className="flex hover:bg-input/30 px-5 py-1 text-left font-bold duration-300 hover:scale-103"
+          className="hover:bg-input/30 px-5 py-1 text-left font-bold duration-300 hover:scale-103 sm:flex"
         >
           Year {getSortIcon('year')}
         </button>
         <button
           onClick={() => handleSort('population')}
-          className="flex hover:bg-input/30 px-5 py-1 text-left font-bold duration-300 hover:scale-103"
+          className="hover:bg-input/30 px-5 py-1 text-left font-bold duration-300 hover:scale-103 sm:flex"
         >
           Population {getSortIcon('population')}
         </button>
@@ -128,15 +128,15 @@ function CountryList() {
           <div
             key={country.name}
             className={cn(
-              'even:bg-input/20',
+              'even:bg-input/20 w-full',
               'grid grid-cols-[2fr_1fr_1fr_1fr]',
               'gap-4 px-3 py-2 odd:bg-transparent',
             )}
           >
-            <div className="font-medium">{country.name}</div>
-            <div className="px-7">{country.isoCode || 'N/A'}</div>
-            <div className="px-7">{country.year || 'N/A'}</div>
-            <div className="px-7">
+            <div>{country.name}</div>
+            <div>{country.isoCode || 'N/A'}</div>
+            <div>{country.year || 'N/A'}</div>
+            <div>
               {country.population ? country.population.toLocaleString() : 'N/A'}
             </div>
           </div>
