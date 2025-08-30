@@ -17,3 +17,10 @@ export type SortConfig = {
   key: 'name' | 'population' | 'year' | 'isoCode';
   direction: 'asc' | 'desc';
 };
+
+export type CountryItem = {
+  name: string;
+  isoCode: string | undefined;
+  population: number | null | undefined;
+  year: number | undefined;
+};
