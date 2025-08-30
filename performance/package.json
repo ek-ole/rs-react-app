@@ -23,6 +23,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
+    "esbuild-plugin-react-virtualized": "^1.0.5",
     "lucide-react": "^0.526.0",
     "middleware": "^1.0.0",
     "performant-array-to-tree": "^1.11.0",
@@ -32,6 +33,7 @@
     "react-redux": "^9.2.0",
     "react-router": "^7.7.1",
     "react-router-dom": "^7.7.0",
+    "react-virtualized": "^9.22.6",
     "tailwind-merge": "^3.3.1",
     "tailwindcss": "^4.1.11",
     "zod": "^4.0.17"
@@ -44,6 +46,7 @@
     "@types/node": "^24.0.15",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
+    "@types/react-virtualized": "^9.22.2",
     "@vitejs/plugin-react": "^4.7.0",
     "eslint": "^9.31.0",
     "eslint-config-prettier": "^10.1.8",

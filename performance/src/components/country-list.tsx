@@ -1,5 +1,6 @@
 import { ArrowDownUp, ArrowDownWideNarrow, ArrowUpWideNarrow } from 'lucide-react';
 import { useState } from 'react';
+import { List } from 'react-virtualized';
 
 import { useCountries } from '@/hooks/use-countries';
 import type { SortConfig } from '@/types/co2-data';
@@ -75,6 +76,34 @@ function CountryList() {
     return 0;
   });
 
+   const rowRenderer = ({
+     index,
+     key,
+     style,
+   }: {
+     index: number;
+     key: string;
+     style: React.CSSProperties;
+   }) => {
+     const country = sortedCountries[index];
+     return (
+       <div
+         key={key}
+         style={style}
+         className={cn(
+           'even:bg-input/20 w-full',
+           'grid grid-cols-[2fr_1fr_1fr_1fr]',
+           'gap-4 px-3 py-2 odd:bg-transparent',
+         )}
+       >
+         <div>{country.name}</div>
+         <div>{country.isoCode || 'N/A'}</div>
+         <div>{country.year || 'N/A'}</div>
+         <div>{country.population ? country.population.toLocaleString() : 'N/A'}</div>
+       </div>
+     );
+   };
+
   return (
     <div
       className={cn(
@@ -124,23 +153,13 @@ function CountryList() {
         </button>
       </div>
       <div className="custom-scrollbar flex w-full flex-col overflow-y-auto">
-        {sortedCountries.map((country) => (
-          <div
-            key={country.name}
-            className={cn(
-              'even:bg-input/20 w-full',
-              'grid grid-cols-[2fr_1fr_1fr_1fr]',
-              'gap-4 px-3 py-2 odd:bg-transparent',
-            )}
-          >
-            <div>{country.name}</div>
-            <div>{country.isoCode || 'N/A'}</div>
-            <div>{country.year || 'N/A'}</div>
-            <div>
-              {country.population ? country.population.toLocaleString() : 'N/A'}
-            </div>
-          </div>
-        ))}
+        <List
+          width={800} 
+          height={400} 
+          rowCount={sortedCountries.length}
+          rowHeight={40} 
+          rowRenderer={rowRenderer}
+        />
       </div>
     </div>
   );
