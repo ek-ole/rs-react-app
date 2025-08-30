@@ -8,7 +8,7 @@ type Props = {
   onSort: (key: SortConfig['key']) => void;
 }
 
-export function TableHeader({ sortConfig, onSort }: Props) {  
+function TableHeader({ sortConfig, onSort }: Props) {  
   const getSortIcon = (key: string) => {
     if (sortConfig.key !== key) return <ArrowDownUp className="mx-2 h-5 w-5" />;
     return sortConfig.direction === 'asc' ? (
@@ -52,3 +52,5 @@ export function TableHeader({ sortConfig, onSort }: Props) {
     </div>
   );
 };
+
+export default TableHeader;

@@ -7,7 +7,7 @@ type Props = {
   countries: CountryItem[];
 }
 
-export function CountryTable({ countries }: Props) {
+function CountryTable({ countries }: Props) {
   const rowRenderer = ({
     index,
     key,
@@ -48,3 +48,5 @@ export function CountryTable({ countries }: Props) {
     </div>
   );
 }
+
+export default CountryTable;

@@ -4,9 +4,9 @@ import { useCountries } from '@/hooks/use-countries';
 import type { SortConfig } from '@/types/co2-data';
 import { cn } from '@/utils/cn';
 
-import { CountryTable } from './country-table';
-import { TableHeader } from './table-header';
-import { TableToolbar } from './table-toolbar';
+import CountryTable from './country-table';
+import TableHeader from './table-header';
+import TableToolbar from './table-toolbar';
 
 function CountryList() {
   const countriesData = useCountries();
@@ -15,6 +15,7 @@ function CountryList() {
     key: 'name',
     direction: 'asc',
   });
+  const [selectedYear, setSelectedYear] = useState<number | null>(null);
 
   const handleSort = (key: SortConfig['key']) => {
     setSortConfig((prev) => ({
@@ -23,17 +24,31 @@ function CountryList() {
     }));
   };
 
+  const availableYears = (() => {
+    const years = new Set<number>();
+    Object.values(countriesData).forEach(country => {
+      country.data.forEach(yearData => {
+        if (yearData.year) years.add(yearData.year);
+      });
+    });
+    return Array.from(years).sort((a, b) => b - a);
+  })();
+
   const filteredCountries = Object.entries(countriesData)
     .filter(([name]) => name.toLowerCase().includes(searchTerm.toLowerCase()))
     .map(([name, data]) => {
-      const latestYearData = data.data[data.data.length - 1];
-      const latestYear = latestYearData?.year;
+      let yearData;
+      if (selectedYear) {
+        yearData = data.data.find(d => d.year === selectedYear);
+      } else {
+        yearData = data.data[data.data.length - 1];
+      }
 
       return {
         name,
         isoCode: data.iso_code,
-        population: latestYearData?.population,
-        year: latestYear,
+        population: yearData?.population,
+        year: yearData?.year,
       };
     });
 
@@ -81,6 +96,9 @@ function CountryList() {
         searchTerm={searchTerm}
         onSearchChange={setSearchTerm}
         countriesCount={sortedCountries.length}
+        selectedYear={selectedYear}
+        onYearChange={setSelectedYear}
+        availableYears={availableYears}
       />
 
       <TableHeader sortConfig={sortConfig} onSort={handleSort} />
