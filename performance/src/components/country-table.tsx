@@ -7,9 +7,10 @@ import { cn } from '@/utils/cn';
 type Props = {
   countries: CountryItem[];
   columns: string[];
+  cellChanges: Record<string, Set<string>>;
 };
 
-function CountryTable({ countries, columns }: Props) {
+function CountryTable({ countries, columns, cellChanges }: Props) {
   const rowRenderer = ({
     index,
     key,
@@ -20,6 +21,8 @@ function CountryTable({ countries, columns }: Props) {
     style: React.CSSProperties;
   }) => {
     const country = countries[index];
+    const countryChanges = cellChanges[country.name];
+
     return (
       <div
         key={key}
@@ -30,28 +33,34 @@ function CountryTable({ countries, columns }: Props) {
           'gap-4 px-3 py-2 odd:bg-transparent',
         )}
       >
-        {columns.map((columnKey) => (
-          <div key={columnKey}>{country[columnKey] ?? 'N/A'}</div>
-        ))}
+        {columns.map((columnKey) => {
+          const shouldHighlight = countryChanges?.has(columnKey);
+
+          return (
+            <div key={columnKey} className={cn(shouldHighlight && 'highlight-cell')}>
+              {country[columnKey] ?? 'N/A'}
+            </div>
+          );
+        })}
       </div>
     );
   };
 
-   const tableWidth = columns.length * 150; 
+  const tableWidth = columns.length * 150;
 
   return (
-    <div className="flex-col flex h-[60vh] w-full">
+    <div className="flex h-[60vh] w-full flex-col">
       <AutoSizer>
         {({ width, height }) => (
           <div style={{ width: Math.max(width, tableWidth), height }}>
-          <List
-            width={Math.max(width, tableWidth)}
-            height={height}
-            rowCount={countries.length}
-            rowHeight={40}
-            rowRenderer={rowRenderer}
-            className="custom-scrollbar"
-          />
+            <List
+              width={Math.max(width, tableWidth)}
+              height={height}
+              rowCount={countries.length}
+              rowHeight={40}
+              rowRenderer={rowRenderer}
+              className="custom-scrollbar"
+            />
           </div>
         )}
       </AutoSizer>

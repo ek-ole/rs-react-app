@@ -73,6 +73,20 @@
   }
 }
 
+@keyframes highlight-cell {
+  0% {
+    color: var(--color-modal)
+  }
+  100% {
+    background-color: transparent;
+    box-shadow: none;
+  }
+}
+
+.highlight-cell {
+  animation: highlight-cell 2s ease-in-out;
+}
+
 @layer utilities {
   .shadow-glow {
     box-shadow:
