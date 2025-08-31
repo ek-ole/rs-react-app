@@ -1,3 +1,5 @@
+import React from 'react';
+
 import SearchInput from './search-input';
 
 type Props = {
@@ -31,4 +33,4 @@ function TableToolbar({
   );
 }
 
-export default TableToolbar;
+export default React.memo(TableToolbar);

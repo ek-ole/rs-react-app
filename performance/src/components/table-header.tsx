@@ -1,4 +1,5 @@
 import { ArrowDownUp, ArrowDownWideNarrow, ArrowUpWideNarrow } from 'lucide-react';
+import React from 'react';
 
 import type { SortConfig } from '@/types/co2-data';
 import { cn } from '@/utils/cn';
@@ -84,4 +85,4 @@ function TableHeader({ sortConfig, onSort, selectedYear, onYearChange, available
   );
 }
 
-export default TableHeader;
+export default React.memo(TableHeader);

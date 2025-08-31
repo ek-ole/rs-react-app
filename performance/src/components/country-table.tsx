@@ -1,3 +1,4 @@
+import React from 'react';
 import { List, AutoSizer } from 'react-virtualized';
 
 import type { CountryItem } from '@/types/co2-data';
@@ -58,4 +59,4 @@ function CountryTable({ countries, columns }: Props) {
   );
 }
 
-export default CountryTable;
+export default React.memo(CountryTable);
