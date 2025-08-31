@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import { useCountries } from '@/hooks/use-countries';
 import type { CountryItem, SortConfig } from '@/types/co2-data';
@@ -27,7 +27,7 @@ function CountryList() {
     }));
   };
 
-  const availableYears = (() => {
+  const availableYears = useMemo(() => {
     const years = new Set<number>();
     Object.values(countriesData).forEach((country) => {
       country.data.forEach((yearData) => {
@@ -35,35 +35,37 @@ function CountryList() {
       });
     });
     return Array.from(years).sort((a, b) => b - a);
-  })();
+  },[countriesData]);
 
-  const filteredCountries = Object.entries(countriesData)
-    .filter(([name]) => name.toLowerCase().includes(searchTerm.toLowerCase()))
-    .map(([name, data]) => {
-      let yearData;
-      if (selectedYear) {
-        yearData = data.data.find((d) => d.year === selectedYear);
-      } else {
-        yearData = data.data[data.data.length - 1];
-      }
+ const filteredCountries = useMemo(() => {
+   return Object.entries(countriesData)
+     .filter(([name]) => name.toLowerCase().includes(searchTerm.toLowerCase()))
+     .map(([name, data]) => {
+       let yearData;
+       if (selectedYear) {
+         yearData = data.data.find((d) => d.year === selectedYear);
+       } else {
+         yearData = data.data[data.data.length - 1];
+       }
 
-      const countryItem: CountryItem = {
-        name,
-        isoCode: data.iso_code,
-        population: yearData?.population,
-        year: yearData?.year,
-        co2: yearData?.co2,
-        co2_per_capita: yearData?.co2_per_capita,
-      };
-      
-      selectedColumns.forEach((column) => {
-        countryItem[column] = yearData?.[column] ?? null;
-      });
+       const countryItem: CountryItem = {
+         name,
+         isoCode: data.iso_code,
+         population: yearData?.population,
+         year: yearData?.year,
+         co2: yearData?.co2,
+         co2_per_capita: yearData?.co2_per_capita,
+       };
 
-      return countryItem;
-    });
+       selectedColumns.forEach((column) => {
+         countryItem[column] = yearData?.[column] ?? null;
+       });
 
-    const availableColumns = (() => {
+       return countryItem;
+     });
+ }, [countriesData, searchTerm, selectedYear, selectedColumns]); 
+
+    const availableColumns = useMemo(() => {
       const columns = new Set<string>();
       Object.values(countriesData).forEach((country) => {
         country.data.forEach((yearData) => {
@@ -75,9 +77,10 @@ function CountryList() {
         });
       });
       return Array.from(columns);
-    })();
+    }, [countriesData]);
 
-  const sortedCountries = [...filteredCountries].sort((a, b) => {
+const sortedCountries = useMemo(() => {
+  return [...filteredCountries].sort((a, b) => {
     if (sortConfig.key === 'name') {
       return sortConfig.direction === 'asc'
         ? a.name.localeCompare(b.name)
@@ -100,6 +103,7 @@ function CountryList() {
 
     return 0;
   });
+}, [filteredCountries, sortConfig]); 
 
   const baseColumns = ['name', 'isoCode', 'year', 'population', 'co2', 'co2_per_capita'];
   const allColumns = [...baseColumns, ...selectedColumns];

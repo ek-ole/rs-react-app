@@ -31,7 +31,7 @@ async function fetchMockData(): Promise<CO2Data> {
   });
 }
 
-const dataPromise = import.meta.env.PROD ? fetchRealData() : fetchMockData();
+const dataPromise = import.meta.env.DEV ? fetchRealData() : fetchMockData();
 
 export function useCountries(): CO2Data {
    return use(dataPromise);
