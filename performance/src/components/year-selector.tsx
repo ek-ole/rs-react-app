@@ -8,7 +8,7 @@ type Props = {
 
 function YearSelector({ selectedYear, onYearChange, availableYears }: Props) {
    return (
-     <div className={cn('flex items-center')}>
+     <div className={cn('min-w-14 flex items-center')}>
        <label htmlFor="year-select  " className="text-center">
          Year
        </label>

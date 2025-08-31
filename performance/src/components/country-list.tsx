@@ -52,11 +52,22 @@ function CountryList() {
         isoCode: data.iso_code,
         population: yearData?.population,
         year: yearData?.year,
+        co2: yearData?.co2,
+        co2_per_capita: yearData?.co2_per_capita,
       };
     });
 
     const availableColumns = (() => {
       const columns = new Set<string>();
+      Object.values(countriesData).forEach((country) => {
+        country.data.forEach((yearData) => {
+          Object.keys(yearData).forEach((key) => {
+            if (!['year', 'population', 'co2', 'co2_per_capita'].includes(key)) {
+              columns.add(key);
+            }
+          });
+        });
+      });
       return Array.from(columns);
     })();
 

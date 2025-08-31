@@ -23,4 +23,6 @@ export type CountryItem = {
   isoCode: string | undefined;
   population: number | null | undefined;
   year: number | undefined;
+  co2: number | null | undefined;
+  co2_per_capita: number | null | undefined;
 };

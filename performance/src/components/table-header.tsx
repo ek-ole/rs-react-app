@@ -25,24 +25,24 @@ function TableHeader({ sortConfig, onSort, selectedYear, onYearChange, available
   return (
     <div
       className={cn(
-        'bg-input border-shadow/20 w-full',
-        'grid grid-cols-[2fr_1fr_1fr_1fr]',
-        'border-b font-semibold sm:gap-4',
+        'bg-input border-shadow/20 w-full px-5' ,
+        'grid grid-cols-[3fr_2fr_2fr_2fr_2fr_2fr]',
+        'border-b font-semibold sm:gap-4 items-end',
       )}
     >
       <button
         onClick={() => onSort('name')}
-        className="hover:bg-input/30 cursor-pointer px-5 py-1 text-left font-bold duration-300 hover:scale-103 sm:flex"
+        className="hover:bg-input/30 cursor-pointer py-1 text-left font-bold duration-300 hover:scale-103 sm:flex"
       >
         Country {getSortIcon('name')}
       </button>
       <button
         onClick={() => onSort('isoCode')}
-        className="hover:bg-input/30 cursor-pointer px-5 py-1 text-left font-bold whitespace-nowrap duration-300 hover:scale-103 sm:flex"
+        className="hover:bg-input/30 cursor-pointer py-1 text-left font-bold whitespace-nowrap duration-300 hover:scale-103 sm:flex"
       >
         ISO Code {getSortIcon('isoCode')}
       </button>
-      <div className="hover:bg-input/30 cursor-pointer px-2 py-1 text-left font-bold duration-300 hover:scale-103 sm:flex">
+      <div className="hover:bg-input/30 cursor-pointer py-1 text-left font-bold duration-300 hover:scale-103 sm:flex">
         <YearSelector
           selectedYear={selectedYear}
           onYearChange={onYearChange}
@@ -51,10 +51,12 @@ function TableHeader({ sortConfig, onSort, selectedYear, onYearChange, available
       </div>
       <button
         onClick={() => onSort('population')}
-        className="hover:bg-input/30 cursor-pointer px-5 py-1 text-left font-bold duration-300 hover:scale-103 sm:flex"
+        className="hover:bg-input/30 cursor-pointer py-1 text-left font-bold duration-300 hover:scale-103 sm:flex"
       >
         Population {getSortIcon('population')}
       </button>
+      <div className="py-1 text-left font-bold">CO2</div>
+      <div className="py-1 text-left font-bold whitespace-nowrap">CO2 per capita</div>
     </div>
   );
 };
