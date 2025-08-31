@@ -123,16 +123,19 @@ function CountryList() {
         onOpenModal={() => setIsModalOpen(true)}
       />
 
-      <TableHeader
-        sortConfig={sortConfig}
-        onSort={handleSort}
-        selectedYear={selectedYear}
-        onYearChange={setSelectedYear}
-        availableYears={availableYears}
-        columns={allColumns}
-      />
+      <div className="custom-scrollbar w-full overflow-x-auto">
+        <TableHeader
+          sortConfig={sortConfig}
+          onSort={handleSort}
+          selectedYear={selectedYear}
+          onYearChange={setSelectedYear}
+          availableYears={availableYears}
+          columns={allColumns}
+        />
 
-      <CountryTable countries={sortedCountries} columns={allColumns} />
+        <CountryTable countries={sortedCountries} columns={allColumns} />
+      </div>
+
       <ColumnSelector
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}

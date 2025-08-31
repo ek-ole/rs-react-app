@@ -36,18 +36,22 @@ function CountryTable({ countries, columns }: Props) {
     );
   };
 
+   const tableWidth = columns.length * 150; 
+
   return (
     <div className="flex-col flex h-[60vh] w-full">
       <AutoSizer>
         {({ width, height }) => (
+          <div style={{ width: Math.max(width, tableWidth), height }}>
           <List
-            width={width}
+            width={Math.max(width, tableWidth)}
             height={height}
             rowCount={countries.length}
             rowHeight={40}
             rowRenderer={rowRenderer}
             className="custom-scrollbar"
           />
+          </div>
         )}
       </AutoSizer>
     </div>
