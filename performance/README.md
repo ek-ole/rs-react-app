@@ -28,6 +28,13 @@ Performance optimizations were applied to the CO₂ data display component. The 
 | Passive Effects | 0.5ms |
 
 **Screenshots:**
+
+<img width="1051" height="285" alt="before1" src="https://github.com/user-attachments/assets/ec6589f0-433d-41cf-9da0-6b18efa2f76d" />
+
+<img width="820" height="828" alt="before2" src="https://github.com/user-attachments/assets/44e7f9d0-6b29-43d5-93f2-900ea8566175" />
+
+<img width="1008" height="662" alt="before3" src="https://github.com/user-attachments/assets/2289bd45-9870-495d-9688-4ec86a5e6d0d" />
+
 ![Before Optimization - Flamegraph](/src/assets/before1.PNG)
 ![Before Optimization - Ranked](/src/assets/before2.PNG)
 ![Before Optimization - Ranked](/src/assets/before3.PNG)
@@ -44,6 +51,12 @@ Performance optimizations were applied to the CO₂ data display component. The 
 | Passive Effects | 0.1ms |
 
 **Screenshots:**
+
+<img width="967" height="387" alt="usememo" src="https://github.com/user-attachments/assets/e6bd11c3-535f-4c06-b2b0-6bbf50022e2f" />
+
+
+<img width="954" height="671" alt="usememo2" src="https://github.com/user-attachments/assets/38a81722-a762-48ca-a8f6-d2826df20782" />
+
 ![After useMemo - Flamegraph](/src/assets/usememo.PNG)
 ![After useMemo - Ranked](/src/assets/usememo2.PNG)
 
@@ -59,6 +72,12 @@ Performance optimizations were applied to the CO₂ data display component. The 
 | Passive Effects | 0.1ms |
 
 **Screenshots:**
+
+<img width="900" height="381" alt="key" src="https://github.com/user-attachments/assets/95b7a44c-4da2-4b9c-b017-c1b53c1d275a" />
+
+<img width="912" height="578" alt="key2" src="https://github.com/user-attachments/assets/81f064d0-833f-4671-8b5c-d813acc4cea2" />
+
+
 ![After Keys - Flamegraph](/src/assets/key.PNG)
 ![After Keys - Ranked](/src/assets/key2.PNG)
 
@@ -74,6 +93,12 @@ Performance optimizations were applied to the CO₂ data display component. The 
 | Passive Effects | 0.1ms |
 
 **Screenshots:**
+
+<img width="968" height="354" alt="usecallback" src="https://github.com/user-attachments/assets/d908986a-8661-439f-b368-d158b95fe16a" />
+
+<img width="969" height="636" alt="usecallback2" src="https://github.com/user-attachments/assets/9d6cd11e-2b48-42ec-bf25-ea9d0c0791aa" />
+
+
 ![After useCallback - Flamegraph](/src/assets/usecallback.PNG)
 ![After useCallback - Ranked](/src/assets/usecallback.PNG)
 
