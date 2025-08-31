@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 import { useCountries } from '@/hooks/use-countries';
 import type { CountryItem, SortConfig } from '@/types/co2-data';
@@ -20,12 +20,12 @@ function CountryList() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedColumns, setSelectedColumns] = useState<string[]>([]); 
 
-  const handleSort = (key: SortConfig['key']) => {
+  const handleSort = useCallback((key: SortConfig['key']) => {
     setSortConfig((prev) => ({
       key,
       direction: prev.key === key && prev.direction === 'asc' ? 'desc' : 'asc',
     }));
-  };
+  }, []);
 
   const availableYears = useMemo(() => {
     const years = new Set<number>();
@@ -105,6 +105,10 @@ const sortedCountries = useMemo(() => {
   });
 }, [filteredCountries, sortConfig]); 
 
+const handleYearChange = useCallback((year: number | null) => {
+  setSelectedYear(year);
+}, []);
+
   const baseColumns = ['name', 'isoCode', 'year', 'population', 'co2', 'co2_per_capita'];
   const allColumns = [...baseColumns, ...selectedColumns];
 
@@ -120,10 +124,7 @@ const sortedCountries = useMemo(() => {
       <TableToolbar
         searchTerm={searchTerm}
         onSearchChange={setSearchTerm}
-        countriesCount={sortedCountries.length}
-        selectedYear={selectedYear}
-        onYearChange={setSelectedYear}
-        availableYears={availableYears}
+        countriesCount={sortedCountries.length}       
         onOpenModal={() => setIsModalOpen(true)}
       />
 
@@ -132,7 +133,7 @@ const sortedCountries = useMemo(() => {
           sortConfig={sortConfig}
           onSort={handleSort}
           selectedYear={selectedYear}
-          onYearChange={setSelectedYear}
+          onYearChange={handleYearChange}
           availableYears={availableYears}
           columns={allColumns}
         />

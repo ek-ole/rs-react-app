@@ -3,10 +3,7 @@ import SearchInput from './search-input';
 type Props = {
   searchTerm: string;
   onSearchChange: (value: string) => void;
-  countriesCount: number;
-  selectedYear: number | null;
-  onYearChange: (year: number | null) => void;
-  availableYears: number[];
+  countriesCount: number;  
   onOpenModal: VoidFunction;
 };
 
