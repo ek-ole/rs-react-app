@@ -57,7 +57,7 @@ document.body.style.overflow = 'unset';
       <div className={cn('bg-shadow/40 fixed inset-0 z-50 flex items-center justify-center p-4')}>
         <div
           ref={modalRef}
-          className={cn('bg-primary-light w-full max-w-md rounded-xl border-3 p-6', 'shadow-glow')}
+          className={cn('bg-modal w-full max-w-md rounded-xl border-3 p-6', 'shadow-glow')}
           role="dialog"
           aria-modal="true"
           aria-labelledby="modal-title"
@@ -68,7 +68,7 @@ document.body.style.overflow = 'unset';
               onClick={onClose}
               aria-label="Close modal"
               className={cn(
-                'hover:text-shadow ',
+                'hover:text-shadow',
                 'cursor-pointer',
                 'rounded-4xl text-xl hover:scale-120',
                 'font-bold transition-transform duration-300',
