@@ -5,9 +5,10 @@ import { cn } from '@/utils/cn';
 
 type Props = {
   countries: CountryItem[];
+  columns: string[];
 };
 
-function CountryTable({ countries }: Props) {
+function CountryTable({ countries, columns }: Props) {
   const rowRenderer = ({
     index,
     key,
@@ -24,16 +25,13 @@ function CountryTable({ countries }: Props) {
         style={style}
         className={cn(
           'even:bg-input/20 w-full',
-          'grid grid-cols-[3fr_2fr_2fr_2fr_2fr_2fr]',
+          'dynamic-grid',
           'gap-4 px-3 py-2 odd:bg-transparent',
         )}
       >
-        <div>{country.name}</div>
-        <div>{country.isoCode || 'N/A'}</div>
-        <div>{country.year || 'N/A'}</div>
-        <div>{country.population || 'N/A'}</div>
-        <div>{country.co2 || 'N/A'}</div>
-        <div>{country.co2_per_capita || 'N/A'}</div>
+        {columns.map((columnKey) => (
+          <div key={columnKey}>{country[columnKey] ?? 'N/A'}</div>
+        ))}
       </div>
     );
   };

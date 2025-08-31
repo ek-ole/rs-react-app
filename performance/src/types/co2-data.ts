@@ -25,4 +25,5 @@ export type CountryItem = {
   year: number | undefined;
   co2: number | null | undefined;
   co2_per_capita: number | null | undefined;
+  [key: string]: string | number | null | undefined;
 };

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { useCountries } from '@/hooks/use-countries';
-import type { SortConfig } from '@/types/co2-data';
+import type { CountryItem, SortConfig } from '@/types/co2-data';
 import { cn } from '@/utils/cn';
 
 import ColumnSelector from './column-selector';
@@ -47,7 +47,7 @@ function CountryList() {
         yearData = data.data[data.data.length - 1];
       }
 
-      return {
+      const countryItem: CountryItem = {
         name,
         isoCode: data.iso_code,
         population: yearData?.population,
@@ -55,6 +55,12 @@ function CountryList() {
         co2: yearData?.co2,
         co2_per_capita: yearData?.co2_per_capita,
       };
+      
+      selectedColumns.forEach((column) => {
+        countryItem[column] = yearData?.[column] ?? null;
+      });
+
+      return countryItem;
     });
 
     const availableColumns = (() => {
@@ -95,6 +101,9 @@ function CountryList() {
     return 0;
   });
 
+  const baseColumns = ['name', 'isoCode', 'year', 'population', 'co2', 'co2_per_capita'];
+  const allColumns = [...baseColumns, ...selectedColumns];
+
   return (
     <div
       className={cn(
@@ -120,9 +129,10 @@ function CountryList() {
         selectedYear={selectedYear}
         onYearChange={setSelectedYear}
         availableYears={availableYears}
+        columns={allColumns}
       />
 
-      <CountryTable countries={sortedCountries} />
+      <CountryTable countries={sortedCountries} columns={allColumns} />
       <ColumnSelector
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}

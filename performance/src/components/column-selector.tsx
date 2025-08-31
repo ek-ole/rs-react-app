@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Modal from "./modal";
 
@@ -13,27 +13,42 @@ type Props = {
 function ColumnSelector({ isOpen, onClose, availableColumns, selectedColumns, onColumnsChange }: Props) {
   const [tempSelection, setTempSelection] = useState(selectedColumns);
 
+  useEffect(() => {
+    if (isOpen) {
+      setTempSelection(selectedColumns);
+    }
+  }, [isOpen, selectedColumns]);
+
+   const handleCheckboxChange = (column: string, isChecked: boolean) => {
+     if (isChecked) {
+       setTempSelection((prev) => [...prev, column]);
+     } else {
+       setTempSelection((prev) => prev.filter((col) => col !== column));
+     }
+   };
+
   const handleApply = () => {
     onColumnsChange(tempSelection);
     onClose();
   }
 
+  const handleReset = () => {
+    setTempSelection([]);
+  };
+
   const handleCancel = () => {
-    setTempSelection(selectedColumns); 
     onClose();
   };
 
   return (
     <Modal isOpen={isOpen} onClose={handleCancel} title="Select Columns">
-      <div className="space-y-3">
+      <div className="custom-scrollbar max-h-[60vh] space-y-3 overflow-y-auto">
         {availableColumns.map((column) => (
-          <label
-            key={column}
-            className="flex items-center gap-3"
-          >
+          <label key={column} className="flex items-center gap-3">
             <input
               type="checkbox"
               checked={tempSelection.includes(column)}
+              onChange={(e) => handleCheckboxChange(column, e.target.checked)}
               className="ha-4 w-4"
             />
             <span className="capitalize">{column.replace(/_/g, ' ')}</span>
@@ -41,9 +56,9 @@ function ColumnSelector({ isOpen, onClose, availableColumns, selectedColumns, on
         ))}
       </div>
 
-      <div className="mt-6 flex gap-3">
-        <button type="button" className="custom-button" onClick={handleCancel}>
-          Cancel
+      <div className="mt-6 flex justify-center gap-6">
+        <button type="button" className="custom-button" onClick={handleReset}>
+          Reset
         </button>
         <button type="button" className="custom-button" onClick={handleApply}>
           Apply

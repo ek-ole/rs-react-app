@@ -68,9 +68,9 @@ document.body.style.overflow = 'unset';
               onClick={onClose}
               aria-label="Close modal"
               className={cn(
-                'hover:text-shadow absolute top-0 right-3',
+                'hover:text-shadow ',
                 'cursor-pointer',
-                'rounded-4xl text-3xl hover:scale-120',
+                'rounded-4xl text-xl hover:scale-120',
                 'font-bold transition-transform duration-300',
               )}
             >
