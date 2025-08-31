@@ -1,0 +1,71 @@
+import React from 'react';
+import { List, AutoSizer } from 'react-virtualized';
+
+import type { CountryItem } from '@/types/co2-data';
+import { cn } from '@/utils/cn';
+
+type Props = {
+  countries: CountryItem[];
+  columns: string[];
+  cellChanges: Record<string, Set<string>>;
+};
+
+function CountryTable({ countries, columns, cellChanges }: Props) {
+  const rowRenderer = ({
+    index,
+    key,
+    style,
+  }: {
+    index: number;
+    key: string;
+    style: React.CSSProperties;
+  }) => {
+    const country = countries[index];
+    const countryChanges = cellChanges[country.name];
+
+    return (
+      <div
+        key={key}
+        style={style}
+        className={cn(
+          'even:bg-input/20 w-full',
+          'dynamic-grid',
+          'gap-4 px-3 py-2 odd:bg-transparent',
+        )}
+      >
+        {columns.map((columnKey) => {
+          const shouldHighlight = countryChanges?.has(columnKey);
+
+          return (
+            <div key={columnKey} className={cn(shouldHighlight && 'highlight-cell')}>
+              {country[columnKey] ?? 'N/A'}
+            </div>
+          );
+        })}
+      </div>
+    );
+  };
+
+  const tableWidth = columns.length * 150;
+
+  return (
+    <div className="flex h-[60vh] w-full flex-col">
+      <AutoSizer>
+        {({ width, height }) => (
+          <div style={{ width: Math.max(width, tableWidth), height }}>
+            <List
+              width={Math.max(width, tableWidth)}
+              height={height}
+              rowCount={countries.length}
+              rowHeight={40}
+              rowRenderer={rowRenderer}
+              className="custom-scrollbar"
+            />
+          </div>
+        )}
+      </AutoSizer>
+    </div>
+  );
+}
+
+export default React.memo(CountryTable);
