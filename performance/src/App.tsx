@@ -6,8 +6,8 @@ import { cn } from './utils/cn';
 
 function App() {
   return (
-    <div className="flex h-[100vh] flex-col justify-between">
-      <div className="flex items-center justify-center p-4 md:p-14">
+    <div className="flex h-[100vh] flex-col items-center mx-auto justify-between">
+      <div className="flex items-center w-full justify-center p-4 md:p-14">
         <div
           className={cn(
             'mx-auto flex w-full flex-col',

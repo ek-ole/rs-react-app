@@ -44,7 +44,7 @@ function TableHeader({ sortConfig, onSort, selectedYear, onYearChange, available
     <div
       className={cn(
         'bg-input border-shadow/20 dynamic-grid w-full px-5',
-        'items-end border-b font-semibold sm:gap-4',
+        'min-w-full items-end border-b font-semibold sm:gap-4',
       )}
     >
       {columns.map((columnKey) => {

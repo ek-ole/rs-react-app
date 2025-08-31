@@ -128,7 +128,7 @@ const handleYearChange = useCallback((year: number | null) => {
         onOpenModal={() => setIsModalOpen(true)}
       />
 
-      <div className="custom-scrollbar w-full overflow-x-auto">
+      <div className="flex flex-col custom-scrollbar w-full overflow-x-auto">
         <TableHeader
           sortConfig={sortConfig}
           onSort={handleSort}
